@@ -1,6 +1,9 @@
 // app/layout.tsx
+"use client";
+
 import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
 
 export default function RootLayout({
   children,
@@ -24,30 +27,39 @@ export default function RootLayout({
 
       <body>
         <CustomChakraProvider>
-          <Flex direction="column" minHeight="100vh">
-            <Box
-              as="header"
-              bg="teal.500"
-              p={4}
-              color="white"
-              height="48px"
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-end"
+          <Box position="relative" minHeight="100vh" overflow="hidden">
+            <Box position="absolute" width="100%" height="100%" zIndex={0}>
+              <ParticleBackground />
+            </Box>
+            <Flex
+              direction="column"
+              minHeight="100vh"
+              position="relative"
+              zIndex={1}
             >
-              <Heading as="h1" size="lg">
-                About Us
-              </Heading>
-            </Box>
-            <Box as="main" flex="1" height="calc(100vh - 96px)">
-              {children}
-            </Box>
-            <Box as="footer" bg="gray.200" p={4} height="48px">
-              <Text>
-                Si necesitas ayuda inmediata, existen estas call centers
-              </Text>
-            </Box>
-          </Flex>
+              <Flex
+                as="header"
+                bg="teal.500"
+                p={4}
+                color="white"
+                height="48px"
+                justifyContent="flex-end"
+                alignItems="center"
+              >
+                <Heading as="h1" size="lg">
+                  About Us
+                </Heading>
+              </Flex>
+              <Box as="main" flex="1">
+                {children}
+              </Box>
+              <Box as="footer" bg="gray.200" p={4} height="48px">
+                <Text>
+                  Si necesitas ayuda inmediata, existen estas call centers
+                </Text>
+              </Box>
+            </Flex>
+          </Box>
         </CustomChakraProvider>
       </body>
     </html>

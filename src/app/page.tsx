@@ -1,10 +1,15 @@
+// app/page.tsx
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 
 export default function HomePage() {
   return (
     <Flex direction="column" height="calc(100vh - 96px)">
-      {/* Top Box for the Heading */}
-      <Box bg="red.100" height="27%" position="relative">
+      <Box
+        bg="rgba(255, 0, 0, 0.5)"
+        height="27%"
+        position="relative"
+        zIndex={2}
+      >
         <Flex
           height="100%"
           align="flex-end"
@@ -12,46 +17,48 @@ export default function HomePage() {
           position="relative"
         >
           <Flex width="100%" maxW="1200px" justify="center" align="center">
-            <Box textAlign="right" pr={2} position="relative" zIndex="1">
+            <Box
+              textAlign="right"
+              pr={2}
+              position="relative"
+              zIndex={3}
+              mb="-0.7em"
+            >
               <Heading
                 as="h1"
                 size="4xl"
                 fontWeight="bold"
                 fontFamily="Karla, sans-serif"
                 letterSpacing="0.03em"
+                lineHeight="1"
               >
-                Synaptic\
+                Synaptic
               </Heading>
             </Box>
-            <Box textAlign="left" pl={2} position="relative" zIndex="1">
+            <Box textAlign="left" pl={2} position="relative" zIndex={3}>
               <Text
                 fontSize="2xl"
                 fontWeight="medium"
                 fontFamily="Merriweather, serif"
+                lineHeight="1"
               >
                 Terapia para la vida real.
               </Text>
             </Box>
           </Flex>
-          {/* <Box
-            position="absolute"
-            bottom="0"
-            width="100%"
-            height="10px"
-            bg="purple.500 "
-            zIndex="0"
-          ></Box> */}
         </Flex>
       </Box>
 
       {/* Bottom Box for the Button */}
-      <Box bg="red.100" height="73%">
+      <Box bg="rgba(0, 0, 0, 0.8)" height="73%" zIndex={2}>
         <Flex
           height="100%"
           direction="column"
           align="center"
           justify="flex-start"
           p={4}
+          position="relative"
+          zIndex={3}
         >
           <Button
             colorScheme="teal"
