@@ -27,70 +27,81 @@ const ParticleBackground = () => {
     console.log(container);
   };
 
+  // Configuration object for the particles
   const options: ISourceOptions = useMemo(
     () => ({
+      // Background settings
       background: {
         color: {
-          value: "#ffffff",
+          value: "#0d47a1", // Dark background color
         },
       },
-      fpsLimit: 60,
+      fpsLimit: 60, // Limits the frame rate to 60 FPS
       interactivity: {
         events: {
+          // Enable particle interaction on hover
           onHover: {
             enable: true,
-            mode: "repulse",
+            mode: "grab", // Subtle grab effect
           },
+          // Correct resize configuration
           resize: {
             enable: true,
+            delay: 0.5,
           },
         },
         modes: {
-          repulse: {
-            distance: 100,
-            duration: 0.4,
+          // Grab mode settings
+          grab: {
+            distance: 140, // Distance for the grab effect
+            links: {
+              opacity: 1, // Opacity of the link during the grab effect
+            },
           },
         },
       },
       particles: {
         color: {
-          value: "#000000",
+          value: "#00bcd4", // Light blue particles
         },
         links: {
-          color: "#000000",
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
-          width: 1,
+          color: "#00bcd4", // Light blue links
+          distance: 70, // Distance between linked particles
+          enable: true, // Enable linking
+          opacity: 0.6, // Opacity of the links
+          width: 1, // Width of the links
+        },
+        collisions: {
+          enable: true, // Enable particle collisions
         },
         move: {
-          direction: MoveDirection.none,
-          enable: true,
+          direction: MoveDirection.none, // No specific movement direction
+          enable: true, // Enable particle movement
           outModes: {
-            default: OutMode.bounce,
+            default: OutMode.bounce, // Bounce particles at the edge
           },
-          random: false,
-          speed: 1,
-          straight: false,
+          random: false, // Disable random movement
+          speed: 0.03, // Very slow movement speed
+          straight: false, // No straight movement
         },
         number: {
           density: {
-            enable: true,
-            area: 800,
+            enable: true, // Enable density-based number of particles
+            area: 400, // Area for density calculation
           },
-          value: 80,
+          value: 300, // Total number of particles
         },
         opacity: {
-          value: 0.5,
+          value: 0.8, // Opacity of the particles
         },
         shape: {
-          type: "circle",
+          type: "circle", // Shape of the particles
         },
         size: {
-          value: { min: 1, max: 5 },
+          value: { min: 3, max: 5 }, // Size range of the particles
         },
       },
-      detectRetina: true,
+      detectRetina: true, // Enable retina display support
     }),
     []
   );
