@@ -6,9 +6,10 @@ export default function HomePage() {
     <Flex direction="column" height="calc(100vh - 96px)">
       <Box
         bg="rgba(255, 0, 0, 0.5)"
-        height="27%"
+        height="20%"
         position="relative"
         zIndex={2}
+        pb={4}
       >
         <Flex
           height="100%"
@@ -16,14 +17,15 @@ export default function HomePage() {
           justify="center"
           position="relative"
         >
-          <Flex width="100%" maxW="1200px" justify="center" align="center">
-            <Box
-              textAlign="right"
-              pr={2}
-              position="relative"
-              zIndex={3}
-              mb="-0.7em"
-            >
+          <Flex
+            width="100%"
+            maxW="1200px"
+            justify="center"
+            align="center"
+            position="relative"
+            zIndex={3}
+          >
+            <Box textAlign="right" pr={2}>
               <Heading
                 as="h1"
                 size="4xl"
@@ -31,26 +33,30 @@ export default function HomePage() {
                 fontFamily="Karla, sans-serif"
                 letterSpacing="0.03em"
                 lineHeight="1"
+                color="white"
               >
-                Synaptic
+                Synaptic\
               </Heading>
             </Box>
-            <Box textAlign="left" pl={2} position="relative" zIndex={3}>
-              <Text
-                fontSize="2xl"
-                fontWeight="medium"
-                fontFamily="Merriweather, serif"
-                lineHeight="1"
-              >
-                Terapia para la vida real.
-              </Text>
+            <Box textAlign="left" pl={2}>
+              <Flex alignItems="center" height="100%">
+                <Text
+                  fontSize="2xl"
+                  fontWeight="medium"
+                  fontFamily="Merriweather, serif"
+                  lineHeight="1"
+                  color="white"
+                >
+                  Terapia para la vida real.
+                </Text>
+              </Flex>
             </Box>
           </Flex>
         </Flex>
       </Box>
 
       {/* Bottom Box for the Button */}
-      <Box bg="rgba(0, 0, 0, 0.8)" height="73%" zIndex={2}>
+      <Box bg="rgba(30, 57, 103, 0.54)" height="80%" zIndex={2}>
         <Flex
           height="100%"
           direction="column"

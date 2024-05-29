@@ -33,7 +33,7 @@ const ParticleBackground = () => {
       // Background settings
       background: {
         color: {
-          value: "#0d47a1", // Dark background color
+          value: "#fff",
         },
       },
       fpsLimit: 60, // Limits the frame rate to 60 FPS
@@ -43,6 +43,10 @@ const ParticleBackground = () => {
           onHover: {
             enable: true,
             mode: "grab", // Subtle grab effect
+            distance: 140, // Distance for the grab effect
+            links: {
+              opacity: 1, // Opacity of the link during the grab effect
+            },
           },
           // Correct resize configuration
           resize: {
@@ -62,13 +66,13 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: "#00bcd4", // Light blue particles
+          value: "#000000", // Light blue particles
         },
         links: {
-          color: "#00bcd4", // Light blue links
-          distance: 70, // Distance between linked particles
+          color: "#000000", // Light blue links
+          distance: 75, // Distance between linked particles
           enable: true, // Enable linking
-          opacity: 0.6, // Opacity of the links
+          opacity: 0.9, // Opacity of the links
           width: 1, // Width of the links
         },
         collisions: {
@@ -87,12 +91,12 @@ const ParticleBackground = () => {
         number: {
           density: {
             enable: true, // Enable density-based number of particles
-            area: 400, // Area for density calculation
+            area: 100, // Area for density calculation
           },
           value: 300, // Total number of particles
         },
         opacity: {
-          value: 0.8, // Opacity of the particles
+          value: 0.9, // Opacity of the particles
         },
         shape: {
           type: "circle", // Shape of the particles
