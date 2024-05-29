@@ -1,16 +1,51 @@
-import { Box, Heading, Button, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 
 export default function HomePage() {
   return (
     <Flex direction="column" height="calc(100vh - 96px)">
-      <Box height="27%">
-        <Flex height="100%" align="flex-end" justify="center" p={4}>
-          <Heading as="h1" size="2xl" textAlign="center">
-            SYNAPTIC - TERAPIA PARA LA VIDA REAL
-          </Heading>
+      {/* Top Box for the Heading */}
+      <Box bg="red.100" height="27%" position="relative">
+        <Flex
+          height="100%"
+          align="flex-end"
+          justify="center"
+          position="relative"
+        >
+          <Flex width="100%" maxW="1200px" justify="center" align="center">
+            <Box textAlign="right" pr={2} position="relative" zIndex="1">
+              <Heading
+                as="h1"
+                size="4xl"
+                fontWeight="bold"
+                fontFamily="Karla, sans-serif"
+                letterSpacing="0.03em"
+              >
+                Synaptic\
+              </Heading>
+            </Box>
+            <Box textAlign="left" pl={2} position="relative" zIndex="1">
+              <Text
+                fontSize="2xl"
+                fontWeight="medium"
+                fontFamily="Merriweather, serif"
+              >
+                Terapia para la vida real.
+              </Text>
+            </Box>
+          </Flex>
+          {/* <Box
+            position="absolute"
+            bottom="0"
+            width="100%"
+            height="10px"
+            bg="purple.500 "
+            zIndex="0"
+          ></Box> */}
         </Flex>
       </Box>
-      <Box height="73%">
+
+      {/* Bottom Box for the Button */}
+      <Box bg="red.100" height="73%">
         <Flex
           height="100%"
           direction="column"
@@ -18,7 +53,12 @@ export default function HomePage() {
           justify="flex-start"
           p={4}
         >
-          <Button colorScheme="teal" size="lg">
+          <Button
+            colorScheme="teal"
+            size="lg"
+            mt={4}
+            fontFamily="Merriweather, serif"
+          >
             Agenda Tu Cita
           </Button>
         </Flex>
