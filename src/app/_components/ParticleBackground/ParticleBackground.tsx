@@ -66,14 +66,14 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: "#000000", // Light blue particles
+          value: "#788585", // Light blue particles
         },
         links: {
-          color: "#000000", // Light blue links
-          distance: 75, // Distance between linked particles
+          color: "#32021F", // Light blue links
+          distance: 72, // Distance between linked particles
           enable: true, // Enable linking
-          opacity: 0.9, // Opacity of the links
-          width: 1, // Width of the links
+          opacity: 0.2, // Opacity of the links
+          width: 2, // Width of the links
         },
         collisions: {
           enable: true, // Enable particle collisions
@@ -85,18 +85,18 @@ const ParticleBackground = () => {
             default: OutMode.bounce, // Bounce particles at the edge
           },
           random: false, // Disable random movement
-          speed: 0.03, // Very slow movement speed
+          speed: 0.05, // Very slow movement speed
           straight: false, // No straight movement
         },
         number: {
           density: {
             enable: true, // Enable density-based number of particles
-            area: 100, // Area for density calculation
+            area: 200, // Area for density calculation
           },
           value: 300, // Total number of particles
         },
         opacity: {
-          value: 0.9, // Opacity of the particles
+          value: 0.4, // Opacity of the particles
         },
         shape: {
           type: "circle", // Shape of the particles

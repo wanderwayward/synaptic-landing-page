@@ -4,12 +4,24 @@
 import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
+import React, { useEffect, useState } from "react";
+import Loading from "./_components/Loading/Loading";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 120); // Delay of 0.12s (120ms)
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -28,37 +40,48 @@ export default function RootLayout({
       <body>
         <CustomChakraProvider>
           <Box position="relative" minHeight="100vh" overflow="hidden">
-            <Box position="absolute" width="100%" height="100%" zIndex={0}>
-              <ParticleBackground />
-            </Box>
-            <Flex
-              direction="column"
-              minHeight="100vh"
-              position="relative"
-              zIndex={1}
-            >
-              <Flex
-                as="header"
-                bg="teal.500"
-                p={4}
-                color="white"
-                height="48px"
-                justifyContent="flex-end"
-                alignItems="center"
-              >
-                <Heading as="h1" size="lg">
-                  About Us
-                </Heading>
-              </Flex>
-              <Box as="main" flex="1">
-                {children}
-              </Box>
-              <Box as="footer" bg="gray.200" p={4} height="48px">
-                <Text>
-                  Si necesitas ayuda inmediata, existen estas call centers
-                </Text>
-              </Box>
-            </Flex>
+            {loading ? (
+              <Loading />
+            ) : (
+              <>
+                <Box position="absolute" width="100%" height="100%" zIndex={0}>
+                  <ParticleBackground />
+                </Box>
+                <Flex
+                  direction="column"
+                  minHeight="100vh"
+                  position="relative"
+                  zIndex={1}
+                >
+                  <Flex
+                    as="header"
+                    bg="rgba(252, 222, 190,0.3)"
+                    p={4}
+                    color="#32021F"
+                    height="48px"
+                    justifyContent="flex-end"
+                    alignItems="center"
+                  >
+                    <Heading as="h1" size="md" fontFamily="Karla">
+                      Sobre Nosotros
+                    </Heading>
+                  </Flex>
+                  <Box as="main" flex="1">
+                    {children}
+                  </Box>
+                  <Box
+                    as="footer"
+                    bg="rgba(120, 133, 133, 0.3)"
+                    p={4}
+                    height="48px"
+                  >
+                    <Text>
+                      Si necesitas ayuda inmediata, existen estas call centers
+                    </Text>
+                  </Box>
+                </Flex>
+              </>
+            )}
           </Box>
         </CustomChakraProvider>
       </body>
