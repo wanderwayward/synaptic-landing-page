@@ -65,6 +65,7 @@ export default function HomePage() {
         >
           <Link href="/calendar">
             <Button
+              as={"a"}
               bg="#FFBA08"
               size="lg"
               mt={4}
