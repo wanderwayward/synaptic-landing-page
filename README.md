@@ -28,6 +28,9 @@ marco-landing-page
 │        │  └─ CalendarLayout.tsx
 │        ├─ CustomChakraProvider
 │        │  └─ CustomChakraProvider.tsx
+│        ├─ FrontPage
+│        │  └─ FrontPageBackground
+│        │     └─ FrontPageBackground.tsx
 │        ├─ Loading
 │        │  └─ Loading.tsx
 │        └─ ParticleBackground

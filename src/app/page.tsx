@@ -1,6 +1,7 @@
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
 import Background from "./_components/FrontPage/FrontPageBackground/FrontPageBackground";
+import CustomButton from "./_components/button/CustomButton";
 
 export default function HomePage() {
   return (
@@ -16,17 +17,11 @@ export default function HomePage() {
         pt={250}
         mt="48px"
       >
-        <Flex
-          align="center"
-          justify="space-around"
-          mb={4}
-          width="100%"
-          maxW="1500px"
-        >
+        <Flex align="center" justify="space-around" width="100%" maxW="1500px">
           <Box flex="1" textAlign="center" pr={4}>
             <Heading
               as="h1"
-              fontSize="9.5em"
+              fontSize="10em"
               fontWeight="bold"
               fontFamily="roca, sans-serif"
               letterSpacing="0.03em"
@@ -43,22 +38,24 @@ export default function HomePage() {
               fontWeight="medium"
               fontFamily="roca thin"
               lineHeight="1"
-              color="#FC7A1E"
+              color="#F8F4E3"
             >
               Terapia para la vida real.
             </Text>
           </Box>
         </Flex>
 
-        <Link href="/calendar" passHref>
-          <Button
-            bg="#FFBA08"
-            mt={4}
+        <Link href="/calendar">
+          <CustomButton
+            size="xl"
+            bg="#E12B29"
+            borderRadius={10}
+            color="white"
             fontFamily="roca thin"
-            _hover={{ bg: "#FFA000" }}
+            _hover={{ bg: "#FF312E", boxShadow: "lg" }}
           >
             Agenda Tu Cita Aquí
-          </Button>
+          </CustomButton>
         </Link>
       </Flex>
     </Box>
