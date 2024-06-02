@@ -83,9 +83,7 @@ export default function RootLayout({
                     zIndex={2}
                     position="relative"
                   >
-                    <Text>
-                      Si necesitas ayuda inmediata, existen estas call centers
-                    </Text>
+                    <Text>Si necesitas ayuda inmediata:</Text>
                   </Box>
                 </Flex>
               </>

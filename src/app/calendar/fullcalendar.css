@@ -1,0 +1,102 @@
+/* src/app/calendar/fullcalendar.css */
+
+/* Change the background color of the current day */
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: rgba(
+    255,
+    255,
+    0,
+    0.2
+  ) !important; /* Custom yellow overlay with opacity */
+}
+
+/* Change the color of the grid lines */
+.fc .fc-daygrid-day-frame {
+  border: 1px solid #061c9a; /* Custom line color */
+}
+
+/* Change the font of the entire calendar */
+.fc {
+  font-family: "roca thin" !important; /* Custom font */
+}
+
+/* Change the font size and color of the day numbers */
+.fc .fc-daygrid-day-number {
+  font-size: 14px !important; /* Custom font size */
+  color: #333 !important; /* Custom font color */
+}
+
+/* Change the title font size and color */
+.fc-toolbar-title {
+  font-size: 24px !important; /* Custom font size */
+  color: #000 !important; /* Custom font color */
+}
+
+/* Customize the navigation buttons */
+.fc .fc-button {
+  background-color: pink !important; /* Custom background color */
+  color: blue !important; /* Custom text color */
+  border: 2px solid yellow !important; /* Custom border color */
+  padding: 10px 20px !important; /* Custom padding */
+  border-radius: 10px !important; /* Custom border radius */
+}
+
+/* Change the hover and active states of the navigation buttons */
+.fc .fc-button:hover,
+.fc .fc-button:focus {
+  background-color: green !important; /* Custom hover color */
+  color: red !important; /* Custom hover text color */
+}
+
+.fc .fc-button:active {
+  background-color: purple !important; /* Custom active color */
+  color: orange !important; /* Custom active text color */
+}
+
+/* Customize the today button */
+.fc .fc-button.fc-button-today {
+  background-color: cyan !important; /* Custom background color */
+  color: magenta !important; /* Custom text color */
+}
+
+/* Change the hover and active states of the today button */
+.fc .fc-button.fc-button-today:hover,
+.fc .fc-button.fc-button-today:focus {
+  background-color: lime !important; /* Custom hover color */
+  color: navy !important; /* Custom hover text color */
+}
+
+.fc .fc-button.fc-button-today:active {
+  background-color: olive !important; /* Custom active color */
+  color: teal !important; /* Custom active text color */
+}
+
+/* Customize the month/week/day buttons */
+.fc .fc-button-group .fc-button {
+  background-color: violet !important; /* Custom background color */
+  color: black !important; /* Custom text color */
+}
+
+/* Change the hover and active states of the month/week/day buttons */
+.fc .fc-button-group .fc-button:hover,
+.fc .fc-button-group .fc-button:focus {
+  background-color: gold !important; /* Custom hover color */
+  color: brown !important; /* Custom hover text color */
+}
+
+.fc .fc-button-group .fc-button:active {
+  background-color: silver !important; /* Custom active color */
+  color: maroon !important; /* Custom active text color */
+}
+
+/* Customize the top row with day names (Sun, Mon, Tue, etc.) */
+.fc .fc-col-header-cell {
+  background-color: #f0f0f0 !important; /* Custom background color */
+  color: pink !important; /* Custom text color */
+  border: 1px solid blue !important; /* Custom border color */
+}
+
+/* Customize the borders around the day cells */
+.fc .fc-daygrid-day {
+  border: 1px solid yellow !important; /* Custom border color */
+}
