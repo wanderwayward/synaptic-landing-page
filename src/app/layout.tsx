@@ -22,14 +22,14 @@ export default function RootLayout({
       case "/calendar":
         return {
           bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 10%,  rgba(180, 70, 70) 10%)",
-          clipPath: "polygon(0 0, 10% 0, 90% 0 100%)",
+            "linear(71deg, rgba(120, 161, 187) 15%,  rgba(180, 70, 70) 15%)",
+          clipPath: "polygon(0 0, 15% 0, 85% 0 100%)",
         };
       case "/about":
         return {
           bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 90%, rgba(180, 70, 70) 90%)",
-          clipPath: "polygon(0 0, 90% 0, 10% 0 100%)",
+            "linear(71deg, rgba(120, 161, 187) 85%, rgba(180, 70, 70) 85%)",
+          clipPath: "polygon(0 0, 85% 0, 15% 0 100%)",
         };
       default:
         return {
@@ -104,7 +104,17 @@ export default function RootLayout({
                     zIndex={3}
                     position="relative"
                   >
-                    <Heading as="h1" size="md" fontFamily="roca" color="white">
+                    <Heading
+                      as="h1"
+                      size="md"
+                      fontFamily="roca"
+                      color="white"
+                      sx={{
+                        "&:hover": {
+                          textShadow: "0 0 2px #fff",
+                        },
+                      }}
+                    >
                       {renderNavLinks()}
                     </Heading>
                   </Flex>
