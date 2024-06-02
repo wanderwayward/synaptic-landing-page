@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
-export default function FrontPageBackground() {
+export default function AboutBackground() {
   return (
     <Box
       position="fixed"

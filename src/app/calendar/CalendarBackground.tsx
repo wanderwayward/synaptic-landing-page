@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 
-export default function FrontPageBackground() {
+export default function CalendarBackground() {
   return (
     <Box
       position="fixed"
@@ -8,8 +8,8 @@ export default function FrontPageBackground() {
       left={0}
       width="100%"
       height="100vh"
-      bgGradient="linear(71deg, rgba(120, 161, 187) 51%, rgba(168, 87, 81) 50%)"
-      clipPath="polygon(0 0, 45% 0, 55% 0 100%)"
+      bgGradient="linear(71deg, rgba(120, 161, 187) 10%, rgba(222, 87, 81) 10%)"
+      clipPath="polygon(0 0, 10% 0, 90% 0 100%)"
       zIndex={0}
     />
   );

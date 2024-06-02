@@ -3,16 +3,32 @@
 import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Loading from "./_components/Loading/Loading";
-import Background from "./_components/FrontPage/FrontPageBackground";
+import FrontPageBackground from "./_components/FrontPage/FrontPageBackground";
+import CalendarBackground from "./calendar/CalendarBackground";
+import AboutBackground from "./about-us/AboutBackground";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
+
+  const renderBackground = () => {
+    if (pathname === "/") {
+      return <FrontPageBackground />;
+    } else if (pathname === "/calendar") {
+      return <CalendarBackground />;
+    } else if (pathname === "/about") {
+      return <AboutBackground />;
+    } else {
+      return null;
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -45,7 +61,7 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <Background />
+                {renderBackground()}
                 <Box position="fixed" width="100%" height="100%" zIndex={1}>
                   <ParticleBackground />
                 </Box>
