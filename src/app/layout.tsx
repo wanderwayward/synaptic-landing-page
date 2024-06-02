@@ -3,11 +3,9 @@
 import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "./_components/Loading/Loading";
-import FrontPageBackground from "./_components/FrontPage/FrontPageBackground";
-import CalendarBackground from "./calendar/CalendarBackground";
-import AboutBackground from "./about-us/AboutBackground";
+import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({
@@ -18,17 +16,30 @@ export default function RootLayout({
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
 
-  const renderBackground = () => {
-    if (pathname === "/") {
-      return <FrontPageBackground />;
-    } else if (pathname === "/calendar") {
-      return <CalendarBackground />;
-    } else if (pathname === "/about") {
-      return <AboutBackground />;
-    } else {
-      return null;
+  const getBackgroundProps = () => {
+    switch (pathname) {
+      case "/calendar":
+        return {
+          bgGradient:
+            "linear(71deg, rgba(120, 161, 187) 10%, rgba(168, 87, 81) 10%)",
+          clipPath: "polygon(0 0, 10% 0, 90% 0 100%)",
+        };
+      case "/about":
+        return {
+          bgGradient:
+            "linear(71deg, rgba(140, 150, 170) 50%, rgba(180, 70, 70) 50%)",
+          clipPath: "polygon(0 0, 30% 0, 70% 0 100%)",
+        };
+      default:
+        return {
+          bgGradient:
+            "linear(71deg, rgba(120, 161, 187) 51%, rgba(168, 87, 81) 50%)",
+          clipPath: "polygon(0 0, 45% 0, 55% 0 100%)",
+        };
     }
   };
+
+  const backgroundProps = getBackgroundProps();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -61,7 +72,7 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                {renderBackground()}
+                <DynamicBackground {...backgroundProps} />
                 <Box position="fixed" width="100%" height="100%" zIndex={1}>
                   <ParticleBackground />
                 </Box>

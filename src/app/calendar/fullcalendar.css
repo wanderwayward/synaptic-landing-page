@@ -1,4 +1,20 @@
-/* src/app/calendar/fullcalendar.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.text-border {
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, -1px 1px 0 #000,
+    1px -1px 0 #000;
+}
 
 /* Change the background color of the current day */
 .fc .fc-daygrid-day.fc-day-today {

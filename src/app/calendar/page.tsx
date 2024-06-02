@@ -1,7 +1,7 @@
 // src/app/calendar/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import axios from "axios";
@@ -64,13 +64,15 @@ const CalendarPage = () => {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      className="fade-in" // Apply fade-in animation
     >
       <Heading
         as="h1"
         mb={4}
-        color="black"
+        color="white"
         fontFamily="roca"
         fontSize="xxx-large"
+        className="fade-in text-border" // Apply fade-in animation
       >
         Selecciona un horario a tu conveniencia
       </Heading>
@@ -82,6 +84,7 @@ const CalendarPage = () => {
         borderRadius="md"
         p={4}
         overflow="hidden"
+        className="fade-in" // Apply fade-in animation
       >
         <FullCalendar
           plugins={[dayGridPlugin]}
@@ -107,6 +110,7 @@ const CalendarPage = () => {
               color={eventInfo.event.textColor}
               borderRadius="md"
               p={2}
+              className="fade-in" // Apply fade-in animation
             >
               <span>{eventInfo.event.title}</span>
             </Flex>

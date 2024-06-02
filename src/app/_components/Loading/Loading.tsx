@@ -8,7 +8,7 @@ const Loading = () => (
     alignItems="center"
     justifyContent="center"
     height="100vh"
-    backgroundColor="white"
+    backgroundColor="black"
   >
     <Spinner size="xl" />
   </Box>
