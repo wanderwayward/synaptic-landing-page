@@ -1,12 +1,10 @@
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
-import Background from "./_components/FrontPage/FrontPageBackground/FrontPageBackground";
 import CustomButton from "./_components/button/CustomButton";
 
 export default function HomePage() {
   return (
     <Box position="relative" minHeight="calc(100vh - 96px)" overflow="hidden">
-      <Background />
       <Flex
         direction="column"
         align="center"

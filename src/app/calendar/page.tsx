@@ -1,7 +1,7 @@
 // src/app/calendar/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import axios from "axios";
@@ -61,13 +61,23 @@ const CalendarPage = () => {
       px={4}
       pt="48px"
       display="flex"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
     >
+      <Heading
+        as="h1"
+        mb={4}
+        color="black"
+        fontFamily="roca"
+        fontSize="xxx-large"
+      >
+        Selecciona un horario a tu conveniencia
+      </Heading>
       <Box
         width="60%"
         height="70vh"
-        bg="white"
+        bg="#009DD4"
         boxShadow="lg"
         borderRadius="md"
         p={4}

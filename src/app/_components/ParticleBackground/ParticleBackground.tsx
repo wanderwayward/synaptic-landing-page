@@ -1,6 +1,3 @@
-// app/_components/ParticleBackground.tsx
-"use client";
-
 import React, { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import {
@@ -27,85 +24,75 @@ const ParticleBackground = () => {
     console.log(container);
   };
 
-  // Configuration object for the particles
   const options: ISourceOptions = useMemo(
     () => ({
-      // Background settings
-      background: {
-        color: {
-          value: "#fff",
-        },
-      },
-      fpsLimit: 60, // Limits the frame rate to 60 FPS
+      fpsLimit: 60,
       interactivity: {
         events: {
-          // Enable particle interaction on hover
           onHover: {
             enable: true,
-            mode: "grab", // Subtle grab effect
-            distance: 140, // Distance for the grab effect
+            mode: "grab",
+            distance: 140,
             links: {
-              opacity: 0.8, // Opacity of the link during the grab effect
+              opacity: 0.8,
             },
           },
-          // Correct resize configuration
           resize: {
             enable: true,
             delay: 0.5,
           },
         },
         modes: {
-          // Grab mode settings
           grab: {
-            distance: 140, // Distance for the grab effect
+            distance: 140,
             links: {
-              opacity: 0.8, // Opacity of the link during the grab effect
+              opacity: 0.8,
             },
           },
         },
       },
       particles: {
         color: {
-          value: "#000", // Light blue particles
+          value: "#000",
         },
         links: {
-          color: "#000", // Light blue links
-          distance: 72, // Distance between linked particles
-          enable: true, // Enable linking
-          opacity: 0.8, // Opacity of the links
-          width: 2, // Width of the links
+          color: "#000",
+          distance: 72,
+          enable: true,
+          opacity: 0.8,
+          width: 2,
         },
         collisions: {
-          enable: true, // Enable particle collisions
+          enable: true,
         },
         move: {
-          direction: MoveDirection.none, // No specific movement direction
-          enable: true, // Enable particle movement
+          direction: MoveDirection.none,
+          enable: true,
           outModes: {
-            default: OutMode.bounce, // Bounce particles at the edge
+            default: OutMode.bounce,
           },
-          random: false, // Disable random movement
-          speed: 0.05, // Very slow movement speed
-          straight: false, // No straight movement
+          random: false,
+          speed: 0.05,
+          straight: false,
         },
         number: {
           density: {
-            enable: true, // Enable density-based number of particles
-            area: 200, // Area for density calculation
+            enable: true,
+            area: 200,
           },
-          value: 300, // Total number of particles
+          value: 300,
         },
         opacity: {
-          value: 0.8, // Opacity of the particles
+          value: 0.8,
         },
         shape: {
-          type: "circle", // Shape of the particles
+          type: "circle",
         },
         size: {
-          value: { min: 3, max: 5 }, // Size range of the particles
+          value: { min: 3, max: 5 },
         },
       },
-      detectRetina: true, // Enable retina display support
+      detectRetina: true,
     }),
     []
   );
@@ -116,6 +103,7 @@ const ParticleBackground = () => {
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={options}
+        style={{ position: "fixed", width: "100%", height: "100%", zIndex: 1 }}
       />
     );
   }

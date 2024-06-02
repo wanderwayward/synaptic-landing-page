@@ -5,6 +5,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
 import React, { useEffect, useState } from "react";
 import Loading from "./_components/Loading/Loading";
+import Background from "./_components/FrontPage/FrontPageBackground";
 
 export default function RootLayout({
   children,
@@ -16,7 +17,7 @@ export default function RootLayout({
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 120); // Delay of 0.12s (120ms)
+    }, 120);
 
     return () => clearTimeout(timer);
   }, []);
@@ -44,6 +45,7 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
+                <Background />
                 <Box position="fixed" width="100%" height="100%" zIndex={1}>
                   <ParticleBackground />
                 </Box>
@@ -51,7 +53,7 @@ export default function RootLayout({
                   direction="column"
                   minHeight="100vh"
                   position="relative"
-                  zIndex={3}
+                  zIndex={2}
                 >
                   <Flex
                     as="header"

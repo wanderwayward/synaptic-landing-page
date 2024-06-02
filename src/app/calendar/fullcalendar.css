@@ -3,100 +3,155 @@
 /* Change the background color of the current day */
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(
-    255,
-    255,
-    0,
-    0.2
-  ) !important; /* Custom yellow overlay with opacity */
-}
-
-/* Change the color of the grid lines */
-.fc .fc-daygrid-day-frame {
-  border: 1px solid #061c9a; /* Custom line color */
+    50,
+    2,
+    11,
+    0.5
+  ) !important; /* Custom background color */
 }
 
 /* Change the font of the entire calendar */
 .fc {
-  font-family: "roca thin" !important; /* Custom font */
+  font-family: "roca" !important; /* Custom font */
 }
 
 /* Change the font size and color of the day numbers */
 .fc .fc-daygrid-day-number {
   font-size: 14px !important; /* Custom font size */
-  color: #333 !important; /* Custom font color */
+  color: #f2f2f2 !important; /* Custom font color */
 }
 
 /* Change the title font size and color */
 .fc-toolbar-title {
-  font-size: 24px !important; /* Custom font size */
-  color: #000 !important; /* Custom font color */
+  font-family: "roca";
+  text-transform: uppercase;
+  font-size: 2.5em !important; /* Custom font size */
+  color: #fcdebe !important; /* Custom font color */
 }
 
 /* Customize the navigation buttons */
 .fc .fc-button {
-  background-color: pink !important; /* Custom background color */
-  color: blue !important; /* Custom text color */
-  border: 2px solid yellow !important; /* Custom border color */
-  padding: 10px 20px !important; /* Custom padding */
-  border-radius: 10px !important; /* Custom border radius */
+  color: #fc7a1e !important; /* Custom text color */
+  border-radius: 17px !important; /* Custom border radius */
 }
 
 /* Change the hover and active states of the navigation buttons */
 .fc .fc-button:hover,
 .fc .fc-button:focus {
-  background-color: green !important; /* Custom hover color */
-  color: red !important; /* Custom hover text color */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.267
+  ) !important; /* Custom hover color */
+  color: #32021f !important; /* Custom hover text color */
 }
 
-.fc .fc-button:active {
-  background-color: purple !important; /* Custom active color */
-  color: orange !important; /* Custom active text color */
+.fc .fc-button:active,
+.fc .fc-button.fc-button-active {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.795
+  ) !important; /* Custom active color */
+  color: #cf007c !important; /* Custom active text color */
+  border: none !important; /* Ensure no border */
+  outline: none !important; /* Remove outline */
 }
 
-/* Customize the today button */
-.fc .fc-button.fc-button-today {
-  background-color: cyan !important; /* Custom background color */
-  color: magenta !important; /* Custom text color */
-}
-
-/* Change the hover and active states of the today button */
-.fc .fc-button.fc-button-today:hover,
-.fc .fc-button.fc-button-today:focus {
-  background-color: lime !important; /* Custom hover color */
-  color: navy !important; /* Custom hover text color */
-}
-
-.fc .fc-button.fc-button-today:active {
-  background-color: olive !important; /* Custom active color */
-  color: teal !important; /* Custom active text color */
+/* Additional specificity for active buttons to ensure border removal */
+.fc .fc-button:active,
+.fc .fc-button:focus,
+.fc .fc-button-primary:active,
+.fc .fc-button-primary:focus,
+.fc .fc-button-group .fc-button:active,
+.fc .fc-button-group .fc-button:focus,
+.fc .fc-button-group .fc-button.fc-button-active {
+  border: none !important; /* Ensure no border */
+  outline: none !important; /* Remove outline */
+  box-shadow: none !important; /* Remove any box-shadow */
 }
 
 /* Customize the month/week/day buttons */
 .fc .fc-button-group .fc-button {
-  background-color: violet !important; /* Custom background color */
-  color: black !important; /* Custom text color */
+  background-color: none; /* Custom background color */
+  color: none; /* Custom text color */
+  border: none;
+  margin-right: 3px;
+  margin-left: 3px;
 }
 
 /* Change the hover and active states of the month/week/day buttons */
 .fc .fc-button-group .fc-button:hover,
 .fc .fc-button-group .fc-button:focus {
-  background-color: gold !important; /* Custom hover color */
-  color: brown !important; /* Custom hover text color */
+  background-color: #fc7a1e !important; /* Custom hover color */
+  color: #009dd4 !important; /* Custom hover text color */
 }
 
-.fc .fc-button-group .fc-button:active {
-  background-color: silver !important; /* Custom active color */
-  color: maroon !important; /* Custom active text color */
+.fc .fc-button-group .fc-button:active,
+.fc .fc-button-group .fc-button.fc-button-active {
+  background-color: #fc7a1e !important; /* Custom hover color */
+
+  color: #009dd4 !important; /* Custom active text color */
+  border: none !important; /* Ensure no border */
+  outline: none !important; /* Remove outline */
+  box-shadow: none !important; /* Remove any box-shadow */
+}
+
+/* Customize the primary buttons */
+.fc .fc-button-primary {
+  background-color: #009dd4 !important; /* Custom background color */
+  color: #fc7a1e !important; /* Custom text color */
+  font-weight: semi-bold !important; /* Custom font weight */
+  font-size: 1.5em !important; /* Custom font size */
+  border: none !important;
+  padding: none !important;
+}
+
+/* Change the hover and active states of the primary buttons */
+.fc .fc-button-primary:hover,
+.fc .fc-button-primary:focus {
+  background-color: #fc7a1e !important; /* Custom hover color */
+  color: #009dd4 !important; /* Custom hover text color */
+}
+
+.fc .fc-button-primary:active,
+.fc .fc-button-primary.fc-button-active {
+  background-color: #005f8d !important; /* Custom active color */
+  color: #ffffff !important; /* Custom active text color */
+  border: none !important; /* Ensure no border */
+  outline: none !important; /* Remove outline */
+  box-shadow: none !important; /* Remove any box-shadow */
 }
 
 /* Customize the top row with day names (Sun, Mon, Tue, etc.) */
 .fc .fc-col-header-cell {
-  background-color: #f0f0f0 !important; /* Custom background color */
-  color: pink !important; /* Custom text color */
-  border: 1px solid blue !important; /* Custom border color */
+  background-color: #788585 !important; /* Custom background color */
+  color: white !important; /* Custom text color */
+  border: none !important; /* Remove the border */
 }
 
-/* Customize the borders around the day cells */
-.fc .fc-daygrid-day {
-  border: 1px solid yellow !important; /* Custom border color */
+/* Remove the right border of the last header cell */
+.fc .fc-col-header-cell:last-of-type {
+  border-right: none !important;
+}
+
+/* Customize the grid and remove borders */
+.fc-scrollgrid {
+  border: none !important;
+}
+
+.fc-scrollgrid td:last-of-type {
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+.fc-scrollgrid-section.fc-scrollgrid-section-body td[role="presentation"] {
+  border: transparent !important;
+}
+
+/* Remove the right border of the last header cell correctly */
+.fc .fc-scrollgrid-section.fc-scrollgrid-section-header th:last-child {
+  border-right: none !important;
 }
