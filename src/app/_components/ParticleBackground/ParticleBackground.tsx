@@ -45,7 +45,7 @@ const ParticleBackground = () => {
             mode: "grab", // Subtle grab effect
             distance: 140, // Distance for the grab effect
             links: {
-              opacity: 1, // Opacity of the link during the grab effect
+              opacity: 0.8, // Opacity of the link during the grab effect
             },
           },
           // Correct resize configuration
@@ -59,7 +59,7 @@ const ParticleBackground = () => {
           grab: {
             distance: 140, // Distance for the grab effect
             links: {
-              opacity: 1, // Opacity of the link during the grab effect
+              opacity: 0.8, // Opacity of the link during the grab effect
             },
           },
         },
@@ -72,7 +72,7 @@ const ParticleBackground = () => {
           color: "#000", // Light blue links
           distance: 72, // Distance between linked particles
           enable: true, // Enable linking
-          opacity: 0.2, // Opacity of the links
+          opacity: 0.8, // Opacity of the links
           width: 2, // Width of the links
         },
         collisions: {
@@ -96,7 +96,7 @@ const ParticleBackground = () => {
           value: 300, // Total number of particles
         },
         opacity: {
-          value: 0.4, // Opacity of the particles
+          value: 0.8, // Opacity of the particles
         },
         shape: {
           type: "circle", // Shape of the particles

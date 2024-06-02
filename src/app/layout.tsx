@@ -44,14 +44,14 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <Box position="fixed" width="100%" height="100%" zIndex={0}>
+                <Box position="fixed" width="100%" height="100%" zIndex={1}>
                   <ParticleBackground />
                 </Box>
                 <Flex
                   direction="column"
                   minHeight="100vh"
                   position="relative"
-                  zIndex={1}
+                  zIndex={3}
                 >
                   <Flex
                     as="header"
@@ -60,7 +60,7 @@ export default function RootLayout({
                     height="48px"
                     justifyContent="flex-end"
                     alignItems="center"
-                    zIndex={2}
+                    zIndex={3}
                     position="relative"
                   >
                     <Heading as="h1" size="md" fontFamily="Karla">
@@ -72,7 +72,7 @@ export default function RootLayout({
                     flex="1"
                     overflow="hidden"
                     position="relative"
-                    zIndex={1}
+                    zIndex={2}
                   >
                     {children}
                   </Box>
@@ -80,7 +80,7 @@ export default function RootLayout({
                     as="footer"
                     p={4}
                     height="48px"
-                    zIndex={2}
+                    zIndex={3}
                     position="relative"
                   >
                     <Text>Si necesitas ayuda inmediata:</Text>

@@ -11,7 +11,7 @@ export default function HomePage() {
         direction="column"
         align="center"
         justify="center"
-        zIndex={1}
+        zIndex={2}
         position="relative"
         px={4}
         pt={250}

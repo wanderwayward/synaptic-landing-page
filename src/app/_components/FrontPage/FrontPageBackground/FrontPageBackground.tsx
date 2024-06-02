@@ -8,9 +8,9 @@ export default function Background() {
       left={0}
       width="100%"
       height="100vh"
-      bgGradient="linear(71deg, rgba(120, 161, 187, 0.8) 51%, rgba(168, 87, 81, 0.8) 50%)"
+      bgGradient="linear(71deg, rgba(120, 161, 187, .8) 51%, rgba(168, 87, 81, .8) 50%)"
       clipPath="polygon(0 0, 45% 0, 55% 0 100%)"
-      zIndex={0}
+      zIndex={-1000}
     />
   );
 }
