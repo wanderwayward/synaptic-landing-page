@@ -14,6 +14,7 @@ export default function HomePage() {
         px={4}
         pt={250}
         mt="48px"
+        className="fade-in"
       >
         <Flex align="center" justify="space-around" width="100%" maxW="1500px">
           <Box flex="1" textAlign="center" pr={4}>

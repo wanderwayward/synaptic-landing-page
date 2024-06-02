@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "./_components/Loading/Loading";
 import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function RootLayout({
   children,
@@ -21,21 +22,32 @@ export default function RootLayout({
       case "/calendar":
         return {
           bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 10%, rgba(168, 87, 81) 10%)",
+            "linear(71deg, rgba(120, 161, 187) 10%,  rgba(180, 70, 70) 10%)",
           clipPath: "polygon(0 0, 10% 0, 90% 0 100%)",
         };
       case "/about":
         return {
           bgGradient:
-            "linear(71deg, rgba(140, 150, 170) 50%, rgba(180, 70, 70) 50%)",
-          clipPath: "polygon(0 0, 30% 0, 70% 0 100%)",
+            "linear(71deg, rgba(120, 161, 187) 90%, rgba(180, 70, 70) 90%)",
+          clipPath: "polygon(0 0, 90% 0, 10% 0 100%)",
         };
       default:
         return {
           bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 51%, rgba(168, 87, 81) 50%)",
+            "linear(71deg, rgba(120, 161, 187) 51%,  rgba(180, 70, 70) 50%)",
           clipPath: "polygon(0 0, 45% 0, 55% 0 100%)",
         };
+    }
+  };
+
+  const renderNavLinks = () => {
+    switch (pathname) {
+      case "/calendar":
+        return <Link href="/about">Acerca de Nosotros</Link>;
+      case "/about":
+        return <Link href="/">Inicio</Link>;
+      default:
+        return <Link href="/about">Acerca de Nosotros</Link>;
     }
   };
 
@@ -92,8 +104,8 @@ export default function RootLayout({
                     zIndex={3}
                     position="relative"
                   >
-                    <Heading as="h1" size="md" fontFamily="Karla">
-                      Sobre Nosotros
+                    <Heading as="h1" size="md" fontFamily="roca" color="white">
+                      {renderNavLinks()}
                     </Heading>
                   </Flex>
                   <Box
