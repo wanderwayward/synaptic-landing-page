@@ -1,82 +1,66 @@
-// app/page.tsx
 import { Box, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import Link from "next/link";
+import Background from "./_components/FrontPage/FrontPageBackground/FrontPageBackground";
 
 export default function HomePage() {
   return (
-    <Flex direction="column" height="calc(100vh - 96px)">
-      <Box
-        bg="rgba(252, 222, 190, 0.2)"
-        height="27%"
+    <Box position="relative" minHeight="calc(100vh - 96px)" overflow="hidden">
+      <Background />
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        zIndex={1}
         position="relative"
-        zIndex={2}
+        px={4}
+        pt={250}
+        mt="48px"
       >
         <Flex
-          height="100%"
-          align="flex-end"
-          justify="center"
-          position="relative"
-        >
-          <Flex width="100%" maxW="1200px" justify="center" align="center">
-            <Box
-              textAlign="right"
-              pr={2}
-              position="relative"
-              zIndex={3}
-              mb="-0.7em"
-            >
-              <Heading
-                as="h1"
-                size="4xl"
-                fontWeight="bold"
-                fontFamily="Karla, sans-serif"
-                letterSpacing="0.03em"
-                lineHeight="1"
-                color="#32021F"
-              >
-                Synaptic\
-              </Heading>
-            </Box>
-            <Box textAlign="left" pl={2} position="relative" zIndex={3}>
-              <Text
-                fontSize="2xl"
-                fontWeight="medium"
-                fontFamily="Merriweather, serif"
-                lineHeight="1"
-                color="#32021F"
-              >
-                Terapia para la vida real.
-              </Text>
-            </Box>
-          </Flex>
-        </Flex>
-      </Box>
-
-      {/* Bottom Box for the Button */}
-      <Box bg="rgba(120, 161, 187, 0.2)" height="73%" zIndex={1}>
-        <Flex
-          height="100%"
-          direction="column"
           align="center"
-          justify="flex-start"
-          p={4}
-          position="relative"
-          zIndex={3}
+          justify="space-around"
+          mb={4}
+          width="100%"
+          maxW="1500px"
         >
-          <Link href="/calendar">
-            <Button
-              as={"a"}
-              bg="#FFBA08"
-              size="lg"
-              mt={4}
-              fontFamily="Merriweather, serif"
-              _hover={{ bg: "#FFA000" }}
+          <Box flex="1" textAlign="center" pr={4}>
+            <Heading
+              as="h1"
+              fontSize="9.5em"
+              fontWeight="bold"
+              fontFamily="roca, sans-serif"
+              letterSpacing="0.03em"
+              lineHeight="2"
+              color="#FC7A1E"
+              pr={8}
             >
-              Agenda Tu Cita Aquí
-            </Button>
-          </Link>
+              Synaptic
+            </Heading>
+          </Box>
+          <Box flex="1" textAlign="left" mr={8}>
+            <Text
+              fontSize="6xl"
+              fontWeight="medium"
+              fontFamily="roca thin"
+              lineHeight="1"
+              color="#FC7A1E"
+            >
+              Terapia para la vida real.
+            </Text>
+          </Box>
         </Flex>
-      </Box>
-    </Flex>
+
+        <Link href="/calendar" passHref>
+          <Button
+            bg="#FFBA08"
+            mt={4}
+            fontFamily="roca thin"
+            _hover={{ bg: "#FFA000" }}
+          >
+            Agenda Tu Cita Aquí
+          </Button>
+        </Link>
+      </Flex>
+    </Box>
   );
 }

@@ -66,10 +66,10 @@ const ParticleBackground = () => {
       },
       particles: {
         color: {
-          value: "#788585", // Light blue particles
+          value: "#000", // Light blue particles
         },
         links: {
-          color: "#32021F", // Light blue links
+          color: "#000", // Light blue links
           distance: 72, // Distance between linked particles
           enable: true, // Enable linking
           opacity: 0.2, // Opacity of the links

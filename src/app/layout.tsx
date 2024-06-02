@@ -1,4 +1,3 @@
-// app/layout.tsx
 "use client";
 
 import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
@@ -35,6 +34,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
           rel="stylesheet"
         />
+        <link rel="stylesheet" href="https://use.typekit.net/qqc5ylq.css" />
       </head>
 
       <body>
@@ -44,7 +44,7 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <Box position="absolute" width="100%" height="100%" zIndex={0}>
+                <Box position="fixed" width="100%" height="100%" zIndex={0}>
                   <ParticleBackground />
                 </Box>
                 <Flex
@@ -55,25 +55,33 @@ export default function RootLayout({
                 >
                   <Flex
                     as="header"
-                    bg="rgba(252, 222, 190,0.3)"
                     p={4}
                     color="#32021F"
                     height="48px"
                     justifyContent="flex-end"
                     alignItems="center"
+                    zIndex={2}
+                    position="relative"
                   >
                     <Heading as="h1" size="md" fontFamily="Karla">
                       Sobre Nosotros
                     </Heading>
                   </Flex>
-                  <Box as="main" flex="1">
+                  <Box
+                    as="main"
+                    flex="1"
+                    overflow="hidden"
+                    position="relative"
+                    zIndex={1}
+                  >
                     {children}
                   </Box>
                   <Box
                     as="footer"
-                    bg="rgba(120, 133, 133, 0.3)"
                     p={4}
                     height="48px"
+                    zIndex={2}
+                    position="relative"
                   >
                     <Text>
                       Si necesitas ayuda inmediata, existen estas call centers
