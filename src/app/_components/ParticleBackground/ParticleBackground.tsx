@@ -34,7 +34,7 @@ const ParticleBackground = React.memo(() => {
             mode: "grab",
             distance: 140,
             links: {
-              opacity: 0.8,
+              opacity: 0.5,
             },
           },
           resize: {
@@ -46,7 +46,7 @@ const ParticleBackground = React.memo(() => {
           grab: {
             distance: 140,
             links: {
-              opacity: 0.8,
+              opacity: 0.5,
             },
           },
         },
@@ -59,7 +59,7 @@ const ParticleBackground = React.memo(() => {
           color: "#000",
           distance: 72,
           enable: true,
-          opacity: 0.8,
+          opacity: 0.5,
           width: 2,
         },
         collisions: {
@@ -83,7 +83,7 @@ const ParticleBackground = React.memo(() => {
           value: 300,
         },
         opacity: {
-          value: 0.8,
+          value: 0.5,
         },
         shape: {
           type: "circle",
