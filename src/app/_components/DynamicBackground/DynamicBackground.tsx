@@ -1,42 +1,48 @@
-import { Box, keyframes } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState, ReactNode } from "react";
 import { css, SerializedStyles } from "@emotion/react";
 
 interface DynamicBackgroundProps {
   bgGradient: string;
-  clipPath: string;
+  children: ReactNode;
+  animate: boolean;
 }
 
 const DynamicBackground = ({
   bgGradient,
-  clipPath,
+  children,
+  animate,
 }: DynamicBackgroundProps) => {
-  const [prevBgGradient, setPrevBgGradient] = useState(bgGradient);
-  const [prevClipPath, setPrevClipPath] = useState(clipPath);
-  const [animation, setAnimation] = useState<SerializedStyles | null>(null);
+  const [animationStyle, setAnimationStyle] = useState<SerializedStyles | null>(
+    null
+  );
 
   useEffect(() => {
-    if (prevBgGradient !== bgGradient || prevClipPath !== clipPath) {
-      const keyframeAnimation = keyframes`
-        from {
-          background: ${prevBgGradient};
-          clip-path: ${prevClipPath};
-        }
-        to {
-          background: ${bgGradient};
-          clip-path: ${clipPath};
+    if (animate) {
+      const keyframeAnimation = css`
+        background: ${bgGradient};
+        background-size: 100% 100%;
+        animation: moveBackground 10s ease-in-out forwards;
+
+        @keyframes moveBackground {
+          0% {
+            background-position: 50% 50%;
+          }
+          100% {
+            background-position: 30% 70%;
+          }
         }
       `;
 
-      setAnimation(css`
-        animation: ${keyframeAnimation} 1s ease-in-out forwards;
+      setAnimationStyle(keyframeAnimation);
+    } else {
+      setAnimationStyle(css`
+        background: ${bgGradient};
+        background-size: 100% 100%;
+        background-position: 50% 50%;
       `);
-
-      // Update the previous state values after the animation is set
-      setPrevBgGradient(bgGradient);
-      setPrevClipPath(clipPath);
     }
-  }, [bgGradient, clipPath, prevBgGradient, prevClipPath]);
+  }, [bgGradient, animate]);
 
   return (
     <Box
@@ -45,12 +51,11 @@ const DynamicBackground = ({
       left={0}
       width="100%"
       height="100vh"
-      bgGradient={bgGradient} // Apply current gradient
-      clipPath={clipPath} // Apply current clip path
+      css={animationStyle}
       zIndex={0}
-      css={animation}
-      transition="background 1s ease-in-out, clip-path 1s ease-in-out"
-    />
+    >
+      {children}
+    </Box>
   );
 };
 

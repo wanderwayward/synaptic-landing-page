@@ -16,29 +16,47 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
+  const [bgGradient, setBgGradient] = useState(
+    "linear-gradient(71deg, rgba(120, 161, 187) 51%, rgba(180, 70, 70) 50%)"
+  );
+  const [animate, setAnimate] = useState(false);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [previousPathname, setPreviousPathname] = useState(pathname);
 
-  const getBackgroundProps = () => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setInitialLoadComplete(true); // Mark the initial load as complete
+    }, 120);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (initialLoadComplete && previousPathname !== pathname) {
+      setAnimate(true); // Trigger animation on route change
+      setPreviousPathname(pathname);
+    } else {
+      setAnimate(false); // Do not animate on initial load
+    }
     switch (pathname) {
       case "/calendar":
-        return {
-          bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 15%,  rgba(180, 70, 70) 15%)",
-          clipPath: "polygon(0 0, 15% 0, 85% 0 100%)",
-        };
+        setBgGradient(
+          "linear-gradient(71deg, rgba(120, 161, 187) 15%, rgba(180, 70, 70) 15%)"
+        );
+        break;
       case "/about":
-        return {
-          bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 85%, rgba(180, 70, 70) 85%)",
-          clipPath: "polygon(0 0, 85% 0, 15% 0 100%)",
-        };
+        setBgGradient(
+          "linear-gradient(71deg, rgba(120, 161, 187) 85%, rgba(180, 70, 70) 85%)"
+        );
+        break;
       default:
-        return {
-          bgGradient:
-            "linear(71deg, rgba(120, 161, 187) 51%,  rgba(180, 70, 70) 50%)",
-          clipPath: "polygon(0 0, 45% 0, 55% 0 100%)",
-        };
+        setBgGradient(
+          "linear-gradient(71deg, rgba(120, 161, 187) 51%, rgba(180, 70, 70) 50%)"
+        );
+        break;
     }
-  };
+  }, [pathname, initialLoadComplete, previousPathname]);
 
   const renderNavLinks = () => {
     switch (pathname) {
@@ -50,16 +68,6 @@ export default function RootLayout({
         return <Link href="/about">Acerca de Nosotros</Link>;
     }
   };
-
-  const backgroundProps = getBackgroundProps();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 120);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <html lang="en">
@@ -84,59 +92,60 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <DynamicBackground {...backgroundProps} />
-                <Box position="fixed" width="100%" height="100%" zIndex={1}>
-                  <ParticleBackground />
-                </Box>
-                <Flex
-                  direction="column"
-                  minHeight="100vh"
-                  position="relative"
-                  zIndex={2}
-                >
+                <DynamicBackground bgGradient={bgGradient} animate={animate}>
+                  <Box position="fixed" width="100%" height="100%" zIndex={1}>
+                    <ParticleBackground />
+                  </Box>
                   <Flex
-                    as="header"
-                    p={4}
-                    color="#32021F"
-                    height="48px"
-                    justifyContent="flex-end"
-                    alignItems="center"
-                    zIndex={3}
-                    position="relative"
-                  >
-                    <Heading
-                      as="h1"
-                      size="md"
-                      fontFamily="roca"
-                      color="white"
-                      sx={{
-                        "&:hover": {
-                          textShadow: "0 0 2px #fff",
-                        },
-                      }}
-                    >
-                      {renderNavLinks()}
-                    </Heading>
-                  </Flex>
-                  <Box
-                    as="main"
-                    flex="1"
-                    overflow="hidden"
+                    direction="column"
+                    minHeight="100vh"
                     position="relative"
                     zIndex={2}
                   >
-                    {children}
-                  </Box>
-                  <Box
-                    as="footer"
-                    p={4}
-                    height="48px"
-                    zIndex={3}
-                    position="relative"
-                  >
-                    <Text>Si necesitas ayuda inmediata:</Text>
-                  </Box>
-                </Flex>
+                    <Flex
+                      as="header"
+                      p={4}
+                      color="#32021F"
+                      height="48px"
+                      justifyContent="flex-end"
+                      alignItems="center"
+                      zIndex={3}
+                      position="relative"
+                    >
+                      <Heading
+                        as="h1"
+                        size="md"
+                        fontFamily="roca"
+                        color="white"
+                        sx={{
+                          "&:hover": {
+                            textShadow: "0 0 2px #fff",
+                          },
+                        }}
+                      >
+                        {renderNavLinks()}
+                      </Heading>
+                    </Flex>
+                    <Box
+                      as="main"
+                      flex="1"
+                      overflow="hidden"
+                      position="relative"
+                      zIndex={2}
+                    >
+                      {children}
+                    </Box>
+                    <Box
+                      as="footer"
+                      p={4}
+                      height="48px"
+                      zIndex={3}
+                      position="relative"
+                    >
+                      <Text>Si necesitas ayuda inmediata:</Text>
+                    </Box>
+                  </Flex>
+                </DynamicBackground>
               </>
             )}
           </Box>
