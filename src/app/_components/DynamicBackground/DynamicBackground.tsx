@@ -1,61 +1,64 @@
+"use client";
+
 import { Box } from "@chakra-ui/react";
-import { useEffect, useState, ReactNode } from "react";
-import { css, SerializedStyles } from "@emotion/react";
+import { ReactNode, useEffect, useState } from "react";
+import { css, Global } from "@emotion/react";
 
 interface DynamicBackgroundProps {
-  bgGradient: string;
+  page: string;
   children: ReactNode;
-  animate: boolean;
 }
 
-const DynamicBackground = ({
-  bgGradient,
+const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
+  page,
   children,
-  animate,
-}: DynamicBackgroundProps) => {
-  const [animationStyle, setAnimationStyle] = useState<SerializedStyles | null>(
-    null
+}) => {
+  const [bgGradient, setBgGradient] = useState<string>(
+    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
   );
 
   useEffect(() => {
-    if (animate) {
-      const keyframeAnimation = css`
-        background: ${bgGradient};
-        background-size: 100% 100%;
-        animation: moveBackground 10s ease-in-out forwards;
-
-        @keyframes moveBackground {
-          0% {
-            background-position: 50% 50%;
-          }
-          100% {
-            background-position: 30% 70%;
-          }
-        }
-      `;
-
-      setAnimationStyle(keyframeAnimation);
-    } else {
-      setAnimationStyle(css`
-        background: ${bgGradient};
-        background-size: 100% 100%;
-        background-position: 50% 50%;
-      `);
+    switch (page) {
+      case "/calendar":
+        setBgGradient(
+          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)"
+        );
+        break;
+      case "/about":
+        setBgGradient(
+          "linear-gradient(73deg, rgba(66, 66, 66) 85%, rgba(255, 182, 39) 85%)"
+        );
+        break;
+      default:
+        setBgGradient(
+          "linear-gradient(73deg, rgba(66, 66, 66) 51.5%, rgba(255, 182, 39) 51%)"
+        );
+        break;
     }
-  }, [bgGradient, animate]);
+  }, [page]);
 
   return (
-    <Box
-      position="fixed"
-      top={0}
-      left={0}
-      width="100%"
-      height="100vh"
-      css={animationStyle}
-      zIndex={0}
-    >
-      {children}
-    </Box>
+    <>
+      <Global
+        styles={css`
+          .dynamic-background {
+            background: ${bgGradient};
+            background-size: 100% 100%;
+            background-position: 50% 50%;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+          }
+        `}
+      />
+      <Box className="dynamic-background" />
+      <Box position="relative" zIndex={1}>
+        {children}
+      </Box>
+    </>
   );
 };
 

@@ -1,13 +1,13 @@
 "use client";
 
-import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
-import React, { useEffect, useState } from "react";
-import Loading from "./_components/Loading/Loading";
-import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakraProvider";
+import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
+import Loading from "./_components/Loading/Loading";
+import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
 
 export default function RootLayout({
   children,
@@ -16,12 +16,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
-  const [bgGradient, setBgGradient] = useState(
-    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
-  );
-  const [animate, setAnimate] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
-  const [previousPathname, setPreviousPathname] = useState(pathname);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,33 +26,6 @@ export default function RootLayout({
 
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (initialLoadComplete && previousPathname !== pathname) {
-      setAnimate(true);
-      setPreviousPathname(pathname);
-    } else {
-      setAnimate(false);
-    }
-
-    switch (pathname) {
-      case "/calendar":
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)"
-        );
-        break;
-      case "/about":
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 85%, rgba(255, 182, 39) 85%)"
-        );
-        break;
-      default:
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
-        );
-        break;
-    }
-  }, [pathname, initialLoadComplete, previousPathname]);
 
   const renderNavLinks = () => {
     switch (pathname) {
@@ -93,7 +61,7 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <DynamicBackground bgGradient={bgGradient} animate={animate}>
+                <DynamicBackground page={pathname}>
                   <Box position="fixed" width="100%" height="100%" zIndex={1}>
                     <ParticleBackground />
                   </Box>

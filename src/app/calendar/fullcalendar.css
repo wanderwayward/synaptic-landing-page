@@ -1,7 +1,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(1.25em); /* 20px */
   }
   to {
     opacity: 1;
@@ -10,10 +10,9 @@
 }
 
 .fade-in {
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out; /* Correct time unit */
 }
 
-/* Change the background color of the current day */
 /* Change the background color of the current day */
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(
@@ -31,7 +30,7 @@
 
 /* Change the font size and color of the day numbers */
 .fc .fc-daygrid-day-number {
-  font-size: 14px !important; /* Custom font size */
+  font-size: 0.875em !important; /* 14px */
   color: #f2f2f2 !important; /* Custom font color */
 }
 
@@ -46,7 +45,7 @@
 /* Customize the navigation buttons */
 .fc .fc-button {
   color: #fc7a1e !important; /* Custom text color */
-  border-radius: 17px !important; /* Custom border radius */
+  border-radius: 1.0625em !important; /* 17px */
 }
 
 /* Change the hover and active states of the navigation buttons */
@@ -92,9 +91,10 @@
   background-color: none; /* Custom background color */
   color: none; /* Custom text color */
   border: none;
-  margin-right: 3px;
-  margin-left: 3px;
+  margin-right: 0.1875em; /* 3px */
+  margin-left: 0.1875em; /* 3px */
 }
+
 /* Customize the primary buttons */
 .fc .fc-button-primary {
   background-color: #de3c4b !important; /* Custom background color */
