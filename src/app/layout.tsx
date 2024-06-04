@@ -33,10 +33,6 @@ export default function RootLayout({
   }, []);
 
   useEffect(() => {
-    console.log("Initial Load Complete:", initialLoadComplete);
-    console.log("Previous Pathname:", previousPathname);
-    console.log("Current Pathname:", pathname);
-
     if (initialLoadComplete && previousPathname !== pathname) {
       setAnimate(true);
       setPreviousPathname(pathname);

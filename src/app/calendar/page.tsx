@@ -1,7 +1,7 @@
 // src/app/calendar/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import axios from "axios";
@@ -68,7 +68,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={4}
-        color="7D3C3C "
+        color="#7D3C3C"
         fontFamily="roca"
         fontSize="4.5em"
         className="fade-in"
@@ -78,7 +78,7 @@ const CalendarPage = () => {
       <Box
         width="60%"
         height="70vh"
-        bg="#48A9A6 "
+        bg="#48A9A6"
         boxShadow="lg"
         borderRadius="md"
         p={4}
@@ -102,17 +102,20 @@ const CalendarPage = () => {
             </Flex>
           )}
           eventContent={(eventInfo) => (
-            <Flex
-              align="center"
-              justify="center"
+            <Box
               bg={eventInfo.event.backgroundColor}
               color={eventInfo.event.textColor}
-              borderRadius="md"
-              p={2}
+              borderRadius="sm"
+              p={1}
               className="fade-in" // Apply fade-in animation
+              fontSize="12px" // Custom font size
+              fontFamily="Arial" // Custom font family
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
             >
-              <span>{eventInfo.event.title}</span>
-            </Flex>
+              <Text isTruncated>{eventInfo.event.title}</Text>
+            </Box>
           )}
         />
       </Box>

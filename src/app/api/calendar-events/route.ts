@@ -1,5 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { calendar, authenticate } from "../../_lib/googleCalendar";
+// src/app/api/calendar-events/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { calendar, authenticate } from "@/app/_lib/googleCalendar";
+import { calendar_v3 } from "googleapis";
+import { GaxiosResponse } from "gaxios";
 
 interface GoogleApiError {
   error: {
@@ -15,26 +18,36 @@ interface GoogleApiError {
   };
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const auth = authenticate();
-  const calendarId = "primary";
-
+export async function GET(req: NextRequest) {
   try {
-    const response = await calendar.events.list({
-      auth,
-      calendarId,
-      timeMin: new Date().toISOString(),
-      maxResults: 10,
-      singleEvents: true,
-      orderBy: "startTime",
-    });
+    console.log("Authenticating...");
+    const auth = await authenticate().getClient();
 
-    res.status(200).json(response.data.items);
-  } catch (error: unknown) {
+    // Use the calendar ID here, typically the email address of the owner of the calendar
+    const calendarId = "rubenaguirrelizcano@gmail.com"; // Replace with your calendar ID
+
+    console.log("Fetching events...");
+    const response: GaxiosResponse<calendar_v3.Schema$Events> =
+      await calendar.events.list({
+        auth: auth as any,
+        calendarId,
+        timeMin: new Date().toISOString(), // Fetch events from now onwards
+        maxResults: 100,
+        singleEvents: true,
+        orderBy: "startTime",
+      });
+
+    const events = response.data.items || [];
+
+    console.log("Events fetched:", JSON.stringify(events, null, 2));
+
+    return NextResponse.json(events, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching events:", error);
     const err = error as GoogleApiError;
-    res.status(err.error.code || 500).json({ error: err.error.message });
+    return NextResponse.json(
+      { error: err.error.message },
+      { status: err.error.code || 500 }
+    );
   }
 }
