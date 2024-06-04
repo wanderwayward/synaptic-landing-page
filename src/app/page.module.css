@@ -1,4 +1,4 @@
-@keyframes fadeIn {
+@keyframes fadeInTitle {
   from {
     opacity: 0;
   }
@@ -7,6 +7,6 @@
   }
 }
 
-.fade-in {
-  animation: fadeIn 0.2s ease-in-out;
+.fade-in-title {
+  animation: fadeInTitle 0.2s ease-in-out;
 }

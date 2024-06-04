@@ -17,7 +17,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
   const [bgGradient, setBgGradient] = useState(
-    "linear-gradient(71deg, rgba(120, 161, 187) 51%, rgba(180, 70, 70) 50%)"
+    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
   );
   const [animate, setAnimate] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
@@ -47,17 +47,17 @@ export default function RootLayout({
     switch (pathname) {
       case "/calendar":
         setBgGradient(
-          "linear-gradient(71deg, rgba(120, 161, 187) 15%, rgba(180, 70, 70) 15%)"
+          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)"
         );
         break;
       case "/about":
         setBgGradient(
-          "linear-gradient(71deg, rgba(120, 161, 187) 85%, rgba(180, 70, 70) 85%)"
+          "linear-gradient(73deg, rgba(66, 66, 66) 85%, rgba(255, 182, 39) 85%)"
         );
         break;
       default:
         setBgGradient(
-          "linear-gradient(71deg, rgba(120, 161, 187) 51%, rgba(180, 70, 70) 50%)"
+          "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
         );
         break;
     }

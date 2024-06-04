@@ -59,32 +59,31 @@ const CalendarPage = () => {
       minHeight="calc(100vh - 96px)"
       overflow="hidden"
       px={4}
-      pt="48px"
       display="flex"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      className="fade-in" // Apply fade-in animation
+      className="fade-in"
     >
       <Heading
         as="h1"
         mb={4}
-        color="white"
+        color="7D3C3C "
         fontFamily="roca"
-        fontSize="xxx-large"
-        className="fade-in text-border" // Apply fade-in animation
+        fontSize="4.5em"
+        className="fade-in"
       >
         Selecciona un horario a tu conveniencia
       </Heading>
       <Box
         width="60%"
         height="70vh"
-        bg="#009DD4"
+        bg="#48A9A6 "
         boxShadow="lg"
         borderRadius="md"
         p={4}
         overflow="hidden"
-        className="fade-in" // Apply fade-in animation
+        className="fade-in"
       >
         <FullCalendar
           plugins={[dayGridPlugin]}

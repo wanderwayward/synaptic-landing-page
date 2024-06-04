@@ -12,9 +12,9 @@ export default function HomePage() {
         zIndex={2}
         position="relative"
         px={4}
-        pt={250}
+        pt={150}
         mt="48px"
-        className="fade-in"
+        className="fade-in-title"
       >
         <Flex align="center" justify="space-around" width="100%" maxW="1500px">
           <Box flex="1" textAlign="center" pr={4}>
@@ -25,7 +25,7 @@ export default function HomePage() {
               fontFamily="roca, sans-serif"
               letterSpacing="0.03em"
               lineHeight="2"
-              color="#FC7A1E"
+              color="#DE3C4B"
               pr={8}
             >
               Synaptic
@@ -37,7 +37,7 @@ export default function HomePage() {
               fontWeight="medium"
               fontFamily="roca thin"
               lineHeight="1"
-              color="#F8F4E3"
+              color="#7D3C3C"
             >
               Terapia para la vida real.
             </Text>
