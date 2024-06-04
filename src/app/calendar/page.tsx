@@ -1,11 +1,11 @@
-// src/app/calendar/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
 import axios from "axios";
-import esLocale from "@fullcalendar/core/locales/es"; // Import Spanish locale
+import esLocale from "@fullcalendar/core/locales/es";
 import "./fullcalendar.css"; // Import the custom CSS file
 
 interface Event {
@@ -68,7 +68,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={4}
-        color="#7D3C3C"
+        color="7D3C3C "
         fontFamily="roca"
         fontSize="4.5em"
         className="fade-in"
@@ -78,7 +78,7 @@ const CalendarPage = () => {
       <Box
         width="60%"
         height="70vh"
-        bg="#48A9A6"
+        bg="#48A9A6 "
         boxShadow="lg"
         borderRadius="md"
         p={4}
@@ -86,15 +86,29 @@ const CalendarPage = () => {
         className="fade-in"
       >
         <FullCalendar
-          plugins={[dayGridPlugin]}
-          initialView="dayGridMonth"
+          plugins={[dayGridPlugin, timeGridPlugin]}
+          initialView="timeGridWeek"
           events={events}
           height="100%" // Ensures the calendar fits within the box
           locale={esLocale} // Set the locale to Spanish
           headerToolbar={{
             left: "prev,next today",
             center: "title",
-            right: "dayGridMonth,dayGridWeek,dayGridDay",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          slotMinTime="07:00:00"
+          slotMaxTime="24:00:00"
+          slotLabelFormat={{
+            hour: "2-digit",
+            minute: "2-digit",
+            meridiem: "short",
+          }}
+          slotDuration="01:00:00" // Ensures each slot is one hour long
+          slotLabelInterval="01:00" // Ensures each label is one hour apart
+          eventTimeFormat={{
+            hour: "2-digit",
+            minute: "2-digit",
+            meridiem: "short",
           }}
           dayCellContent={(arg) => (
             <Flex align="center" justify="center" height="100%">
@@ -102,20 +116,17 @@ const CalendarPage = () => {
             </Flex>
           )}
           eventContent={(eventInfo) => (
-            <Box
+            <Flex
+              align="center"
+              justify="center"
               bg={eventInfo.event.backgroundColor}
               color={eventInfo.event.textColor}
-              borderRadius="sm"
-              p={1}
-              className="fade-in" // Apply fade-in animation
-              fontSize="12px" // Custom font size
-              fontFamily="Arial" // Custom font family
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
+              borderRadius="md"
+              p={2}
+              className="fade-in"
             >
-              <Text isTruncated>{eventInfo.event.title}</Text>
-            </Box>
+              <span>{eventInfo.event.title}</span>
+            </Flex>
           )}
         />
       </Box>
