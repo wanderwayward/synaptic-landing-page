@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, useToast, Spinner, Text } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import axios from "axios";
 import esLocale from "@fullcalendar/core/locales/es";
-import "./fullcalendar.css"; // Import the custom CSS file
+import EventForm from "../_components/EventForm/EventForm";
+import "./fullcalendar.css";
 
 interface Event {
   summary: string;
@@ -23,6 +25,7 @@ interface Event {
 }
 
 const CalendarPage = () => {
+  const [isFetching, setIsFetching] = useState(false);
   const [events, setEvents] = useState<
     {
       title: string;
@@ -32,9 +35,15 @@ const CalendarPage = () => {
       textColor?: string;
     }[]
   >([]);
+  const [selectedEvent, setSelectedEvent] = useState<{
+    start: string;
+    end: string;
+  }>({ start: "", end: "" });
+  const toast = useToast();
 
   useEffect(() => {
     const fetchEvents = async () => {
+      setIsFetching(true); // Start fetching
       try {
         const response = await axios.get("/api/calendar-events");
         const events = response.data.map((event: Event) => ({
@@ -47,11 +56,47 @@ const CalendarPage = () => {
         setEvents(events);
       } catch (error) {
         console.error("Error fetching calendar events:", error);
+      } finally {
+        setIsFetching(false); // Stop fetching
       }
     };
 
     fetchEvents();
   }, []);
+
+  const handleCreateEvent = async (newEvent: {
+    summary: string;
+    start: string;
+    end: string;
+  }) => {
+    try {
+      const response = await axios.post("/api/calendar-events", newEvent);
+      setEvents([...events, response.data]);
+      toast({
+        title: "Event created.",
+        description: "The event has been added to the calendar.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.error("Error creating event:", error);
+      toast({
+        title: "Error",
+        description: "There was an error creating the event.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
+
+  const handleDateSelect = (selectInfo: any) => {
+    setSelectedEvent({
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+    });
+  };
 
   return (
     <Box
@@ -65,93 +110,97 @@ const CalendarPage = () => {
       alignItems="center"
       className="fade-in"
     >
-      <Heading
-        as="h1"
-        mb={4}
-        color="#7D3C3C"
-        fontFamily="roca"
-        fontSize="4.5em"
-        className="fade-in"
-      >
+      <Heading as="h1" mb={4} color="7D3C3C" fontFamily="roca" fontSize="4.5em">
         Selecciona un horario a tu conveniencia
       </Heading>
-      <Box
-        width="60%"
-        height="54.1vh"
-        bg="#48A9A6"
-        boxShadow="lg"
-        borderRadius="md"
-        p={4}
-        overflow="hidden"
-        className="fade-in"
-      >
-        <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin]}
-          initialView="timeGridWeek"
-          events={events}
-          height="100%" // Ensures the calendar fits within the box
-          locale={esLocale} // Set the locale to Spanish
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "dayGridMonth,timeGridWeek,timeGridDay",
-          }}
-          slotMinTime="07:00:00"
-          slotMaxTime="22:00:00"
-          slotLabelFormat={{
-            hour: "2-digit",
-            minute: "2-digit",
-            meridiem: "short",
-          }}
-          slotDuration="01:00:00" // Ensures each slot is one hour long
-          slotLabelInterval="01:00" // Ensures each label is one hour apart
-          eventTimeFormat={{
-            hour: "2-digit",
-            minute: "2-digit",
-            meridiem: "short",
-          }}
-          hiddenDays={[0, 6]} // Hide Sunday (0) and Saturday (6)
-          businessHours={{
-            // Specify business hours
-            daysOfWeek: [1, 2, 3, 4, 5], // Monday to Friday
-            startTime: "08:00", // Start time
-            endTime: "17:00", // End time
-          }}
-          dayCellContent={(arg) => (
-            <Flex align="center" justify="center" height="100%">
-              {arg.dayNumberText}
-            </Flex>
-          )}
-          eventContent={(eventInfo) => (
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              bg={eventInfo.event.backgroundColor}
-              color={eventInfo.event.textColor}
-              borderRadius="md"
-              height="100%"
-              p={1}
-              className="fade-in"
-              fontSize="10px" // Adjust font size if needed
-              lineHeight="10px" // Match line height to container height
-            >
-              <Text>Ocupado</Text>
-            </Box>
-          )}
-        />
-      </Box>
-      <Box>
-        <Text
-          mt={4}
-          fontSize="sm"
-          textAlign="center"
-          color="#7D3C3C"
-          className="fade-in"
+      {isFetching ? (
+        <Flex
+          width="60%"
+          height="56vh"
+          boxShadow="lg"
+          borderRadius="md"
+          p={4}
+          overflow="hidden"
+          justify="center"
+          align="center"
         >
-          *Los horarios disponibles son de lunes a viernes de 8:00 a 17:00
-        </Text>
-      </Box>
+          <Spinner />
+        </Flex>
+      ) : (
+        <Box
+          width="60%"
+          height="56vh"
+          bg="#48A9A6"
+          boxShadow="lg"
+          borderRadius="md"
+          p={4}
+          overflow="hidden"
+        >
+          <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            initialView="timeGridWeek"
+            events={events}
+            selectable={true}
+            select={handleDateSelect}
+            height="100%"
+            locale={esLocale}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay",
+            }}
+            slotMinTime="07:00:00"
+            slotMaxTime="22:00:00"
+            slotLabelFormat={{
+              hour: "2-digit",
+              minute: "2-digit",
+              meridiem: "short",
+            }}
+            slotDuration="01:00:00"
+            slotLabelInterval="01:00"
+            eventTimeFormat={{
+              hour: "2-digit",
+              minute: "2-digit",
+              meridiem: "short",
+            }}
+            hiddenDays={[0, 6]}
+            businessHours={{
+              daysOfWeek: [1, 2, 3, 4, 5],
+              startTime: "08:00",
+              endTime: "17:00",
+            }}
+            dayCellContent={(arg) => (
+              <Flex align="center" justify="center" height="100%">
+                {arg.dayNumberText}
+              </Flex>
+            )}
+            eventContent={(eventInfo) => (
+              <Flex
+                align="center"
+                justify="center"
+                bg={eventInfo.event.backgroundColor}
+                color={eventInfo.event.textColor}
+                borderRadius="md"
+                height="100%"
+                p={1}
+                className="fade-in"
+                fontSize="10px"
+                lineHeight="10px"
+              >
+                <Text>Ocupado</Text>
+              </Flex>
+            )}
+          />
+        </Box>
+      )}
+      {selectedEvent.start && selectedEvent.end && (
+        <EventForm
+          start={selectedEvent.start}
+          end={selectedEvent.end}
+          onCreateEvent={handleCreateEvent}
+          onClose={() => setSelectedEvent({ start: "", end: "" })}
+        />
+      )}
     </Box>
   );
 };

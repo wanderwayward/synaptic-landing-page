@@ -47,3 +47,31 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
+export async function POST(req: NextRequest) {
+  try {
+    const { summary, start, end } = await req.json();
+    const auth = await authenticate().getClient();
+    const calendarId = "rubenaguirrelizcano@gmail.com"; // Replace with your calendar ID
+
+    const response: GaxiosResponse<calendar_v3.Schema$Event> =
+      await calendar.events.insert({
+        auth: auth as any,
+        calendarId,
+        requestBody: {
+          summary,
+          start: { dateTime: start },
+          end: { dateTime: end },
+        },
+      });
+
+    return NextResponse.json(response.data, { status: 200 });
+  } catch (error) {
+    console.error("Error creating event:", error);
+    const err = error as GoogleApiError;
+    return NextResponse.json(
+      { error: err.error.message },
+      { status: err.error.code || 500 }
+    );
+  }
+}
