@@ -26,19 +26,24 @@ export default function RootLayout({
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      setInitialLoadComplete(true); // Mark the initial load as complete
+      setInitialLoadComplete(true);
     }, 120);
 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
+    console.log("Initial Load Complete:", initialLoadComplete);
+    console.log("Previous Pathname:", previousPathname);
+    console.log("Current Pathname:", pathname);
+
     if (initialLoadComplete && previousPathname !== pathname) {
-      setAnimate(true); // Trigger animation on route change
+      setAnimate(true);
       setPreviousPathname(pathname);
     } else {
-      setAnimate(false); // Do not animate on initial load
+      setAnimate(false);
     }
+
     switch (pathname) {
       case "/calendar":
         setBgGradient(
