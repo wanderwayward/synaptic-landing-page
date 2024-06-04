@@ -38,7 +38,7 @@ const CalendarPage = () => {
       try {
         const response = await axios.get("/api/calendar-events");
         const events = response.data.map((event: Event) => ({
-          title: event.summary,
+          title: "Ocupado", // Set title to "Ocupado"
           start: event.start.dateTime || event.start.date,
           end: event.end.dateTime || event.end.date,
           backgroundColor: "#FC7A1E", // Custom background color
@@ -97,7 +97,7 @@ const CalendarPage = () => {
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           slotMinTime="07:00:00"
-          slotMaxTime="24:00:00"
+          slotMaxTime="22:00:00"
           slotLabelFormat={{
             hour: "2-digit",
             minute: "2-digit",
@@ -109,6 +109,13 @@ const CalendarPage = () => {
             hour: "2-digit",
             minute: "2-digit",
             meridiem: "short",
+          }}
+          hiddenDays={[0, 6]} // Hide Sunday (0) and Saturday (6)
+          businessHours={{
+            // Specify business hours
+            daysOfWeek: [1, 2, 3, 4, 5], // Monday to Friday
+            startTime: "08:00", // Start time
+            endTime: "17:00", // End time
           }}
           dayCellContent={(arg) => (
             <Flex align="center" justify="center" height="100%">
@@ -125,7 +132,7 @@ const CalendarPage = () => {
               p={2}
               className="fade-in"
             >
-              <span>{eventInfo.event.title}</span>
+              <span>Ocupado</span>
             </Flex>
           )}
         />
