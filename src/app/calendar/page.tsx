@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -68,7 +68,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={4}
-        color="7D3C3C "
+        color="#7D3C3C"
         fontFamily="roca"
         fontSize="4.5em"
         className="fade-in"
@@ -77,8 +77,8 @@ const CalendarPage = () => {
       </Heading>
       <Box
         width="60%"
-        height="70vh"
-        bg="#48A9A6 "
+        height="54.1vh"
+        bg="#48A9A6"
         boxShadow="lg"
         borderRadius="md"
         p={4}
@@ -123,19 +123,34 @@ const CalendarPage = () => {
             </Flex>
           )}
           eventContent={(eventInfo) => (
-            <Flex
-              align="center"
-              justify="center"
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
               bg={eventInfo.event.backgroundColor}
               color={eventInfo.event.textColor}
               borderRadius="md"
-              p={2}
+              height="100%"
+              p={1}
               className="fade-in"
+              fontSize="10px" // Adjust font size if needed
+              lineHeight="10px" // Match line height to container height
             >
-              <span>Ocupado</span>
-            </Flex>
+              <Text>Ocupado</Text>
+            </Box>
           )}
         />
+      </Box>
+      <Box>
+        <Text
+          mt={4}
+          fontSize="sm"
+          textAlign="center"
+          color="#7D3C3C"
+          className="fade-in"
+        >
+          *Los horarios disponibles son de lunes a viernes de 8:00 a 17:00
+        </Text>
       </Box>
     </Box>
   );
