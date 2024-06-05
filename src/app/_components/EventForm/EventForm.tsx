@@ -2,7 +2,6 @@ import { Flex, Box, Button, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Portal from "../Portal/Portal";
 
 interface EventFormProps {
   start: string;
@@ -45,46 +44,31 @@ const EventForm: React.FC<EventFormProps> = ({
   };
 
   return (
-    <Portal>
-      <Box
-        position="fixed"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        zIndex="1000"
-        bg="white"
-        width="20vw"
-        p={4}
-        boxShadow="lg"
-        borderRadius="md"
-      >
-        <Flex direction="column" gap={4}>
-          <Input
-            placeholder="Enter event summary"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-          />
-          <DatePicker
-            selected={startDate}
-            onChange={(date: Date) => setStartDate(date)}
-            showTimeSelect
-            filterDate={isWeekday}
-            filterTime={filterTime}
-            dateFormat="MMMM d, yyyy h:mm aa"
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date: Date) => setEndDate(date)}
-            showTimeSelect
-            filterDate={isWeekday}
-            filterTime={filterTime}
-            dateFormat="MMMM d, yyyy h:mm aa"
-          />
-          <Button onClick={handleSubmit}>Create Event</Button>
-          <Button onClick={onClose}>Cancel</Button>
-        </Flex>
-      </Box>
-    </Portal>
+    <Flex direction="column" gap={4}>
+      <Input
+        placeholder="Enter event summary"
+        value={summary}
+        onChange={(e) => setSummary(e.target.value)}
+      />
+      <DatePicker
+        selected={startDate}
+        onChange={(date: Date) => setStartDate(date)}
+        showTimeSelect
+        filterDate={isWeekday}
+        filterTime={filterTime}
+        dateFormat="MMMM d, yyyy h:mm aa"
+      />
+      <DatePicker
+        selected={endDate}
+        onChange={(date: Date) => setEndDate(date)}
+        showTimeSelect
+        filterDate={isWeekday}
+        filterTime={filterTime}
+        dateFormat="MMMM d, yyyy h:mm aa"
+      />
+      <Button onClick={handleSubmit}>Create Event</Button>
+      <Button onClick={onClose}>Cancel</Button>
+    </Flex>
   );
 };
 

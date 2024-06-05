@@ -1,7 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, useToast, Spinner, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  useToast,
+  Spinner,
+  Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+} from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
+import { EventInput } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -10,35 +26,14 @@ import esLocale from "@fullcalendar/core/locales/es";
 import EventForm from "../_components/EventForm/EventForm";
 import "./fullcalendar.css";
 
-interface Event {
-  summary: string;
-  start: {
-    dateTime?: string;
-    date?: string;
-  };
-  end: {
-    dateTime?: string;
-    date?: string;
-  };
-  backgroundColor?: string;
-  textColor?: string;
-}
-
 const CalendarPage = () => {
   const [isFetching, setIsFetching] = useState(false);
-  const [events, setEvents] = useState<
-    {
-      title: string;
-      start: string;
-      end: string;
-      backgroundColor?: string;
-      textColor?: string;
-    }[]
-  >([]);
+  const [events, setEvents] = useState<EventInput[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<{
     start: string;
     end: string;
-  }>({ start: "", end: "" });
+  } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const toast = useToast();
 
   useEffect(() => {
@@ -46,14 +41,14 @@ const CalendarPage = () => {
       setIsFetching(true); // Start fetching
       try {
         const response = await axios.get("/api/calendar-events");
-        const events = response.data.map((event: Event) => ({
+        const events = response.data.map((event: any) => ({
           title: "Ocupado", // Set title to "Ocupado"
           start: event.start.dateTime || event.start.date,
           end: event.end.dateTime || event.end.date,
           backgroundColor: "#FC7A1E", // Custom background color
           textColor: "#FFFFFF", // Custom text color
         }));
-        setEvents(events);
+        setEvents(events); // Set events once
       } catch (error) {
         console.error("Error fetching calendar events:", error);
       } finally {
@@ -64,6 +59,15 @@ const CalendarPage = () => {
     fetchEvents();
   }, []);
 
+  const handleDateSelect = (selectInfo: any) => {
+    console.log("Date selected:", selectInfo.startStr, selectInfo.endStr);
+    setSelectedEvent({
+      start: selectInfo.startStr,
+      end: selectInfo.endStr,
+    });
+    setIsModalOpen(true); // Show the modal
+  };
+
   const handleCreateEvent = async (newEvent: {
     summary: string;
     start: string;
@@ -71,7 +75,7 @@ const CalendarPage = () => {
   }) => {
     try {
       const response = await axios.post("/api/calendar-events", newEvent);
-      setEvents([...events, response.data]);
+      setEvents((prevEvents) => [...prevEvents, response.data]);
       toast({
         title: "Event created.",
         description: "The event has been added to the calendar.",
@@ -79,6 +83,7 @@ const CalendarPage = () => {
         duration: 5000,
         isClosable: true,
       });
+      setIsModalOpen(false); // Close the modal
     } catch (error) {
       console.error("Error creating event:", error);
       toast({
@@ -91,11 +96,9 @@ const CalendarPage = () => {
     }
   };
 
-  const handleDateSelect = (selectInfo: any) => {
-    setSelectedEvent({
-      start: selectInfo.startStr,
-      end: selectInfo.endStr,
-    });
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedEvent(null);
   };
 
   return (
@@ -117,6 +120,7 @@ const CalendarPage = () => {
         <Flex
           width="60%"
           height="56vh"
+          bg="#48A9A6"
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -183,23 +187,39 @@ const CalendarPage = () => {
                 borderRadius="md"
                 height="100%"
                 p={1}
-                className="fade-in"
                 fontSize="10px"
                 lineHeight="10px"
               >
                 <Text>Ocupado</Text>
               </Flex>
             )}
+            selectAllow={(selectInfo) => {
+              return true;
+            }}
           />
         </Box>
       )}
-      {selectedEvent.start && selectedEvent.end && (
-        <EventForm
-          start={selectedEvent.start}
-          end={selectedEvent.end}
-          onCreateEvent={handleCreateEvent}
-          onClose={() => setSelectedEvent({ start: "", end: "" })}
-        />
+      {selectedEvent && (
+        <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <ModalOverlay />
+          <ModalContent top="20%">
+            <ModalHeader>Create Event</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <EventForm
+                start={selectedEvent.start}
+                end={selectedEvent.end}
+                onCreateEvent={handleCreateEvent}
+                onClose={handleCloseModal}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" onClick={handleCloseModal}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
       )}
     </Box>
   );
