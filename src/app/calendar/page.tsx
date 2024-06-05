@@ -33,6 +33,7 @@ const CalendarPage = () => {
     start: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // State for confirmation modal
   const toast = useToast();
 
   useEffect(() => {
@@ -43,7 +44,10 @@ const CalendarPage = () => {
         const events = response.data.map((event: any) => ({
           title: "Ocupado", // Set title to "Ocupado"
           start: event.start.dateTime || event.start.date,
-          end: event.end.dateTime || event.end.date,
+          end: new Date(
+            new Date(event.start.dateTime || event.start.date).getTime() +
+              60 * 60 * 1000
+          ).toISOString(),
           backgroundColor: "#FC7A1E", // Custom background color
           textColor: "#FFFFFF", // Custom text color
         }));
@@ -59,7 +63,7 @@ const CalendarPage = () => {
   }, []);
 
   const handleDateSelect = (selectInfo: any) => {
-    console.log("Date selected:", selectInfo.startStr, selectInfo.endStr);
+    console.log("Date selected:", selectInfo.startStr);
     setSelectedEvent({
       start: selectInfo.startStr,
     });
@@ -68,8 +72,9 @@ const CalendarPage = () => {
 
   const handleCreateEvent = async (newEvent: {
     summary: string;
-    phone: string;
     email: string;
+    phone: string;
+    reason?: string;
     start: string;
     end: string;
   }) => {
@@ -78,17 +83,18 @@ const CalendarPage = () => {
       setEvents((prevEvents) => [...prevEvents, response.data]);
       toast({
         title: "Event created.",
-        description: "The event has been added to the calendar.",
+        description: "Se ha añadido el evento al calendario.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
       setIsModalOpen(false); // Close the modal
+      setIsConfirmationOpen(true); // Show confirmation modal
     } catch (error) {
       console.error("Error creating event:", error);
       toast({
         title: "Error",
-        description: "There was an error creating the event.",
+        description: "Intenta otra vez, ocurrió un error al crear el evento.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -99,6 +105,11 @@ const CalendarPage = () => {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedEvent(null);
+  };
+
+  const handleCloseConfirmation = () => {
+    setIsConfirmationOpen(false);
+    window.location.href = "/about"; // Redirect to the about page
   };
 
   return (
@@ -201,9 +212,9 @@ const CalendarPage = () => {
       )}
       {selectedEvent && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
-          <ModalContent bg="tomato" top="20%">
-            <ModalHeader>Create Event</ModalHeader>
+          <ModalOverlay />
+          <ModalContent top="20%">
+            <ModalHeader>Crear Evento</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <EventForm
@@ -211,6 +222,25 @@ const CalendarPage = () => {
                 onCreateEvent={handleCreateEvent}
                 onClose={handleCloseModal}
               />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
+      {isConfirmationOpen && (
+        <Modal isOpen={isConfirmationOpen} onClose={handleCloseConfirmation}>
+          <ModalOverlay />
+          <ModalContent top="20%">
+            <ModalHeader>Confirmación</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>
+                Tu cita se ha programado. Checa tu correo electrónico para más
+                información.
+              </Text>
+              <Text mb={4}>
+                Si tienes una cuenta de Gmail, también recibirás una invitación
+                al evento.
+              </Text>
             </ModalBody>
           </ModalContent>
         </Modal>

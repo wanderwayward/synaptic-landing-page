@@ -1,29 +1,22 @@
-import { useState } from "react";
 import {
   Flex,
-  Box,
-  Button,
-  Input,
   FormControl,
   FormLabel,
+  Input,
+  Textarea,
+  Button,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import React from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {
-  useForm,
-  SubmitHandler,
-  FieldValues,
-  FieldError,
-} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface EventFormProps {
   start: string;
   onCreateEvent: (newEvent: {
     summary: string;
-    phone: string;
     email: string;
+    phone: string;
+    reason?: string;
     start: string;
     end: string;
   }) => Promise<void>;
@@ -39,21 +32,19 @@ const EventForm: React.FC<EventFormProps> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ name: string; email: string; phone: string }>();
-  const [startDate, setStartDate] = useState(new Date(start));
+  } = useForm();
 
-  const onSubmit: SubmitHandler<{
-    name: string;
-    email: string;
-    phone: string;
-  }> = async (data) => {
-    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // Set end time to one hour after start time
+  const onSubmit = async (data: any) => {
+    const eventEnd = new Date(
+      new Date(start).getTime() + 60 * 60 * 1000
+    ).toISOString();
     await onCreateEvent({
       summary: data.name,
-      phone: data.phone,
       email: data.email,
-      start: startDate.toISOString(),
-      end: endDate.toISOString(),
+      phone: data.phone,
+      reason: data.reason,
+      start,
+      end: eventEnd,
     });
     onClose();
   };
@@ -65,43 +56,42 @@ const EventForm: React.FC<EventFormProps> = ({
           <FormLabel>Nombre</FormLabel>
           <Input
             placeholder="¿Cuál es tu nombre?"
-            {...register("name", { required: "Este campo es requerido" })}
+            {...register("name", { required: "El nombre es requerido" })}
           />
-          <FormErrorMessage>{errors.name?.message as string}</FormErrorMessage>
+          <FormErrorMessage>
+            {errors.name && (errors.name.message as string)}
+          </FormErrorMessage>
         </FormControl>
-
         <FormControl isInvalid={!!errors.email}>
           <FormLabel>Email</FormLabel>
           <Input
             placeholder="¿Cuál es tu email?"
-            {...register("email", { required: "Este campo es requerido" })}
+            {...register("email", { required: "El email es requerido" })}
           />
-          <FormErrorMessage>{errors.email?.message as string}</FormErrorMessage>
+          <FormErrorMessage>
+            {errors.email && (errors.email.message as string)}
+          </FormErrorMessage>
         </FormControl>
-
         <FormControl>
-          <FormLabel>Número de teléfono</FormLabel>
+          <FormLabel>Teléfono</FormLabel>
           <Input
+            type="number"
             placeholder="¿Cuál es tu número de telefono?"
             {...register("phone")}
           />
         </FormControl>
-
         <FormControl>
-          <FormLabel>Fecha y hora de inicio</FormLabel>
-          <DatePicker
-            selected={startDate}
-            onChange={(date: Date) => setStartDate(date)}
-            showTimeSelect
-            dateFormat="MMMM d, yyyy h:mm aa"
-            className="chakra-input css-1c6u7zm"
+          <FormLabel>Razón por la que busca terapia</FormLabel>
+          <Textarea
+            resize={"vertical"}
+            placeholder="Razón por la que busca terapia"
+            {...register("reason")}
           />
         </FormControl>
-
-        <Button type="submit">Create Event</Button>
-        <Button onClick={onClose} mb={2}>
-          Cancel
+        <Button type="submit" colorScheme="blue">
+          Create Event
         </Button>
+        <Button onClick={onClose}>Cancel</Button>
       </Flex>
     </form>
   );
