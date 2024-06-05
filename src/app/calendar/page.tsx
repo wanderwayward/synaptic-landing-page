@@ -31,7 +31,6 @@ const CalendarPage = () => {
   const [events, setEvents] = useState<EventInput[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<{
     start: string;
-    end: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toast = useToast();
@@ -63,13 +62,14 @@ const CalendarPage = () => {
     console.log("Date selected:", selectInfo.startStr, selectInfo.endStr);
     setSelectedEvent({
       start: selectInfo.startStr,
-      end: selectInfo.endStr,
     });
     setIsModalOpen(true); // Show the modal
   };
 
   const handleCreateEvent = async (newEvent: {
     summary: string;
+    phone: string;
+    email: string;
     start: string;
     end: string;
   }) => {
@@ -201,23 +201,17 @@ const CalendarPage = () => {
       )}
       {selectedEvent && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-          <ModalOverlay />
-          <ModalContent top="20%">
+          <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
+          <ModalContent bg="tomato" top="20%">
             <ModalHeader>Create Event</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <EventForm
                 start={selectedEvent.start}
-                end={selectedEvent.end}
                 onCreateEvent={handleCreateEvent}
                 onClose={handleCloseModal}
               />
             </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="blue" onClick={handleCloseModal}>
-                Close
-              </Button>
-            </ModalFooter>
           </ModalContent>
         </Modal>
       )}
