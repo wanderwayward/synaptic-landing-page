@@ -34,7 +34,7 @@ const CalendarPage = () => {
     start: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // State for confirmation modal
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const toast = useToast();
   const router = useRouter();
 
