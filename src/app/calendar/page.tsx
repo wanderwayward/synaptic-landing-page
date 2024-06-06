@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {
   Box,
   Flex,
@@ -35,6 +36,7 @@ const CalendarPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false); // State for confirmation modal
   const toast = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -109,7 +111,7 @@ const CalendarPage = () => {
 
   const handleCloseConfirmation = () => {
     setIsConfirmationOpen(false);
-    window.location.href = "/about"; // Redirect to the about page
+    router.push("/about"); // Use router.push instead of window.location.href
   };
 
   return (
@@ -237,10 +239,13 @@ const CalendarPage = () => {
                 Tu cita se ha programado. Checa tu correo electrónico para más
                 información.
               </Text>
-              <Text mb={4}>
+              <Text mb={2}>
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
               </Text>
+              <Button width="100%" mb={2} onClick={handleCloseConfirmation}>
+                Aceptar
+              </Button>
             </ModalBody>
           </ModalContent>
         </Modal>
