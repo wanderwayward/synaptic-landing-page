@@ -1,7 +1,8 @@
+/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateX(1.25em); /* 20px */
+    transform: translateX(1.3125em);
   }
   to {
     opacity: 1;
@@ -10,70 +11,54 @@
 }
 
 .fade-in {
-  animation: fadeIn 0.4s ease-in-out; /* Correct time unit */
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-/* Change the background color of the current day */
+/* Current day background color */
 .fc .fc-daygrid-day.fc-day-today {
-  background-color: rgba(
-    222,
-    60,
-    75,
-    0.5
-  ) !important; /* Semi-transparent red */
+  background-color: rgba(158, 206, 154, 0.5) !important; /* Celadon */
 }
 
-/* Change the font of the entire calendar */
+/* Calendar font */
 .fc {
-  font-family: "roca" !important; /* Custom font */
+  font-family: "roca" !important;
 }
 
-/* Change the font size and color of the day numbers */
+/* Day numbers */
 .fc .fc-daygrid-day-number {
-  font-size: 0.875em !important; /* 14px */
-  color: #f2f2f2 !important; /* Custom font color */
+  font-size: 1.06em !important;
+  color: #f2f2f2 !important; /* Light Text */
 }
 
-/* Change the title font size and color */
+/* Title */
 .fc-toolbar-title {
   font-family: "roca";
   text-transform: uppercase;
-  font-size: 2.5em !important; /* Custom font size */
-  color: #fff !important; /* Custom font color */
+  font-size: 2.65em !important;
+  color: #fff !important;
 }
 
-/* Customize the navigation buttons */
+/* Navigation buttons */
 .fc .fc-button {
-  color: #fc7a1e !important; /* Custom text color */
-  border-radius: 1.0625em !important; /* 17px */
+  color: #0d00a4 !important; /* Duke Blue */
+  border-radius: 1.126em !important;
 }
 
-/* Change the hover and active states of the navigation buttons */
 .fc .fc-button:hover,
 .fc .fc-button:focus {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.267
-  ) !important; /* Custom hover color */
-  color: #32021f !important; /* Custom hover text color */
+  background-color: rgba(187, 173, 255, 0.267) !important; /* Mauve Light */
+  color: #0d00a4 !important; /* Duke Blue */
 }
 
 .fc .fc-button:active,
 .fc .fc-button.fc-button-active {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.795
-  ) !important; /* Custom active color */
-  color: #cf007c !important; /* Custom active text color */
-  border: none !important; /* Ensure no border */
-  outline: none !important; /* Remove outline */
+  background-color: rgba(187, 173, 255, 0.795) !important; /* Mauve Light */
+  color: #0d00a4 !important; /* Duke Blue */
+  border: none !important;
+  outline: none !important;
 }
 
-/* Additional specificity for active buttons to ensure border removal */
+/* Active buttons additional specificity */
 .fc .fc-button:active,
 .fc .fc-button:focus,
 .fc .fc-button-primary:active,
@@ -81,76 +66,74 @@
 .fc .fc-button-group .fc-button:active,
 .fc .fc-button-group .fc-button:focus,
 .fc .fc-button-group .fc-button.fc-button-active {
-  border: none !important; /* Ensure no border */
-  outline: none !important; /* Remove outline */
-  box-shadow: none !important; /* Remove any box-shadow */
-}
-
-/* Customize the month/week/day buttons */
-.fc .fc-button-group .fc-button {
-  background-color: none; /* Custom background color */
-  color: none; /* Custom text color */
-  border: none;
-  margin-right: 0.1875em; /* 3px */
-  margin-left: 0.1875em; /* 3px */
-}
-
-/* Customize the primary buttons */
-.fc .fc-button-primary {
-  background-color: #de3c4b !important; /* Custom background color */
-  color: white !important; /* Custom text color */
-  font-weight: semi-bold !important; /* Custom font weight */
-  font-size: 1.2em !important; /* Adjusted font size */
   border: none !important;
-  padding: 0.5em 1em !important; /* Adjusted padding */
-  border-radius: 0.25em !important; /* Add border radius for rounded corners */
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* Change the hover and active states of the primary buttons */
+/* Month/week/day buttons */
+.fc .fc-button-group .fc-button {
+  background-color: none;
+  color: none;
+  border: none;
+  margin-right: 0.19875em;
+  margin-left: 0.19875em;
+}
+
+/* Primary buttons */
+.fc .fc-button-primary {
+  background-color: #ff0035 !important; /* Imperial Red */
+  color: white !important;
+  font-weight: semi-bold !important;
+  font-size: 1.272em !important;
+  border: none !important;
+  padding: 0.53em 1.06em !important;
+  border-radius: 0.265em !important;
+}
+
 .fc .fc-button-primary:hover,
 .fc .fc-button-primary:focus {
-  background-color: #a83232 !important; /* Darker red for hover/active state */
-  color: white !important; /* Keep text color white */
+  background-color: #a83232 !important; /* Darker Red */
+  color: white !important;
 }
 
-/* Change the hover and active states of the month/week/day buttons */
 .fc .fc-button-group .fc-button:hover,
 .fc .fc-button-group .fc-button:focus {
-  background-color: #a83232 !important; /* Darker red for hover/active state */
-  color: white !important; /* Keep text color white */
+  background-color: #a83232 !important; /* Darker Red */
+  color: white !important;
 }
 
 .fc .fc-button-group .fc-button:active,
 .fc .fc-button-group .fc-button.fc-button-active {
-  background-color: #a83232 !important; /* Darker red for hover/active state */
-  color: white !important; /* Keep text color white */
-  border: none !important; /* Ensure no border */
-  outline: none !important; /* Remove outline */
-  box-shadow: none !important; /* Remove any box-shadow */
+  background-color: #a83232 !important; /* Darker Red */
+  color: white !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .fc .fc-button-primary:active,
 .fc .fc-button-primary.fc-button-active {
-  background-color: #005f8d !important; /* Custom active color */
-  color: #ffffff !important; /* Custom active text color */
-  border: none !important; /* Ensure no border */
-  outline: none !important; /* Remove outline */
-  box-shadow: none !important; /* Remove any box-shadow */
+  background-color: #0d00a4 !important; /* Duke Blue */
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* Customize the top row with day names (Sun, Mon, Tue, etc.) */
+/* Day names */
 .fc .fc-col-header-cell {
-  background-color: #6b6b6b !important; /* Medium-dark gray background color */
-  color: white !important; /* Custom text color */
-  border: none !important; /* Remove the border */
+  background-color: #eef4ed !important; /* Mint Cream */
+  color: #424242 !important; /* Onyx */
+  border: none !important;
 }
 
-/* Remove the right border of the last header cell */
+/* Last header cell border */
 .fc .fc-col-header-cell:last-of-type {
   border-right: none !important;
 }
 
-/* Customize the grid and remove borders */
+/* Grid and borders */
 .fc-scrollgrid {
   border: none !important;
 }
@@ -164,7 +147,39 @@
   border: transparent !important;
 }
 
-/* Remove the right border of the last header cell correctly */
+/* Last header cell border correction */
 .fc .fc-scrollgrid-section.fc-scrollgrid-section-header th:last-child {
   border-right: none !important;
+}
+
+/* Hour labels */
+.fc-timegrid-slot-label {
+  font-size: 1.272em !important;
+  line-height: 1.59em !important;
+  color: #f2f2f2 !important; /* Light Text */
+}
+
+/* Event titles */
+.fc-event-title,
+.fc-event-time {
+  font-size: 1.272em !important;
+  line-height: 1.59em !important;
+  color: #fff !important; /* White */
+}
+
+/* Event appearance */
+.fc-event {
+  background-color: #ff0035 !important; /* Imperial Red */
+  border-radius: 0.53em !important;
+  padding: 0.318em !important;
+}
+
+/* Event text alignment */
+.fc-event-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.272em !important;
+  line-height: 1.59em !important;
 }

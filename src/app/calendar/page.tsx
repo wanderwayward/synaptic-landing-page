@@ -50,8 +50,6 @@ const CalendarPage = () => {
             new Date(event.start.dateTime || event.start.date).getTime() +
               60 * 60 * 1000
           ).toISOString(),
-          backgroundColor: "#FC7A1E", // Custom background color
-          textColor: "#FFFFFF", // Custom text color
         }));
         setEvents(events); // Set events once
       } catch (error) {
@@ -125,8 +123,9 @@ const CalendarPage = () => {
       justifyContent="center"
       alignItems="center"
       className="fade-in"
+      pb={24}
     >
-      <Heading as="h1" mb={4} color="7D3C3C" fontFamily="roca" fontSize="4.5em">
+      <Heading as="h1" mb={28} color="#0d00a4" fontFamily="roca" fontSize="6em">
         Selecciona un horario a tu conveniencia
       </Heading>
       {isFetching ? (
@@ -154,6 +153,7 @@ const CalendarPage = () => {
           overflow="hidden"
         >
           <FullCalendar
+            timeZone="local"
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView="timeGridWeek"
             events={events}
@@ -196,13 +196,11 @@ const CalendarPage = () => {
               <Flex
                 align="center"
                 justify="center"
-                bg={eventInfo.event.backgroundColor}
-                color={eventInfo.event.textColor}
                 borderRadius="md"
                 height="100%"
                 p={1}
-                fontSize="1em"
-                lineHeight="1em"
+                fontSize="1.5em"
+                lineHeight="2em"
               >
                 <Text>Ocupado</Text>
               </Flex>
