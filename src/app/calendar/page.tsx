@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
   Box,
   Flex,
@@ -40,7 +40,7 @@ const CalendarPage = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setIsFetching(true); // Start fetching
+      setIsFetching(true);
       try {
         const response = await axios.get("/api/calendar-events");
         const events = response.data.map((event: any) => ({
@@ -117,7 +117,7 @@ const CalendarPage = () => {
   return (
     <Box
       position="relative"
-      minHeight="calc(100vh - 96px)"
+      minHeight="calc(100vh - 48px)"
       overflow="hidden"
       px={4}
       display="flex"
@@ -146,7 +146,7 @@ const CalendarPage = () => {
       ) : (
         <Box
           width="60%"
-          height="56vh"
+          height="49vh"
           bg="#48A9A6"
           boxShadow="lg"
           borderRadius="md"
@@ -186,6 +186,7 @@ const CalendarPage = () => {
               startTime: "08:00",
               endTime: "17:00",
             }}
+            allDaySlot={false}
             dayCellContent={(arg) => (
               <Flex align="center" justify="center" height="100%">
                 {arg.dayNumberText}
@@ -200,8 +201,8 @@ const CalendarPage = () => {
                 borderRadius="md"
                 height="100%"
                 p={1}
-                fontSize="10px"
-                lineHeight="10px"
+                fontSize="1em"
+                lineHeight="1em"
               >
                 <Text>Ocupado</Text>
               </Flex>
