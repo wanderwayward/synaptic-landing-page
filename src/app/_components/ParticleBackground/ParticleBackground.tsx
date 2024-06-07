@@ -84,7 +84,7 @@ const ParticleBackground = React.memo(() => {
           value: 0.5,
         },
         shape: {
-          type: "circle",
+          type: "triangle",
         },
         size: {
           value: { min: 3, max: 5 },

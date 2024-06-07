@@ -25,9 +25,7 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
         );
         break;
       case "/about":
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 85%, rgba(255, 182, 39) 85%)"
-        );
+        setBgGradient("rgba(66, 66, 66)");
         break;
       default:
         setBgGradient(
@@ -43,8 +41,6 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
         styles={css`
           .dynamic-background {
             background: ${bgGradient};
-            background-size: 100% 100%;
-            background-position: 50% 50%;
             width: 100%;
             height: 100vh;
             position: fixed;
@@ -52,10 +48,32 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
             left: 0;
             z-index: 0;
           }
+          .top-triangle {
+            width: 40vw;
+            height: 65vh;
+            background: rgba(255, 182, 39);
+            clip-path: polygon(70% 0%, 100% 0%, 100% 100%);
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1;
+          }
+          .bottom-triangle {
+            width: 150vw;
+            height: 55vh;
+            background: rgba(255, 182, 39);
+            clip-path: polygon(100% 0%, 90% 100%, 100% 100%);
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+          }
         `}
       />
       <Box className="dynamic-background" />
-      <Box position="relative" zIndex={1}>
+      <Box className="top-triangle" />
+      <Box className="bottom-triangle" />
+      <Box position="relative" zIndex={2}>
         {children}
       </Box>
     </>
