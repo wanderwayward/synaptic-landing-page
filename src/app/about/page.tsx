@@ -12,6 +12,7 @@ export default function AboutUsPage() {
       height="calc(100vh - 48px)" // Accounting for the navbar
       overflow="hidden"
       position="relative"
+      // No need to set background color here, as it's predefined
     >
       <Grid
         templateRows="repeat(2, 1fr)"
@@ -53,11 +54,40 @@ export default function AboutUsPage() {
           alignItems="center"
           style={{ transform: "translateX(-9%)" }}
         >
-          <Box boxShadow="lg" bg="tomato" borderRadius={4} p={4}>
-            <Text fontSize="4xl" mb={4}>
+          <Box
+            position="relative" // Ensure the pseudo-element is positioned relative to this Box
+            boxShadow="lg"
+            bg="#bbadff" // Mauve background
+            borderRadius="0.25em"
+            p="1em"
+            _before={{
+              content: '""',
+              position: "absolute",
+              top: "0.2em",
+              left: "0.2em",
+              right: "-0.4em",
+              bottom: "-0.4em",
+              backgroundColor: "#d1ffc6", // Tea Green for pseudo-element background
+              zIndex: -1, // Place it behind the main content
+              borderRadius: "0.35em", // Slightly larger border radius for a shadow effect
+              boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)", // Optional: Add shadow to the pseudo-element
+            }}
+          >
+            <Text
+              fontSize="2em"
+              mb="1em"
+              color="#424242"
+              fontFamily="roca"
+              fontWeight="bold"
+            >
               About Therapist 1
             </Text>
-            <Text mb={2} fontSize="xl">
+            <Text
+              mb="0.5em"
+              fontSize="1.2em"
+              color="#424242"
+              fontFamily="roca thin"
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -65,7 +95,9 @@ export default function AboutUsPage() {
               dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </Text>
-            <Text fontSize="xl">
+            <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
+              {" "}
+              {/* Onyx for the main text */}
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
               repellendus, laborum illo. Cupiditate consequatur iure expedita
@@ -90,24 +122,51 @@ export default function AboutUsPage() {
           style={{ transform: "translateX(-9%)" }}
         >
           <Box
+            position="relative" // Ensure the pseudo-element is positioned relative to this Box
             boxShadow="lg"
-            bg="tomato"
-            borderRadius={4}
-            p={4}
+            bg="#bbadff" // Mauve background
+            borderRadius="0.25em"
+            p="1em"
             textAlign="right"
+            _before={{
+              content: '""',
+              position: "absolute",
+              top: "0.2em",
+              left: "0.2em",
+              right: "-0.4em",
+              bottom: "-0.4em",
+              backgroundColor: "#d1ffc6", // Tea Green for pseudo-element background
+              zIndex: -1, // Place it behind the main content
+              borderRadius: "0.35em", // Slightly larger border radius for a shadow effect
+              boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)", // Optional: Add shadow to the pseudo-element
+            }}
           >
-            <Text fontSize="4xl" mb={4}>
-              About Therapist 1
+            <Text
+              fontSize="2em"
+              mb="1em"
+              color="#424242"
+              fontFamily="roca"
+              fontWeight="bold"
+            >
+              About Therapist 2
             </Text>
-            <Text mb={2} fontSize="xl">
+            <Text
+              mb="0.5em"
+              fontSize="1.2em"
+              color="#424242"
+              fontFamily="roca thin"
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              eiusmod tempor incididunt ut labore et dolore fontFamily="roca
+              thin" magna aliqua. Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua.
             </Text>
-            <Text fontSize="xl">
+            <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
+              {" "}
+              {/* Onyx for the main text */}
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
               repellendus, laborum illo. Cupiditate consequatur iure expedita

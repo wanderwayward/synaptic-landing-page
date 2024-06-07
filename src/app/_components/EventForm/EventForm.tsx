@@ -99,15 +99,6 @@ const EventForm: React.FC<EventFormProps> = ({
           />
         </FormControl>
         <FormControl>
-          <FormLabel color="#0d00a4">Razón por la que busca terapia</FormLabel>
-          <Textarea
-            resize={"vertical"}
-            placeholder="Razón por la que buscas terapia"
-            {...register("reason")}
-            bg="#eef4ed"
-          />
-        </FormControl>
-        <FormControl>
           <FormLabel color="#0d00a4">Fecha y hora de inicio</FormLabel>
           <Input
             type="datetime-local"
@@ -116,11 +107,21 @@ const EventForm: React.FC<EventFormProps> = ({
             bg="#eef4ed"
           />
         </FormControl>
+        <FormControl>
+          <FormLabel color="#0d00a4">Razón por la que busca terapia</FormLabel>
+          <Textarea
+            resize={"vertical"}
+            placeholder="Razón por la que buscas terapia"
+            {...register("reason")}
+            bg="#eef4ed"
+          />
+        </FormControl>
+
         <Button
           type="submit"
-          colorScheme="blue"
+          bg={"fff"}
           mb={2}
-          _hover={{ bg: "#0d00a4" }}
+          _hover={{ bg: "#0d00a4", color: "white" }}
         >
           Crear Evento
         </Button>

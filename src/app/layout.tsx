@@ -83,12 +83,12 @@ export default function RootLayout({
                     >
                       <Heading
                         as="h1"
-                        size="md"
+                        size="lg"
                         fontFamily="roca"
                         color="white"
                         sx={{
                           "&:hover": {
-                            textShadow: "0 0 2px #fff",
+                            textShadow: "0 0 2px #DE3C4B",
                           },
                         }}
                       >

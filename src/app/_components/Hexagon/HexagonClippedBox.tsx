@@ -34,7 +34,7 @@ export default function HexagonClippedBox() {
         <rect
           width="242.4" // Adjusted width proportional to the new viewBox size
           height="198.77" // Adjusted height proportional to the new viewBox size
-          fill="#fff" // White background color
+          fill="#d1ffc6" // White background color
           clipPath="url(#hexagonClipBox)" // Apply the hexagon clip-path
         />
       </svg>
