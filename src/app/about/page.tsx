@@ -27,6 +27,7 @@ export default function AboutUsPage() {
           display="flex"
           justifyContent="center"
           alignItems="center"
+          style={{ transform: "translateX(-9%)" }}
         >
           {/* Stack the HexagonClippedImage and HexagonClippedBox components */}
           <Box position="relative" width="55vh" height="55vh">
@@ -45,12 +46,18 @@ export default function AboutUsPage() {
           </Box>
         </GridItem>
 
-        <GridItem rowSpan={1} colSpan={1} display="flex" alignItems="center">
+        <GridItem
+          rowSpan={1}
+          colSpan={1}
+          display="flex"
+          alignItems="center"
+          style={{ transform: "translateX(-9%)" }}
+        >
           <Box boxShadow="lg" bg="tomato" borderRadius={4} p={4}>
-            <Text fontSize="2xl" mb={4}>
+            <Text fontSize="4xl" mb={4}>
               About Therapist 1
             </Text>
-            <Text mb={2}>
+            <Text mb={2} fontSize="xl">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -58,7 +65,7 @@ export default function AboutUsPage() {
               dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </Text>
-            <Text>
+            <Text fontSize="xl">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
               repellendus, laborum illo. Cupiditate consequatur iure expedita
@@ -80,6 +87,7 @@ export default function AboutUsPage() {
           display="flex"
           alignItems="center"
           justifyContent="flex-end"
+          style={{ transform: "translateX(-9%)" }}
         >
           <Box
             boxShadow="lg"
@@ -88,10 +96,10 @@ export default function AboutUsPage() {
             p={4}
             textAlign="right"
           >
-            <Text fontSize="2xl" mb={4}>
-              About Therapist 2
+            <Text fontSize="4xl" mb={4}>
+              About Therapist 1
             </Text>
-            <Text mb={2}>
+            <Text mb={2} fontSize="xl">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
               ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -99,7 +107,7 @@ export default function AboutUsPage() {
               dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
               incididunt ut labore et dolore magna aliqua.
             </Text>
-            <Text>
+            <Text fontSize="xl">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
               repellendus, laborum illo. Cupiditate consequatur iure expedita
@@ -121,10 +129,11 @@ export default function AboutUsPage() {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          mt="-10vh"
+          mt="-14vh"
+          style={{ transform: "translateX(9%)" }}
         >
           {/* Stack the HexagonClippedImage and HexagonClippedBox components */}
-          <Box position="relative" width="55vh" height="55vh">
+          <Box position="relative" width="55vh" height="55vh" top={16}>
             <HexagonClippedBox />
             <Box
               position="absolute"
