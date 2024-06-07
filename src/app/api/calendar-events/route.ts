@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { calendar, authenticate } from "@/app/_lib/googleCalendar";
 import { calendar_v3 } from "googleapis";
 import { GaxiosResponse } from "gaxios";
+import { parseISO } from "date-fns";
 
 interface GoogleApiError {
   error: {
@@ -52,7 +53,15 @@ export async function POST(req: NextRequest) {
   try {
     const { summary, start, end } = await req.json();
     const auth = await authenticate().getClient();
-    const calendarId = "rubenaguirrelizcano@gmail.com"; // Replace with your calendar ID
+    const calendarId = "rubenaguirrelizcano@gmail.com";
+
+    // Parse the start and end times
+    const startDate = parseISO(start);
+    const endDate = parseISO(end);
+
+    // Convert to UTC strings
+    const startUTC = startDate.toISOString();
+    const endUTC = endDate.toISOString();
 
     const response: GaxiosResponse<calendar_v3.Schema$Event> =
       await calendar.events.insert({
@@ -60,8 +69,8 @@ export async function POST(req: NextRequest) {
         calendarId,
         requestBody: {
           summary,
-          start: { dateTime: start },
-          end: { dateTime: end },
+          start: { dateTime: startUTC },
+          end: { dateTime: endUTC },
         },
       });
 

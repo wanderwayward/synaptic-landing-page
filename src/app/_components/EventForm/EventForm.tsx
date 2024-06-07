@@ -34,16 +34,31 @@ const EventForm: React.FC<EventFormProps> = ({
     formState: { errors },
   } = useForm();
 
+  // Initialize startTime with the selected date and time in local time zone
+  const [startTime, setStartTime] = React.useState(() => {
+    const date = new Date(start);
+
+    // Format to 'YYYY-MM-DDTHH:MM' in local time zone
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  });
+
   const onSubmit = async (data: any) => {
+    // Calculate event end time as 1 hour after the start time
     const eventEnd = new Date(
-      new Date(start).getTime() + 60 * 60 * 1000
+      new Date(startTime).getTime() + 60 * 60 * 1000
     ).toISOString();
     await onCreateEvent({
       summary: data.name,
       email: data.email,
       phone: data.phone,
       reason: data.reason,
-      start,
+      start: startTime,
       end: eventEnd,
     });
     onClose();
@@ -53,45 +68,62 @@ const EventForm: React.FC<EventFormProps> = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex direction="column" gap={4}>
         <FormControl isInvalid={!!errors.name}>
-          <FormLabel>Nombre</FormLabel>
+          <FormLabel color="#0d00a4">Nombre</FormLabel>
           <Input
             placeholder="¿Cuál es tu nombre?"
             {...register("name", { required: "El nombre es requerido" })}
+            bg="#eef4ed"
           />
           <FormErrorMessage>
             {errors.name && (errors.name.message as string)}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={!!errors.email}>
-          <FormLabel>Email</FormLabel>
+          <FormLabel color="#0d00a4">Email</FormLabel>
           <Input
             placeholder="¿Cuál es tu email?"
             {...register("email", { required: "El email es requerido" })}
+            bg="#eef4ed"
           />
           <FormErrorMessage>
             {errors.email && (errors.email.message as string)}
           </FormErrorMessage>
         </FormControl>
         <FormControl>
-          <FormLabel>Teléfono</FormLabel>
+          <FormLabel color="#0d00a4">Teléfono</FormLabel>
           <Input
             type="number"
             placeholder="¿Cuál es tu número de telefono?"
             {...register("phone")}
+            bg="#eef4ed"
           />
         </FormControl>
         <FormControl>
-          <FormLabel>Razón por la que busca terapia</FormLabel>
+          <FormLabel color="#0d00a4">Razón por la que busca terapia</FormLabel>
           <Textarea
             resize={"vertical"}
-            placeholder="Razón por la que busca terapia"
+            placeholder="Razón por la que buscas terapia"
             {...register("reason")}
+            bg="#eef4ed"
           />
         </FormControl>
-        <Button type="submit" colorScheme="blue">
-          Create Event
+        <FormControl>
+          <FormLabel color="#0d00a4">Fecha y hora de inicio</FormLabel>
+          <Input
+            type="datetime-local"
+            value={startTime} // Prepopulated value
+            onChange={(e) => setStartTime(e.target.value)}
+            bg="#eef4ed"
+          />
+        </FormControl>
+        <Button
+          type="submit"
+          colorScheme="blue"
+          mb={2}
+          _hover={{ bg: "#0d00a4" }}
+        >
+          Crear Evento
         </Button>
-        <Button onClick={onClose}>Cancel</Button>
       </Flex>
     </form>
   );
