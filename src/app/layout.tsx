@@ -104,15 +104,6 @@ export default function RootLayout({
                     >
                       {children}
                     </Box>
-                    <Box
-                      as="footer"
-                      p={4}
-                      height="48px"
-                      zIndex={3}
-                      position="relative"
-                    >
-                      <Text>Si necesitas ayuda inmediata:</Text>
-                    </Box>
                   </Flex>
                 </DynamicBackground>
               </>
