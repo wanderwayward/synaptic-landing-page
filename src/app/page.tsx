@@ -38,12 +38,12 @@ const HomePage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        ml={{ lg: "10em" }} // Add margin-left to bring text closer together
+        ml={{ lg: "2em", xl: "10em" }} // Add margin-left to bring text closer together
         mb={{ base: 4, lg: 0 }} // Adjust bottom margin to bring items closer
       >
         <Box
           color="#DE3C4B"
-          fontSize={{ xl: "12.5em" }}
+          fontSize={{ lg: "8vw", xl: "8vw" }}
           fontWeight="bold"
           fontFamily="roca"
         >
@@ -58,12 +58,12 @@ const HomePage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        ml={{ lg: "-10em" }} // Add margin-left to bring text closer together
+        ml={{ lg: "-12em", xl: "-10em" }} // Add margin-left to bring text closer together
         mt={{ base: 0, lg: -4 }} // Adjust top margin to bring items closer on large screens
       >
         <Box
           color="#0D00A4"
-          fontSize={{ xl: "6em" }}
+          fontSize={{ lg: "3.5vw", xl: "4vw" }}
           fontWeight="bold"
           fontFamily="roca"
         >
