@@ -11,30 +11,38 @@ export default function AboutUsPage() {
       justify="center"
       align="center"
       height="calc(100vh - 48px)" // Accounting for the navbar
-      overflow="hidden"
+      overflow={{ base: "auto", md: "hidden" }} // Scroll on mobile, hidden on desktop
       position="relative"
-      // No need to set background color here, as it's predefined
     >
       <Grid
-        templateRows="repeat(2, 1fr)"
-        templateColumns="repeat(2, 1fr)"
+        templateRows={{ base: "repeat(4, auto)", md: "repeat(2, 1fr)" }}
+        templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
         height="100%"
         width="80%"
         gap={4} // Increase the gap for better spacing
-        mt="-10vh" // Move the grid slightly up to prevent clipping
+        mt={{ base: 0, lg: "-10vh" }} // Adjust for mobile and larger screens
       >
+        {/* First Hexagon Image */}
         <GridItem
-          rowSpan={1}
-          colSpan={1}
+          rowSpan={{ base: 1, md: 1 }}
+          colSpan={{ base: 1, md: 1 }}
           display="flex"
           justifyContent="center"
           alignItems="center"
-          style={{ transform: "translateX(-9%)" }}
+          sx={{
+            transform: {
+              base: "translateX(-16%)", // Applies to screens smaller than `md`
+              md: "translateX(-9%)", // Applies to screens `md` and larger
+            },
+          }}
+          order={{ base: 1, md: 1 }} // Mobile: First, Desktop: Original
         >
-          {/* Stack the HexagonClippedImage and HexagonClippedBox components */}
-          <Box position="relative" width="55vh" height="55vh">
+          <Box
+            position="relative"
+            width={{ base: "80vw", md: "55vh" }}
+            height={{ base: "80vw", md: "55vh" }}
+          >
             <HexagonClippedBox />
-
             <Box
               position="absolute"
               top="0"
@@ -48,15 +56,24 @@ export default function AboutUsPage() {
           </Box>
         </GridItem>
 
+        {/* First Text Box */}
         <GridItem
-          rowSpan={1}
-          colSpan={1}
+          rowSpan={{ base: 1, md: 1 }}
+          colSpan={{ base: 1, md: 1 }}
           display="flex"
           alignItems="center"
-          style={{ transform: "translateX(-9%)" }}
+          justifyContent={{ base: "center", md: "flex-start" }}
+          textAlign={{ base: "center", md: "left" }}
+          sx={{
+            transform: {
+              base: "none", // Applies to screens smaller than `md`
+              md: "translateX(-9%)", // Applies to screens `md` and larger
+            },
+          }}
+          order={{ base: 2, md: 2 }} // Mobile: Second, Desktop: Original
         >
           <Box
-            position="relative" // Ensure the pseudo-element is positioned relative to this Box
+            position="relative"
             boxShadow="lg"
             bg="#bbadff" // Mauve background
             borderRadius="0.25em"
@@ -75,7 +92,7 @@ export default function AboutUsPage() {
             }}
           >
             <Text
-              fontSize="2em"
+              fontSize={{ base: "1.5em", md: "2em" }}
               mb="1em"
               color="#424242"
               fontFamily="roca"
@@ -85,33 +102,81 @@ export default function AboutUsPage() {
             </Text>
             <Text
               mb="0.5em"
-              fontSize="1.2em"
+              fontSize={{ base: "1em", md: "1.2em" }}
               color="#424242"
               fontFamily="roca thin"
             >
               {text}
             </Text>
-            <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
+            <Text
+              fontSize={{ base: "1em", md: "1.2em" }}
+              color="#424242"
+              fontFamily="roca thin"
+            >
               {textTwo}
             </Text>
           </Box>
         </GridItem>
 
+        {/* Second Hexagon Image */}
         <GridItem
-          rowSpan={1}
-          colSpan={1}
+          rowSpan={{ base: 1, md: 1 }}
+          colSpan={{ base: 1, md: 1 }}
           display="flex"
+          justifyContent="center"
           alignItems="center"
-          justifyContent="flex-end"
-          style={{ transform: "translateX(-9%)" }}
+          mt={{ base: 0, md: "-14vh" }}
+          sx={{
+            transform: {
+              base: "translateX(-16%)", // Applies to screens smaller than `md`
+              md: "translateX(-9%)", // Applies to screens `md` and larger
+            },
+          }}
+          order={{ base: 3, md: 4 }} // Mobile: Third, Desktop: Fourth
         >
           <Box
-            position="relative" // Ensure the pseudo-element is positioned relative to this Box
+            position="relative"
+            width={{ base: "80vw", md: "55vh" }}
+            height={{ base: "80vw", md: "55vh" }}
+            top={16}
+          >
+            <HexagonClippedBox />
+            <Box
+              position="absolute"
+              top="0"
+              left="0"
+              width="100%"
+              height="100%"
+              zIndex="1"
+            >
+              <HexagonClippedImage imageUrl={imageUrl} />
+            </Box>
+          </Box>
+        </GridItem>
+
+        {/* Second Text Box */}
+        <GridItem
+          rowSpan={{ base: 1, md: 1 }}
+          colSpan={{ base: 1, md: 1 }}
+          display="flex"
+          alignItems="center"
+          justifyContent={{ base: "center", md: "flex-end" }}
+          textAlign={{ base: "center", md: "right" }}
+          sx={{
+            transform: {
+              base: "none", // Applies to screens smaller than `md`
+              md: "translateX(-9%)", // Applies to screens `md` and larger
+            },
+          }}
+          order={{ base: 4, md: 3 }} // Mobile: Fourth, Desktop: Third
+        >
+          <Box
+            position="relative"
             boxShadow="lg"
             bg="#bbadff" // Mauve background
             borderRadius="0.25em"
             p="1em"
-            textAlign="right"
+            textAlign={{ base: "center", md: "right" }}
             _before={{
               content: '""',
               position: "absolute",
@@ -126,7 +191,7 @@ export default function AboutUsPage() {
             }}
           >
             <Text
-              fontSize="2em"
+              fontSize={{ base: "1.5em", md: "2em" }}
               mb="1em"
               color="#424242"
               fontFamily="roca"
@@ -136,40 +201,19 @@ export default function AboutUsPage() {
             </Text>
             <Text
               mb="0.5em"
-              fontSize="1.2em"
+              fontSize={{ base: "1em", md: "1.2em" }}
               color="#424242"
               fontFamily="roca thin"
             >
               {text}
             </Text>
-            <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
+            <Text
+              fontSize={{ base: "1em", md: "1.2em" }}
+              color="#424242"
+              fontFamily="roca thin"
+            >
               {textTwo}
             </Text>
-          </Box>
-        </GridItem>
-
-        <GridItem
-          rowSpan={1}
-          colSpan={1}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt="-14vh"
-          style={{ transform: "translateX(9%)" }}
-        >
-          {/* Stack the HexagonClippedImage and HexagonClippedBox components */}
-          <Box position="relative" width="55vh" height="55vh" top={16}>
-            <HexagonClippedBox />
-            <Box
-              position="absolute"
-              top="0"
-              left="0"
-              width="100%"
-              height="100%"
-              zIndex="1"
-            >
-              <HexagonClippedImage imageUrl={imageUrl} />
-            </Box>
           </Box>
         </GridItem>
       </Grid>

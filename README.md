@@ -3,13 +3,12 @@ marco-landing-page
 ├─ .eslintrc.json
 ├─ .git
 ├─ .gitignore
-├─ 119531984_2901899473248778_1054565180691625408_n.jpg
 ├─ next.config.mjs
 ├─ package.json
 ├─ public
 │  ├─ next.svg
+│  ├─ Sigmund_Freud_1926_(cropped).jpg
 │  └─ vercel.svg
-├─ README.md
 ├─ src
 │  ├─ app
 │  │  ├─ about
@@ -36,6 +35,9 @@ marco-landing-page
 │  │  │  │  └─ DynamicBackground.tsx
 │  │  │  ├─ EventForm
 │  │  │  │  └─ EventForm.tsx
+│  │  │  ├─ Hexagon
+│  │  │  │  ├─ HexagonClippedBox.tsx
+│  │  │  │  └─ HexagonClippedImage.tsx
 │  │  │  ├─ Loading
 │  │  │  │  └─ Loading.tsx
 │  │  │  └─ ParticleBackground
