@@ -1,6 +1,7 @@
 import { Box, Grid, GridItem, Text, Flex } from "@chakra-ui/react";
 import HexagonClippedImage from "../_components/Hexagon/HexagonClippedImage";
 import HexagonClippedBox from "../_components/Hexagon/HexagonClippedBox";
+import { text, textTwo } from "../_components/text";
 
 export default function AboutUsPage() {
   const imageUrl = "/Sigmund_Freud_1926_(cropped).jpg";
@@ -88,27 +89,10 @@ export default function AboutUsPage() {
               color="#424242"
               fontFamily="roca thin"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {text}
             </Text>
             <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
-              {" "}
-              {/* Onyx for the main text */}
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
-              repellendus, laborum illo. Cupiditate consequatur iure expedita
-              quod impedit quaerat facere? Totam eius illo voluptatem ipsam
-              nesciunt natus, perferendis architecto quos laboriosam inventore
-              illum iusto temporibus! Voluptatum dicta accusamus atque, tempore
-              debitis sequi iste. Rerum asperiores illo, placeat blanditiis
-              porro quod. Eius, at vitae! Quibusdam cum aliquid illo earum
-              doloribus et aperiam ipsam. Deleniti, optio nisi explicabo
-              voluptatem commodi fuga laboriosam hic maiores illo, labore, autem
-              reprehenderit exercitationem dignissimos. Similique, quod!
+              {textTwo}
             </Text>
           </Box>
         </GridItem>
@@ -156,28 +140,10 @@ export default function AboutUsPage() {
               color="#424242"
               fontFamily="roca thin"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore fontFamily="roca
-              thin" magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua.
+              {text}
             </Text>
             <Text fontSize="1.2em" color="#424242" fontFamily="roca thin">
-              {" "}
-              {/* Onyx for the main text */}
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Voluptate nihil est a totam et, hic eveniet, cumque incidunt error
-              repellendus, laborum illo. Cupiditate consequatur iure expedita
-              quod impedit quaerat facere? Totam eius illo voluptatem ipsam
-              nesciunt natus, perferendis architecto quos laboriosam inventore
-              illum iusto temporibus! Voluptatum dicta accusamus atque, tempore
-              debitis sequi iste. Rerum asperiores illo, placeat blanditiis
-              porro quod. Eius, at vitae! Quibusdam cum aliquid illo earum
-              doloribus et aperiam ipsam. Deleniti, optio nisi explicabo
-              voluptatem commodi fuga laboriosam hic maiores illo, labore, autem
-              reprehenderit exercitationem dignissimos. Similique, quod!
+              {textTwo}
             </Text>
           </Box>
         </GridItem>
