@@ -76,7 +76,7 @@ export default function RootLayout({
                       p={4}
                       color="#32021F"
                       height="48px"
-                      justifyContent="flex-end"
+                      justifyContent={{ base: "center", md: "flex-end" }}
                       alignItems="center"
                       zIndex={3}
                       position="relative"

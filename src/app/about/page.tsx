@@ -31,7 +31,7 @@ export default function AboutUsPage() {
           alignItems="center"
           sx={{
             transform: {
-              base: "translateX(-16%)", // Applies to screens smaller than `md`
+              base: "none", // Applies to screens smaller than `md`
               md: "translateX(-9%)", // Applies to screens `md` and larger
             },
           }}
@@ -125,10 +125,11 @@ export default function AboutUsPage() {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          mt={{ base: 0, md: "-14vh" }}
+          mt={{ base: "-5vh", md: "-14vh" }}
+          mb={{ base: "5vh" }}
           sx={{
             transform: {
-              base: "translateX(-16%)", // Applies to screens smaller than `md`
+              base: "none", // Applies to screens smaller than `md`
               md: "translateX(-9%)", // Applies to screens `md` and larger
             },
           }}
@@ -189,6 +190,7 @@ export default function AboutUsPage() {
               borderRadius: "0.35em", // Slightly larger border radius for a shadow effect
               boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)", // Optional: Add shadow to the pseudo-element
             }}
+            mb={{ base: "6vh", md: 0 }} // Adjust margin for mobile and desktop
           >
             <Text
               fontSize={{ base: "1.5em", md: "2em" }}

@@ -1,13 +1,27 @@
-import { Box } from "@chakra-ui/react";
+"use client";
+import React from "react";
+import { Box, useMediaQuery } from "@chakra-ui/react";
 
 export default function HexagonClippedBox() {
+  // Define media queries
+  const [isMobile] = useMediaQuery("(max-width: 600px)"); // For very small screens
+  const [isTablet] = useMediaQuery("(max-width: 768px)"); // For small to medium screens
+  const [isDesktop] = useMediaQuery("(max-width: 1024px)"); // For medium to large screens
+
+  // Determine the scale factor based on the media query
+  let scaleFactor = 1; // Default scale factor for large screens
+  if (isMobile) {
+    scaleFactor = 0.7; // Scale down for very small screens
+  } else if (isTablet) {
+    scaleFactor = 0.7; // Slightly larger scale for small screens
+  } else if (isDesktop) {
+    scaleFactor = 0.85; // Moderate scale for medium screens
+  }
+
   // Original dimensions
   const originalWidth = 242.4;
   const originalHeight = 198.77;
   const containerSize = 55; // in vh
-
-  // Scale factor (2/3 for the requested change, 1 for original size)
-  const scaleFactor = 1; // Change this value to scale the hexagon
 
   // Scaled dimensions
   const scaledWidth = originalWidth * scaleFactor;
