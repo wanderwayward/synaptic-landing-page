@@ -1,40 +1,70 @@
 import { Box } from "@chakra-ui/react";
 
 export default function HexagonClippedBox() {
+  // Original dimensions
+  const originalWidth = 242.4;
+  const originalHeight = 198.77;
+  const containerSize = 55; // in vh
+
+  // Scale factor (2/3 for the requested change, 1 for original size)
+  const scaleFactor = 1; // Change this value to scale the hexagon
+
+  // Scaled dimensions
+  const scaledWidth = originalWidth * scaleFactor;
+  const scaledHeight = originalHeight * scaleFactor;
+  const scaledContainerSize = containerSize * scaleFactor;
+
   return (
     <Box
       position="relative"
-      width="55vh" // Updated container size to 55vh
-      height="55vh"
+      width={`${scaledContainerSize}vh`} // Scaled container size
+      height={`${scaledContainerSize}vh`}
       display="flex"
       justifyContent="center"
       alignItems="center"
       overflow="hidden"
     >
-      <svg viewBox="0 0 242.4 198.77" width="100%" height="100%">
+      <svg
+        viewBox={`0 0 ${scaledWidth} ${scaledHeight}`}
+        width="100%"
+        height="100%"
+      >
         <defs>
           <clipPath id="hexagonClipBox">
             <path
-              d="M77.55,3.38 
-                 L166.43,3.38 
-                 A24.42,24.42 0 0,1 190.29,18.92 
-                 L226.93,85.42 
-                 A24.42,24.42 0 0,1 226.93,106.04
-                 L190.29,172.54       
-                 A24.42,24.42 0 0,1 166.43,188.08
-                 L77.55,188.08
-                 A24.42,24.42 0 0,1 53.69,172.54
-                 L17.05,106.04
-                 A24.42,24.42 0 0,1 17.05,85.42
-                 L53.69,18.92
-                 A24.42,24.42 0 0,1 77.55,3.38"
+              d={`
+                M${77.55 * scaleFactor},${3.38 * scaleFactor} 
+                L${166.43 * scaleFactor},${3.38 * scaleFactor} 
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                190.29 * scaleFactor
+              },${18.92 * scaleFactor} 
+                L${226.93 * scaleFactor},${85.42 * scaleFactor} 
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                226.93 * scaleFactor
+              },${106.04 * scaleFactor}
+                L${190.29 * scaleFactor},${172.54 * scaleFactor}       
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                166.43 * scaleFactor
+              },${188.08 * scaleFactor}
+                L${77.55 * scaleFactor},${188.08 * scaleFactor}
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                53.69 * scaleFactor
+              },${172.54 * scaleFactor}
+                L${17.05 * scaleFactor},${106.04 * scaleFactor}
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                17.05 * scaleFactor
+              },${85.42 * scaleFactor}
+                L${53.69 * scaleFactor},${18.92 * scaleFactor}
+                A${24.42 * scaleFactor},${24.42 * scaleFactor} 0 0,1 ${
+                77.55 * scaleFactor
+              },${3.38 * scaleFactor}`}
             />
           </clipPath>
         </defs>
         <rect
-          width="242.4" // Adjusted width proportional to the new viewBox size
-          height="198.77" // Adjusted height proportional to the new viewBox size
-          fill="#d1ffc6" // White background color
+          width={scaledWidth} // Scaled width
+          height={scaledHeight} // Scaled height
+          fill="#d1ffc6" // Hexagon background color
           clipPath="url(#hexagonClipBox)" // Apply the hexagon clip-path
         />
       </svg>
