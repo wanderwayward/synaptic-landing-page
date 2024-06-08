@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { Box, useMediaQuery } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import useScaleFactor from "@/app/_hooks/useScaleFactor";
 
 interface HexagonClippedImageProps {
   imageUrl: string;
@@ -9,27 +10,12 @@ interface HexagonClippedImageProps {
 const HexagonClippedImage: React.FC<HexagonClippedImageProps> = ({
   imageUrl,
 }) => {
-  // Define media queries
-  const [isMobile] = useMediaQuery("(max-width: 600px)"); // For very small screens
-  const [isTablet] = useMediaQuery("(max-width: 768px)"); // For small to medium screens
-  const [isDesktop] = useMediaQuery("(max-width: 1024px)"); // For medium to large screens
+  const scaleFactor = useScaleFactor();
 
-  // Determine the scale factor based on the media query
-  let scaleFactor = 1; // Default scale factor for large screens
-  if (isMobile) {
-    scaleFactor = 0.7; // Scale down for very small screens
-  } else if (isTablet) {
-    scaleFactor = 0.7; // Slightly larger scale for small screens
-  } else if (isDesktop) {
-    scaleFactor = 0.85; // Moderate scale for medium screens
-  }
-
-  // Original dimensions
   const originalWidth = 233.0;
   const originalHeight = 190.9;
   const containerSize = 53; // in vh
 
-  // Scaled dimensions
   const scaledWidth = originalWidth * scaleFactor;
   const scaledHeight = originalHeight * scaleFactor;
   const scaledContainerSize = containerSize * scaleFactor;
@@ -37,7 +23,7 @@ const HexagonClippedImage: React.FC<HexagonClippedImageProps> = ({
   return (
     <Box
       position="relative"
-      width={`${scaledContainerSize}vh`} // Scaled container size
+      width={`${scaledContainerSize}vh`}
       height={`${scaledContainerSize}vh`}
       display="flex"
       justifyContent="center"
@@ -82,11 +68,11 @@ const HexagonClippedImage: React.FC<HexagonClippedImageProps> = ({
           </clipPath>
         </defs>
         <image
-          width={scaledWidth} // Scaled width
-          height={scaledHeight} // Scaled height
+          width={scaledWidth}
+          height={scaledHeight}
           xlinkHref={imageUrl}
           clipPath="url(#hexagonClip)"
-          preserveAspectRatio="xMidYMid slice" // Keeps the image centered and fitting well
+          preserveAspectRatio="xMidYMid slice"
         />
       </svg>
     </Box>

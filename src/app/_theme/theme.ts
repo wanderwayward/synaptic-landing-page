@@ -1,6 +1,14 @@
 import { extendTheme } from "@chakra-ui/react";
 
+const breakpoints = {
+  sm: "600px", // Mobile
+  md: "900px", // Tablet
+  lg: "1300px", // Desktop
+  xl: "1536px", // Large Desktop (optional, for larger screens)
+};
+
 const customTheme = extendTheme({
+  breakpoints,
   components: {
     Button: {
       sizes: {

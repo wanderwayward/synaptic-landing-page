@@ -1,29 +1,15 @@
 "use client";
 import React from "react";
-import { Box, useMediaQuery } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import useScaleFactor from "@/app/_hooks/useScaleFactor";
 
-export default function HexagonClippedBox() {
-  // Define media queries
-  const [isMobile] = useMediaQuery("(max-width: 600px)"); // For very small screens
-  const [isTablet] = useMediaQuery("(max-width: 768px)"); // For small to medium screens
-  const [isDesktop] = useMediaQuery("(max-width: 1024px)"); // For medium to large screens
+const HexagonClippedBox = () => {
+  const scaleFactor = useScaleFactor();
 
-  // Determine the scale factor based on the media query
-  let scaleFactor = 1; // Default scale factor for large screens
-  if (isMobile) {
-    scaleFactor = 0.7; // Scale down for very small screens
-  } else if (isTablet) {
-    scaleFactor = 0.7; // Slightly larger scale for small screens
-  } else if (isDesktop) {
-    scaleFactor = 0.85; // Moderate scale for medium screens
-  }
-
-  // Original dimensions
   const originalWidth = 242.4;
   const originalHeight = 198.77;
   const containerSize = 55; // in vh
 
-  // Scaled dimensions
   const scaledWidth = originalWidth * scaleFactor;
   const scaledHeight = originalHeight * scaleFactor;
   const scaledContainerSize = containerSize * scaleFactor;
@@ -31,7 +17,7 @@ export default function HexagonClippedBox() {
   return (
     <Box
       position="relative"
-      width={`${scaledContainerSize}vh`} // Scaled container size
+      width={`${scaledContainerSize}vh`}
       height={`${scaledContainerSize}vh`}
       display="flex"
       justifyContent="center"
@@ -76,12 +62,14 @@ export default function HexagonClippedBox() {
           </clipPath>
         </defs>
         <rect
-          width={scaledWidth} // Scaled width
-          height={scaledHeight} // Scaled height
-          fill="#d1ffc6" // Hexagon background color
-          clipPath="url(#hexagonClipBox)" // Apply the hexagon clip-path
+          width={scaledWidth}
+          height={scaledHeight}
+          fill="#d1ffc6"
+          clipPath="url(#hexagonClipBox)"
         />
       </svg>
     </Box>
   );
-}
+};
+
+export default HexagonClippedBox;
