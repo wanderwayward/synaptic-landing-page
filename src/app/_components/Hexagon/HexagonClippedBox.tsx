@@ -8,7 +8,7 @@ const HexagonClippedBox = () => {
 
   const originalWidth = 242.4;
   const originalHeight = 198.77;
-  const containerSize = 55; // in vh
+  const containerSize = 55;
 
   const scaledWidth = originalWidth * scaleFactor;
   const scaledHeight = originalHeight * scaleFactor;

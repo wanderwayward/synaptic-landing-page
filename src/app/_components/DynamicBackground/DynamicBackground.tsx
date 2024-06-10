@@ -1,39 +1,47 @@
-"use client";
-
-import { Box } from "@chakra-ui/react";
+import { Box, useMediaQuery } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
 import { css, Global } from "@emotion/react";
+import { MEDIA_QUERIES } from "@/app/_constants/mediaQueries";
 
 interface DynamicBackgroundProps {
   page: string;
+  initialGradient: string; // Add this prop
   children: ReactNode;
 }
 
 const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
   page,
+  initialGradient, // Use this prop
   children,
 }) => {
-  const [bgGradient, setBgGradient] = useState<string>(
-    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)"
-  );
+  const [isSM] = useMediaQuery(MEDIA_QUERIES.sm);
+
+  // Use initialGradient for the initial value
+  const [bgGradient, setBgGradient] = useState<string>(initialGradient);
+  const [showTriangles, setShowTriangles] = useState<boolean>(false);
 
   useEffect(() => {
+    // Update the gradient based on the page and screen size
+    let updatedGradient = initialGradient;
+
     switch (page) {
       case "/calendar":
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)"
-        );
+        updatedGradient =
+          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)";
+        setShowTriangles(false);
         break;
       case "/about":
-        setBgGradient("rgba(66, 66, 66)");
+        updatedGradient = "rgba(66, 66, 66)";
+        setShowTriangles(true);
         break;
       default:
-        setBgGradient(
-          "linear-gradient(73deg, rgba(66, 66, 66) 51.5%, rgba(255, 182, 39) 51%)"
-        );
+        updatedGradient = initialGradient;
+        setShowTriangles(false);
         break;
     }
-  }, [page]);
+
+    setBgGradient(updatedGradient);
+  }, [page, isSM, initialGradient]);
 
   return (
     <>
@@ -71,8 +79,8 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
         `}
       />
       <Box className="dynamic-background" />
-      <Box className="top-triangle" />
-      <Box className="bottom-triangle" />
+      {showTriangles && <Box className="top-triangle" />}
+      {showTriangles && <Box className="bottom-triangle" />}
       <Box position="relative" zIndex={2}>
         {children}
       </Box>

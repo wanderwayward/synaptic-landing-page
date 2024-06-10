@@ -1,4 +1,3 @@
-// mediaQueries.js
 export const MEDIA_QUERIES = {
   sm: "(max-width: 600px)",
   md: "(min-width: 601px) and (max-width: 900px)",

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, useMediaQuery, Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -8,6 +8,8 @@ import CustomChakraProvider from "./_components/CustomChakraProvider/CustomChakr
 import ParticleBackground from "./_components/ParticleBackground/ParticleBackground";
 import Loading from "./_components/Loading/Loading";
 import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
+import { MEDIA_QUERIES } from "@/app/_constants/mediaQueries";
+import { el } from "date-fns/locale";
 
 export default function RootLayout({
   children,
@@ -17,6 +19,24 @@ export default function RootLayout({
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+
+  // Media queries for determining the gradient during initial load
+  const [isSM] = useMediaQuery(MEDIA_QUERIES.sm);
+  const [isMd] = useMediaQuery(MEDIA_QUERIES.md);
+  const [isLg] = useMediaQuery(MEDIA_QUERIES.lg);
+
+  let initialGradient =
+    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)";
+  if (isSM) {
+    initialGradient =
+      "linear-gradient(183deg, rgba(66, 66, 66) 27.2%, rgba(255, 182, 39) 27.2%)";
+  } else if (isMd) {
+    initialGradient =
+      "linear-gradient(182deg, rgba(66, 66, 66) 34%, rgba(255, 182, 39) 34%)";
+  } else if (isLg) {
+    initialGradient =
+      "linear-gradient(183deg, rgba(66, 66, 66) 30%, rgba(255, 182, 39) 30%)";
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -61,7 +81,10 @@ export default function RootLayout({
               <Loading />
             ) : (
               <>
-                <DynamicBackground page={pathname}>
+                <DynamicBackground
+                  page={pathname}
+                  initialGradient={initialGradient}
+                >
                   <Box position="fixed" width="100%" height="100%" zIndex={1}>
                     <ParticleBackground />
                   </Box>
