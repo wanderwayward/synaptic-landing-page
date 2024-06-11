@@ -63,7 +63,7 @@ const HomePage = () => {
         alignItems="center"
         mt={{ base: 14, lg: 0 }} // Add margin-top to push down the button
       >
-        <Link href="/calendar">
+        <Link href="/calendar" _hover={{ textDecoration: "none" }}>
           <CustomButton
             size="xl"
             width={{ base: "90%" }} // Set responsive width
