@@ -12,7 +12,7 @@ export default function AboutUsPage() {
       align="center"
       height="calc(100vh - 48px)" // Accounting for the navbar
       position="relative"
-      overflow="auto"
+      overflow={{ base: "auto", xl: "hidden" }}
     >
       <Grid
         templateRows={{ base: "repeat(4, auto)", lg: "repeat(2, 1fr)" }}

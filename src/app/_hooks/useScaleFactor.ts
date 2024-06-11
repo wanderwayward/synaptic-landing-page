@@ -6,9 +6,8 @@ const useScaleFactor = () => {
   const [isMD] = useMediaQuery(MEDIA_QUERIES.md);
   const [isLG] = useMediaQuery(MEDIA_QUERIES.lg);
   const [isXL] = useMediaQuery(MEDIA_QUERIES.xl);
-  const [isXXL] = useMediaQuery(MEDIA_QUERIES.xxl);
 
-  let scaleFactor = 1; // Default scale factor for extra-large screens (xl)
+  let scaleFactor = 0.95; // Default scale factor for extra-large screens (xl)
   if (isSM) {
     scaleFactor = 0.6; // Scale down for very small screens
   } else if (isMD) {

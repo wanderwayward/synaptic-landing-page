@@ -9,7 +9,7 @@ import ParticleBackground from "./_components/ParticleBackground/ParticleBackgro
 import Loading from "./_components/Loading/Loading";
 import DynamicBackground from "./_components/DynamicBackground/DynamicBackground";
 import { MEDIA_QUERIES } from "@/app/_constants/mediaQueries";
-import { el } from "date-fns/locale";
+import "./globals.css";
 
 export default function RootLayout({
   children,

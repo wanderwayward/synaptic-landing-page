@@ -1,6 +1,7 @@
 "use client";
 import { Box, Grid, GridItem, Link } from "@chakra-ui/react";
 import CustomButton from "./_components/button/CustomButton";
+import "./page.module.css";
 
 const HomePage = () => {
   return (
@@ -71,11 +72,9 @@ const HomePage = () => {
             borderRadius={10}
             color="#DE3C4B"
             fontFamily="roca thin"
-            fontSize={{ base: "1.5em", md: "1.5em", lg: "1.5em", xl: "1.5em" }}
+            fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "3.5em" }}
             _hover={{
               bg: "#c0e9b5",
-              color: "#FFFFFF",
-              boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)",
             }}
             // Apply flex properties for better centering control
             display="flex"

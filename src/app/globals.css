@@ -35,3 +35,24 @@ a {
     color-scheme: dark;
   }
 }
+
+/* For Webkit browsers */
+::-webkit-scrollbar {
+  width: 5px; /* for vertical scrollbars */
+  height: 5px; /* for horizontal scrollbars */
+  scrollbar-color: #de3c4b transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* or any color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #de3c4b; /* scrollbar color */
+  border-radius: 10px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #de3c4b transparent;
+}
