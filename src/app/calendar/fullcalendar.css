@@ -1,29 +1,3 @@
-<<<<<<< Updated upstream
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(1.3125em);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-/* Current day background color */
-.fc .fc-daygrid-day.fc-day-today {
-  background-color: rgba(158, 206, 154, 0.5) !important; /* Celadon */
-}
-
-/* Calendar font */
-.fc {
-  font-family: "roca" !important;
-=======
 /* Current day background color */
 .fc .fc-daygrid-day.fc-day-today {
   background-color: rgba(255, 250, 205, 0.6) !important; /* Lemon Chiffon */
@@ -32,7 +6,6 @@
 /* Selection highlight color */
 .fc .fc-highlight {
   background-color: rgba(255, 250, 205, 0.6) !important; /* Lemon Chiffon */
->>>>>>> Stashed changes
 }
 
 /* Day numbers */
@@ -46,43 +19,25 @@
   font-family: "roca";
   text-transform: uppercase;
   font-size: 2.65em !important;
-<<<<<<< Updated upstream
-  color: #fff !important;
-=======
   color: #fffff0 !important; /* Ivory */
->>>>>>> Stashed changes
 }
 
 /* Navigation buttons */
 .fc .fc-button {
-<<<<<<< Updated upstream
-  color: #0d00a4 !important; /* Duke Blue */
-=======
   color: #0047ab !important; /* Cobalt Blue */
->>>>>>> Stashed changes
   border-radius: 1.126em !important;
 }
 
 .fc .fc-button:hover,
 .fc .fc-button:focus {
-<<<<<<< Updated upstream
-  background-color: rgba(187, 173, 255, 0.267) !important; /* Mauve Light */
-  color: #0d00a4 !important; /* Duke Blue */
-=======
   background-color: rgba(255, 250, 205, 0.6) !important; /* Lemon Chiffon */
   color: #0047ab !important; /* Cobalt Blue */
->>>>>>> Stashed changes
 }
 
 .fc .fc-button:active,
 .fc .fc-button.fc-button-active {
-<<<<<<< Updated upstream
-  background-color: rgba(187, 173, 255, 0.795) !important; /* Mauve Light */
-  color: #0d00a4 !important; /* Duke Blue */
-=======
   background-color: rgba(255, 250, 205, 0.6) !important; /* Lemon Chiffon */
   color: #0047ab !important; /* Cobalt Blue */
->>>>>>> Stashed changes
   border: none !important;
   outline: none !important;
 }
@@ -111,13 +66,8 @@
 
 /* Primary buttons */
 .fc .fc-button-primary {
-<<<<<<< Updated upstream
-  background-color: #ff0035 !important; /* Imperial Red */
-  color: white !important;
-=======
   background-color: #228b22 !important; /* Forest Green */
   color: #ffffff !important; /* Pure White */
->>>>>>> Stashed changes
   font-weight: semi-bold !important;
   font-size: 1.272em !important;
   border: none !important;
@@ -127,35 +77,20 @@
 
 .fc .fc-button-primary:hover,
 .fc .fc-button-primary:focus {
-<<<<<<< Updated upstream
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
-=======
   background-color: #006400 !important; /* Dark Green */
   color: #ffffff !important;
->>>>>>> Stashed changes
 }
 
 .fc .fc-button-group .fc-button:hover,
 .fc .fc-button-group .fc-button:focus {
-<<<<<<< Updated upstream
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
-=======
   background-color: #006400 !important; /* Dark Green */
   color: #ffffff !important;
->>>>>>> Stashed changes
 }
 
 .fc .fc-button-group .fc-button:active,
 .fc .fc-button-group .fc-button.fc-button-active {
-<<<<<<< Updated upstream
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
-=======
   background-color: #006400 !important; /* Dark Green */
   color: #ffffff !important;
->>>>>>> Stashed changes
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -163,11 +98,7 @@
 
 .fc .fc-button-primary:active,
 .fc .fc-button-primary.fc-button-active {
-<<<<<<< Updated upstream
-  background-color: #0d00a4 !important; /* Duke Blue */
-=======
   background-color: #228b22 !important; /* Forest Green */
->>>>>>> Stashed changes
   color: #ffffff !important;
   border: none !important;
   outline: none !important;
@@ -176,13 +107,8 @@
 
 /* Day names */
 .fc .fc-col-header-cell {
-<<<<<<< Updated upstream
-  background-color: #eef4ed !important; /* Mint Cream */
-  color: #424242 !important; /* Onyx */
-=======
   background-color: #ffdab9 !important; /* Peach */
   color: #2c3e50 !important; /* Deep Indigo */
->>>>>>> Stashed changes
   border: none !important;
 }
 
@@ -227,11 +153,7 @@
 
 /* Event appearance */
 .fc-event {
-<<<<<<< Updated upstream
-  background-color: #ff0035 !important; /* Imperial Red */
-=======
   background-color: #0047ab !important; /* Cobalt Blue */
->>>>>>> Stashed changes
   border-radius: 0.53em !important;
   padding: 0.318em !important;
 }

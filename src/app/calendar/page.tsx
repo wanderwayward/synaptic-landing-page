@@ -133,11 +133,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={{ base: 4, md: 8, lg: 24 }}
-<<<<<<< Updated upstream
-        color="#0d00a4"
-=======
         color="#FFFFF0"
->>>>>>> Stashed changes
         fontFamily="roca"
         fontSize={{ base: "3em", xl: "6em" }}
       >
@@ -147,11 +143,7 @@ const CalendarPage = () => {
         <Flex
           width="60%"
           height="56vh"
-<<<<<<< Updated upstream
-          bg="#48A9A6"
-=======
           bg="#D2B48C "
->>>>>>> Stashed changes
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -165,11 +157,7 @@ const CalendarPage = () => {
         <Box
           width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
           height={isSmallScreen ? "50vh" : "49vh"}
-<<<<<<< Updated upstream
-          bg="#48A9A6"
-=======
           bg="#D2B48C "
->>>>>>> Stashed changes
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -262,18 +250,12 @@ const CalendarPage = () => {
       {isConfirmationOpen && (
         <Modal isOpen={isConfirmationOpen} onClose={handleCloseConfirmation}>
           <ModalOverlay />
-<<<<<<< Updated upstream
-          <ModalContent top="20%">
-            <ModalHeader>Confirmación</ModalHeader>
-            <ModalCloseButton />
-=======
           <ModalContent top="20%" bg="#f5f5dc">
             {" "}
             {/* Beige background */}
             <ModalHeader color="#b0341a">Confirmación</ModalHeader>{" "}
             {/* Warm Red */}
             <ModalCloseButton color="#b0341a" /> {/* Warm Red */}
->>>>>>> Stashed changes
             <ModalBody>
               <Text>
                 Tu cita se ha programado. Checa tu correo electrónico para más
@@ -283,9 +265,6 @@ const CalendarPage = () => {
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
               </Text>
-<<<<<<< Updated upstream
-              <Button width="100%" mb={2} onClick={handleCloseConfirmation}>
-=======
               <Button
                 width="100%"
                 mb={2}
@@ -297,7 +276,6 @@ const CalendarPage = () => {
                 }} /* Warm Red on hover */
                 onClick={handleCloseConfirmation}
               >
->>>>>>> Stashed changes
                 Aceptar
               </Button>
             </ModalBody>

@@ -56,8 +56,6 @@ a {
   scrollbar-width: thin;
   scrollbar-color: #de3c4b transparent;
 }
-<<<<<<< Updated upstream
-=======
 
 :root {
   /* Override FullCalendar CSS variables */
@@ -74,4 +72,3 @@ a {
     0.6
   ) !important; /* Light Steel Blue (semi-transparent) */
 }
->>>>>>> Stashed changes

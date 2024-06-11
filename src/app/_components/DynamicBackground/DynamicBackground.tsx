@@ -27,19 +27,11 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
     switch (page) {
       case "/calendar":
         updatedGradient =
-<<<<<<< Updated upstream
-          "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)";
-        setShowTriangles(false);
-        break;
-      case "/about":
-        updatedGradient = "rgba(66, 66, 66)";
-=======
           "linear-gradient(73deg, rgba(138, 154, 91) 15%, rgba(204, 119, 34) 15%)";
         setShowTriangles(false);
         break;
       case "/about":
         updatedGradient = "rgba(138, 154, 91)";
->>>>>>> Stashed changes
         setShowTriangles(true);
         break;
       default:
