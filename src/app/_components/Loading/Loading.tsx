@@ -7,7 +7,7 @@ const Loading = () => (
     display="flex"
     alignItems="center"
     justifyContent="center"
-    height="100vh"
+    width={{ base: "100%", md: "100%", lg: "80%", xl: "60%" }}
     backgroundColor="black"
   >
     <Spinner size="xl" />

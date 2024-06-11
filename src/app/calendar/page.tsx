@@ -16,6 +16,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import { EventInput } from "@fullcalendar/core";
@@ -26,6 +27,7 @@ import axios from "axios";
 import esLocale from "@fullcalendar/core/locales/es";
 import EventForm from "../_components/EventForm/EventForm";
 import "./fullcalendar.css";
+import { MEDIA_QUERIES } from "../_constants/mediaQueries";
 
 const CalendarPage = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -37,6 +39,9 @@ const CalendarPage = () => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const toast = useToast();
   const router = useRouter();
+
+  const [isSmallScreen] = useMediaQuery(MEDIA_QUERIES.sm);
+  const [isMediumScreen] = useMediaQuery(MEDIA_QUERIES.md);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -125,7 +130,13 @@ const CalendarPage = () => {
       className="fade-in"
       pb={24}
     >
-      <Heading as="h1" mb={28} color="#0d00a4" fontFamily="roca" fontSize="6em">
+      <Heading
+        as="h1"
+        mb={{ base: 4, md: 8, lg: 24 }}
+        color="#0d00a4"
+        fontFamily="roca"
+        fontSize={{ base: "3em", xl: "6em" }}
+      >
         Selecciona un horario a tu conveniencia
       </Heading>
       {isFetching ? (
@@ -144,27 +155,36 @@ const CalendarPage = () => {
         </Flex>
       ) : (
         <Box
-          width="60%"
-          height="49vh"
+          width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
+          height={isSmallScreen ? "50vh" : "49vh"}
           bg="#48A9A6"
           boxShadow="lg"
           borderRadius="md"
           p={4}
-          overflow="hidden"
+          overflowX="auto" // Enable horizontal scrolling on mobile
         >
           <FullCalendar
             timeZone="local"
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            initialView="timeGridWeek"
+            initialView={isSmallScreen ? "customTwoDay" : "timeGridWeek"}
+            views={{
+              customTwoDay: {
+                type: "timeGrid",
+                duration: { days: 2 },
+                buttonText: "2 días",
+              },
+            }}
             events={events}
             selectable={true}
             select={handleDateSelect}
             height="100%"
             locale={esLocale}
             headerToolbar={{
-              left: "prev,next today",
+              left: isSmallScreen ? "prev,next" : "prev,next today",
               center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
+              right: isSmallScreen
+                ? "customTwoDay"
+                : "dayGridMonth,timeGridWeek,timeGridDay",
             }}
             slotMinTime="07:00:00"
             slotMaxTime="22:00:00"
@@ -199,7 +219,7 @@ const CalendarPage = () => {
                 borderRadius="md"
                 height="100%"
                 p={1}
-                fontSize="1.5em"
+                fontSize={isSmallScreen ? "1em" : "1.5em"}
                 lineHeight="2em"
               >
                 <Text>Ocupado</Text>
