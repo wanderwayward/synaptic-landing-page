@@ -26,16 +26,16 @@ export default function RootLayout({
   const [isLg] = useMediaQuery(MEDIA_QUERIES.lg);
 
   let initialGradient =
-    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)";
+    "linear-gradient(73deg, rgba(44, 62, 80) 51%, rgba(255, 111, 97) 51%)";
   if (isSM) {
     initialGradient =
-      "linear-gradient(183deg, rgba(66, 66, 66) 27.2%, rgba(255, 182, 39) 27.2%)";
+      "linear-gradient(183deg, rgba(44, 62, 80) 27.2%, rgba(255, 111, 97) 27.2%)";
   } else if (isMd) {
     initialGradient =
-      "linear-gradient(182deg, rgba(66, 66, 66) 34%, rgba(255, 182, 39) 34%)";
+      "linear-gradient(182deg, rgba(44, 62, 80) 34%, rgba(255, 111, 97) 34%)";
   } else if (isLg) {
     initialGradient =
-      "linear-gradient(183deg, rgba(66, 66, 66) 30%, rgba(255, 182, 39) 30%)";
+      "linear-gradient(183deg, rgba(44, 62, 80) 30%, rgba(255, 111, 97) 30%)";
   }
 
   useEffect(() => {

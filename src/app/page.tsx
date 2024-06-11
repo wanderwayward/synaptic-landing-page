@@ -23,7 +23,7 @@ const HomePage = () => {
         mb={{ base: -2, lg: 0 }} // Apply negative margin-bottom to bring items closer
       >
         <Box
-          color="#DE3C4B"
+          color="#ffffff" // Pure White for "Synaptic" text
           fontSize={{ base: "18vw", lg: "8vw", xl: "8vw" }}
           fontWeight="bold"
           fontFamily="roca"
@@ -43,7 +43,7 @@ const HomePage = () => {
         mt={{ base: -2, lg: -4 }} // Apply negative margin-top to bring items closer
       >
         <Box
-          color="#0D00A4"
+          color="#800020" // Rich Burgundy for "terapia para la vida real" text
           textAlign={{ base: "center", lg: "right" }}
           fontSize={{ base: "8vw", lg: "3.5vw", xl: "4vw" }}
           fontWeight="bold"
@@ -68,13 +68,14 @@ const HomePage = () => {
             size="xl"
             width={{ base: "90%" }} // Set responsive width
             maxWidth="120vw" // Ensure max width doesn't exceed a certain size
-            bg="#d1ffc6"
+            bg="#00b5ad" // Bright Teal for button background
             borderRadius={10}
-            color="#DE3C4B"
+            color="#ffffff" // Pure White for button text
             fontFamily="roca thin"
             fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "3.5em" }}
             _hover={{
-              bg: "#c0e9b5",
+              bg: "#e6e6fa", // Soft Lavender for hover background
+              color: "#708090", // Slate Gray for hover text
             }}
             // Apply flex properties for better centering control
             display="flex"

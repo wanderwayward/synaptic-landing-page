@@ -133,7 +133,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={{ base: 4, md: 8, lg: 24 }}
-        color="#0d00a4"
+        color="#ffffff"
         fontFamily="roca"
         fontSize={{ base: "3em", xl: "6em" }}
       >
@@ -143,7 +143,7 @@ const CalendarPage = () => {
         <Flex
           width="60%"
           height="56vh"
-          bg="#48A9A6"
+          bg="#00b5ad"
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -157,7 +157,7 @@ const CalendarPage = () => {
         <Box
           width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
           height={isSmallScreen ? "50vh" : "49vh"}
-          bg="#48A9A6"
+          bg="#00b5ad"
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -250,19 +250,36 @@ const CalendarPage = () => {
       {isConfirmationOpen && (
         <Modal isOpen={isConfirmationOpen} onClose={handleCloseConfirmation}>
           <ModalOverlay />
-          <ModalContent top="20%">
-            <ModalHeader>Confirmación</ModalHeader>
-            <ModalCloseButton />
+          <ModalContent top="20%" bg="#eef4ed">
+            {" "}
+            {/* Mint Cream background */}
+            <ModalHeader color="#800020">Confirmación</ModalHeader>{" "}
+            {/* Rich Burgundy */}
+            <ModalCloseButton color="#800020" /> {/* Rich Burgundy */}
             <ModalBody>
-              <Text>
+              <Text color="#2c3e50" mb={4}>
+                {" "}
+                {/* Deep Indigo */}
                 Tu cita se ha programado. Checa tu correo electrónico para más
                 información.
               </Text>
-              <Text mb={2}>
+              <Text color="#2c3e50" mb={2}>
+                {" "}
+                {/* Deep Indigo */}
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
               </Text>
-              <Button width="100%" mb={2} onClick={handleCloseConfirmation}>
+              <Button
+                width="100%"
+                mb={2}
+                bg="#ff6f61" /* Coral */
+                color="#ffffff" /* Pure White */
+                _hover={{
+                  bg: "#00b5ad",
+                  color: "white",
+                }} /* Bright Teal on hover */
+                onClick={handleCloseConfirmation}
+              >
                 Aceptar
               </Button>
             </ModalBody>

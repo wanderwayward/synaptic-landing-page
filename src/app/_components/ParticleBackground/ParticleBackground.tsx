@@ -51,10 +51,10 @@ const ParticleBackground = React.memo(() => {
       },
       particles: {
         color: {
-          value: "#7A7A7A",
+          value: "#b0c4de",
         },
         links: {
-          color: "#7A7A7A",
+          color: "#b0c4de",
           distance: 72,
           enable: true,
           opacity: 0.5,
