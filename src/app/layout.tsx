@@ -26,6 +26,7 @@ export default function RootLayout({
   const [isLg] = useMediaQuery(MEDIA_QUERIES.lg);
 
   let initialGradient =
+<<<<<<< Updated upstream
     "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)";
   if (isSM) {
     initialGradient =
@@ -36,6 +37,18 @@ export default function RootLayout({
   } else if (isLg) {
     initialGradient =
       "linear-gradient(183deg, rgba(66, 66, 66) 30%, rgba(255, 182, 39) 30%)";
+=======
+    "linear-gradient(73deg, rgba(138, 154, 91) 51%, rgba(204, 85, 0) 51%)";
+  if (isSM) {
+    initialGradient =
+      "linear-gradient(183deg, rgba(138, 154, 91) 27.2%, rgba(204, 85, 0) 27.2%)";
+  } else if (isMd) {
+    initialGradient =
+      "linear-gradient(182deg, rgba(138, 154, 91) 34%, rgba(204, 85, 0) 34%)";
+  } else if (isLg) {
+    initialGradient =
+      "linear-gradient(183deg, rgba(138, 154, 91) 30%, rgba(204, 85, 0) 30%)";
+>>>>>>> Stashed changes
   }
 
   useEffect(() => {

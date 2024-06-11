@@ -56,3 +56,22 @@ a {
   scrollbar-width: thin;
   scrollbar-color: #de3c4b transparent;
 }
+<<<<<<< Updated upstream
+=======
+
+:root {
+  /* Override FullCalendar CSS variables */
+  --fc-highlight-color: rgba(
+    255,
+    250,
+    205,
+    0.6
+  ) !important; /* Light Steel Blue (semi-transparent) */
+  --fc-today-bg-color: rgba(
+    255,
+    250,
+    205,
+    0.6
+  ) !important; /* Light Steel Blue (semi-transparent) */
+}
+>>>>>>> Stashed changes

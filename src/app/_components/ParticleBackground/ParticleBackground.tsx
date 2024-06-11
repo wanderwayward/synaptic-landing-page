@@ -51,10 +51,17 @@ const ParticleBackground = React.memo(() => {
       },
       particles: {
         color: {
+<<<<<<< Updated upstream
           value: "#7A7A7A",
         },
         links: {
           color: "#7A7A7A",
+=======
+          value: "#f0e68c",
+        },
+        links: {
+          color: "#f0e68c",
+>>>>>>> Stashed changes
           distance: 72,
           enable: true,
           opacity: 0.5,

@@ -27,11 +27,19 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
     switch (page) {
       case "/calendar":
         updatedGradient =
+<<<<<<< Updated upstream
           "linear-gradient(73deg, rgba(66, 66, 66) 15%, rgba(255, 182, 39) 15%)";
         setShowTriangles(false);
         break;
       case "/about":
         updatedGradient = "rgba(66, 66, 66)";
+=======
+          "linear-gradient(73deg, rgba(138, 154, 91) 15%, rgba(204, 119, 34) 15%)";
+        setShowTriangles(false);
+        break;
+      case "/about":
+        updatedGradient = "rgba(138, 154, 91)";
+>>>>>>> Stashed changes
         setShowTriangles(true);
         break;
       default:
@@ -59,7 +67,11 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
           .top-triangle {
             width: 40vw;
             height: 65vh;
+<<<<<<< Updated upstream
             background: rgba(255, 182, 39);
+=======
+            background: rgba(204, 119, 34);
+>>>>>>> Stashed changes
             clip-path: polygon(70% 0%, 100% 0%, 100% 100%);
             position: fixed;
             top: 0;
@@ -69,7 +81,11 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
           .bottom-triangle {
             width: 150vw;
             height: 55vh;
+<<<<<<< Updated upstream
             background: rgba(255, 182, 39);
+=======
+            background: rgba(204, 119, 34);
+>>>>>>> Stashed changes
             clip-path: polygon(100% 0%, 90% 100%, 100% 100%);
             position: fixed;
             bottom: 0;

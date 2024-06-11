@@ -8,9 +8,9 @@ const HomePage = () => {
     <Grid
       templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }}
       templateRows={{ base: "repeat(3, 1fr)", lg: "repeat(2, 1fr)" }}
-      rowGap={0} // Ensure row gap is 0
+      rowGap={0}
       gap={{ lg: "none", xl: 4 }}
-      mt={{ base: 24 }} // Add margin-top to push down the whole layout
+      mt={{ base: 24 }}
     >
       {/* Item 1 */}
       <GridItem
@@ -19,11 +19,15 @@ const HomePage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        ml={{ lg: "2em", xl: "10em" }} // Add margin-left to bring text closer together
-        mb={{ base: -2, lg: 0 }} // Apply negative margin-bottom to bring items closer
+        ml={{ lg: "2em", xl: "10em" }}
+        mb={{ base: -2, lg: 0 }}
       >
         <Box
+<<<<<<< Updated upstream
           color="#DE3C4B"
+=======
+          color="#FFFFF0" // Ivory for "Synaptic" text
+>>>>>>> Stashed changes
           fontSize={{ base: "18vw", lg: "8vw", xl: "8vw" }}
           fontWeight="bold"
           fontFamily="roca"
@@ -39,16 +43,20 @@ const HomePage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        ml={{ lg: "-12em", xl: "-10em" }} // Add margin-left to bring text closer together
-        mt={{ base: -2, lg: -4 }} // Apply negative margin-top to bring items closer
+        ml={{ lg: "-12em", xl: "-10em" }}
+        mt={{ base: -2, lg: -4 }}
       >
         <Box
+<<<<<<< Updated upstream
           color="#0D00A4"
+=======
+          color="#7C0A02" // Golden Brown for "terapia para la vida real" text
+>>>>>>> Stashed changes
           textAlign={{ base: "center", lg: "right" }}
           fontSize={{ base: "8vw", lg: "3.5vw", xl: "4vw" }}
           fontWeight="bold"
           fontFamily="roca"
-          padding={{ base: "0 10vh", lg: 0 }} // Reduce padding for base screen size
+          padding={{ base: "0 10vh", lg: 0 }}
         >
           terapia para la vida real
         </Box>
@@ -61,11 +69,12 @@ const HomePage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        mt={{ base: 14, lg: 0 }} // Add margin-top to push down the button
+        mt={{ base: 14, lg: 0 }}
       >
         <Link href="/calendar" _hover={{ textDecoration: "none" }}>
           <CustomButton
             size="xl"
+<<<<<<< Updated upstream
             width={{ base: "90%" }} // Set responsive width
             maxWidth="120vw" // Ensure max width doesn't exceed a certain size
             bg="#d1ffc6"
@@ -75,12 +84,23 @@ const HomePage = () => {
             fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "3.5em" }}
             _hover={{
               bg: "#c0e9b5",
+=======
+            width={{ base: "90%" }}
+            maxWidth="120vw"
+            bg="#228B22" // Forest Green for button background
+            borderRadius={10}
+            color="#FFFFF0" // Ivory for button text
+            fontFamily="roca thin"
+            fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "3.5em" }}
+            _hover={{
+              bg: "#FFDAB9", // Peach for hover background
+              color: "#996515", // Golden Brown for hover text
+>>>>>>> Stashed changes
             }}
-            // Apply flex properties for better centering control
             display="flex"
             justifyContent="center"
             alignItems="center"
-            textAlign="center" // Center text inside the button
+            textAlign="center"
           >
             Agenda Tu Cita Aquí
           </CustomButton>
