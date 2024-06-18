@@ -40,7 +40,7 @@ a {
 ::-webkit-scrollbar {
   width: 5px; /* for vertical scrollbars */
   height: 5px; /* for horizontal scrollbars */
-  scrollbar-color: #de3c4b transparent;
+  scrollbar-color: #de6b48 transparent;
 }
 
 ::-webkit-scrollbar-track {
@@ -48,13 +48,13 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #de3c4b; /* scrollbar color */
+  background-color: #de6b48; /* scrollbar color */
   border-radius: 10px;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #de3c4b transparent;
+  scrollbar-color: #de6b48 transparent;
 }
 
 :root {

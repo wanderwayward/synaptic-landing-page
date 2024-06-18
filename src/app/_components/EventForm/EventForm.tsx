@@ -68,63 +68,63 @@ const EventForm: React.FC<EventFormProps> = ({
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex direction="column" gap={4}>
         <FormControl isInvalid={!!errors.name}>
-          <FormLabel color="#800020">Nombre</FormLabel> {/* Rich Burgundy */}
+          <FormLabel color="#2c3e50">Nombre</FormLabel> {/* Deep Indigo */}
           <Input
             placeholder="¿Cuál es tu nombre?"
             {...register("name", { required: "El nombre es requerido" })}
-            bg="#eef4ed" /* Mint Cream */
+            bg="#FFFFF0" /* Ivory */
           />
           <FormErrorMessage>
             {errors.name && (errors.name.message as string)}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={!!errors.email}>
-          <FormLabel color="#800020">Email</FormLabel> {/* Rich Burgundy */}
+          <FormLabel color="#2c3e50">Email</FormLabel> {/* Deep Indigo */}
           <Input
             placeholder="¿Cuál es tu email?"
             {...register("email", { required: "El email es requerido" })}
-            bg="#eef4ed" /* Mint Cream */
+            bg="#FFFFF0" /* Ivory */
           />
           <FormErrorMessage>
             {errors.email && (errors.email.message as string)}
           </FormErrorMessage>
         </FormControl>
         <FormControl>
-          <FormLabel color="#800020">Teléfono</FormLabel> {/* Rich Burgundy */}
+          <FormLabel color="#2c3e50">Teléfono</FormLabel> {/* Deep Indigo */}
           <Input
             type="number"
             placeholder="¿Cuál es tu número de telefono?"
             {...register("phone")}
-            bg="#eef4ed" /* Mint Cream */
+            bg="#FFFFF0" /* Ivory */
           />
         </FormControl>
         <FormControl>
-          <FormLabel color="#800020">Fecha y hora de inicio</FormLabel>{" "}
-          {/* Rich Burgundy */}
+          <FormLabel color="#2c3e50">Fecha y hora de inicio</FormLabel>{" "}
+          {/* Deep Indigo */}
           <Input
             type="datetime-local"
             value={startTime} // Prepopulated value
             onChange={(e) => setStartTime(e.target.value)}
-            bg="#eef4ed" /* Mint Cream */
+            bg="#FFFFF0" /* Ivory */
           />
         </FormControl>
         <FormControl>
-          <FormLabel color="#800020">Razón por la que busca terapia</FormLabel>{" "}
-          {/* Rich Burgundy */}
+          <FormLabel color="#2c3e50">Razón por la que busca terapia</FormLabel>{" "}
+          {/* Deep Indigo */}
           <Textarea
             resize={"vertical"}
             placeholder="Razón por la que buscas terapia"
             {...register("reason")}
-            bg="#eef4ed" /* Mint Cream */
+            bg="#FFFFF0" /* Ivory */
           />
         </FormControl>
 
         <Button
           type="submit"
-          bg="#ff6f61" /* Coral */
+          bg="#de6b48" /* Burnt Sienna */
           color="#ffffff" /* Pure White */
           mb={2}
-          _hover={{ bg: "#00b5ad", color: "white" }} /* Bright Teal on hover */
+          _hover={{ bg: "#2c3e50", color: "white" }} /* Deep Indigo on hover */
         >
           Crear Evento
         </Button>

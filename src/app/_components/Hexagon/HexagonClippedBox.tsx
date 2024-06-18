@@ -64,7 +64,7 @@ const HexagonClippedBox = () => {
         <rect
           width={scaledWidth}
           height={scaledHeight}
-          fill="#F2A1C1"
+          fill="#de6b48"
           clipPath="url(#hexagonClipBox)"
         />
       </svg>

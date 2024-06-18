@@ -87,14 +87,19 @@ const CalendarPage = () => {
       const response = await axios.post("/api/calendar-events", newEvent);
       setEvents((prevEvents) => [...prevEvents, response.data]);
       toast({
-        title: "Event created.",
+        title: "Evento creado.",
         description: "Se ha añadido el evento al calendario.",
         status: "success",
         duration: 5000,
         isClosable: true,
+        render: () => (
+          <Box color="#FFFFF0" p={3} bg="#de6b48" borderRadius="md">
+            Evento creado. Se ha añadido el evento al calendario.
+          </Box>
+        ),
       });
-      setIsModalOpen(false); // Close the modal
-      setIsConfirmationOpen(true); // Show confirmation modal
+      setIsModalOpen(false);
+      setIsConfirmationOpen(true);
     } catch (error) {
       console.error("Error creating event:", error);
       toast({
@@ -103,6 +108,11 @@ const CalendarPage = () => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        render: () => (
+          <Box color="#FFFFF0" p={3} bg="#800020" borderRadius="md">
+            Error al crear el evento. Intenta de nuevo.
+          </Box>
+        ),
       });
     }
   };
@@ -133,7 +143,7 @@ const CalendarPage = () => {
       <Heading
         as="h1"
         mb={{ base: 4, md: 8, lg: 24 }}
-        color="#ffffff"
+        color="#f4e8c1"
         fontFamily="roca"
         fontSize={{ base: "3em", xl: "6em" }}
       >
@@ -143,7 +153,7 @@ const CalendarPage = () => {
         <Flex
           width="60%"
           height="56vh"
-          bg="#00b5ad"
+          bg="#D8C3A5"
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -157,7 +167,7 @@ const CalendarPage = () => {
         <Box
           width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
           height={isSmallScreen ? "50vh" : "49vh"}
-          bg="#00b5ad"
+          bg="#D8C3A5"
           boxShadow="lg"
           borderRadius="md"
           p={4}
@@ -234,9 +244,12 @@ const CalendarPage = () => {
       {selectedEvent && (
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
           <ModalOverlay />
-          <ModalContent top="20%">
-            <ModalHeader>Crear Evento</ModalHeader>
-            <ModalCloseButton />
+          <ModalContent top="20%" bg="#FFFFF0">
+            {" "}
+            {/* Ivory Background */}
+            <ModalHeader color="#2c3e50">Crear Evento</ModalHeader>{" "}
+            {/* Deep Indigo */}
+            <ModalCloseButton color="#2c3e50" /> {/* Deep Indigo */}
             <ModalBody>
               <EventForm
                 start={selectedEvent.start}
@@ -250,21 +263,19 @@ const CalendarPage = () => {
       {isConfirmationOpen && (
         <Modal isOpen={isConfirmationOpen} onClose={handleCloseConfirmation}>
           <ModalOverlay />
-          <ModalContent top="20%" bg="#eef4ed">
+          <ModalContent top="20%" bg="#FFFFF0">
             {" "}
-            {/* Mint Cream background */}
-            <ModalHeader color="#800020">Confirmación</ModalHeader>{" "}
-            {/* Rich Burgundy */}
-            <ModalCloseButton color="#800020" /> {/* Rich Burgundy */}
+            {/* Ivory Background */}
+            <ModalHeader color="#2c3e50">Confirmación</ModalHeader>{" "}
+            {/* Deep Indigo */}
+            <ModalCloseButton color="#2c3e50" /> {/* Deep Indigo */}
             <ModalBody>
               <Text color="#2c3e50" mb={4}>
-                {" "}
                 {/* Deep Indigo */}
                 Tu cita se ha programado. Checa tu correo electrónico para más
                 información.
               </Text>
               <Text color="#2c3e50" mb={2}>
-                {" "}
                 {/* Deep Indigo */}
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
@@ -272,12 +283,12 @@ const CalendarPage = () => {
               <Button
                 width="100%"
                 mb={2}
-                bg="#ff6f61" /* Coral */
+                bg="#de6b48" /* Burnt Sienna */
                 color="#ffffff" /* Pure White */
                 _hover={{
-                  bg: "#00b5ad",
+                  bg: "#2c3e50",
                   color: "white",
-                }} /* Bright Teal on hover */
+                }} /* Deep Indigo on hover */
                 onClick={handleCloseConfirmation}
               >
                 Aceptar

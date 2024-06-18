@@ -27,7 +27,7 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
     switch (page) {
       case "/calendar":
         updatedGradient =
-          "linear-gradient(73deg, rgba(44, 62, 80) 15%, rgba(255, 111, 97) 15%)";
+          "linear-gradient(73deg, rgba(44, 62, 80) 15%, rgba(108, 117, 125) 15%)";
         setShowTriangles(false);
         break;
       case "/about":
@@ -59,7 +59,7 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
           .top-triangle {
             width: 40vw;
             height: 65vh;
-            background: rgba(255, 111, 97);
+            background: rgba(108, 117, 125);
             clip-path: polygon(70% 0%, 100% 0%, 100% 100%);
             position: fixed;
             top: 0;
@@ -69,7 +69,7 @@ const DynamicBackground: React.FC<DynamicBackgroundProps> = ({
           .bottom-triangle {
             width: 150vw;
             height: 55vh;
-            background: rgba(255, 111, 97);
+            background: rgba(108, 117, 125);
             clip-path: polygon(100% 0%, 90% 100%, 100% 100%);
             position: fixed;
             bottom: 0;

@@ -80,7 +80,7 @@ export default function AboutUsPage() {
           <Box
             position="relative"
             boxShadow="lg"
-            bg="#CA7DF9" // Heliotrope for the main text box background
+            bg="#FFFFF0" // Ivory for the main text box background
             borderRadius="0.25em"
             p={{ base: "1em", sm: "1.5em", md: "2em" }} // Increase padding for larger screens
             _before={{
@@ -90,7 +90,7 @@ export default function AboutUsPage() {
               left: "0.2em",
               right: "-0.4em",
               bottom: "-0.4em",
-              backgroundColor: "#F2A1C1", // New background for the pseudo-element
+              backgroundColor: "#D8C3A5", // Warm Beige for the pseudo-element
               zIndex: -1, // Place it behind the main content
               borderRadius: "0.35em", // Slightly larger border radius for a shadow effect
               boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)", // Optional: Add shadow to the pseudo-element
@@ -99,7 +99,7 @@ export default function AboutUsPage() {
             <Text
               fontSize={{ base: "1.5em", sm: "1.75em", md: "2em" }}
               mb="1em"
-              color="#424242" // Onyx for text color
+              color="#2c3e50" // Deep Indigo for text color
               fontFamily="roca"
               fontWeight="bold"
             >
@@ -182,7 +182,7 @@ export default function AboutUsPage() {
             mb={{ base: "6vh", lg: "5vh" }} // Adjust margin for mobile and desktop
             position="relative"
             boxShadow="lg"
-            bg="#CA7DF9" // Heliotrope for the main text box background
+            bg="#FFFFF0" // Ivory for the main text box background
             borderRadius="0.25em"
             p={{ base: "1em", sm: "1.5em", md: "2em" }} // Increase padding for larger screens
             textAlign={{ base: "center", lg: "right" }}
@@ -193,7 +193,7 @@ export default function AboutUsPage() {
               left: "0.2em",
               right: "-0.4em",
               bottom: "-0.4em",
-              backgroundColor: "#F2A1C1", // New background for the pseudo-element
+              backgroundColor: "#D8C3A5", // Warm Beige for the pseudo-element
               zIndex: -1, // Place it behind the main content
               borderRadius: "0.35em", // Slightly larger border radius for a shadow effect
               boxShadow: "0 0.25em 0.5em rgba(0, 0, 0, 0.1)", // Optional: Add shadow to the pseudo-element
@@ -202,7 +202,7 @@ export default function AboutUsPage() {
             <Text
               fontSize={{ base: "1.5em", sm: "1.75em", md: "1.5em" }}
               mb="1em"
-              color="#424242" // Onyx for text color
+              color="#2c3e50" // Deep Indigo for text color
               fontFamily="roca"
               fontWeight="bold"
             >
