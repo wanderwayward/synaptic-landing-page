@@ -27,7 +27,7 @@ const HomePage = () => {
           fontWeight="bold"
           fontFamily="roca"
         >
-          Sinaptico
+          Synaptic
         </Box>
       </GridItem>
 
@@ -42,7 +42,7 @@ const HomePage = () => {
         mt={{ base: -2, lg: -4 }}
       >
         <Box
-          color="#DCAE96" // Turkey Red for "terapia para la vida real" text
+          color="#DCAE96"
           textAlign={{ base: "center", lg: "right" }}
           fontSize={{ base: "8vw", lg: "3.5vw", xl: "4vw" }}
           fontWeight="bold"
