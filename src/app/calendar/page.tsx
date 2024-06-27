@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { parseISO, format } from "date-fns";
 import { fromZonedTime, toZonedTime } from "date-fns-tz";
-
+import { useRouter } from "next/navigation";
 import {
   Box,
   Spinner,
@@ -45,6 +45,7 @@ const CalendarPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const toast = useToast();
+  const router = useRouter();
 
   const [isSmallScreen] = useMediaQuery(MEDIA_QUERIES.sm);
   const [isMediumScreen] = useMediaQuery(MEDIA_QUERIES.md);
@@ -166,6 +167,7 @@ const CalendarPage = () => {
 
   const handleCloseConfirmation = () => {
     setIsConfirmationOpen(false);
+    router.push("/about");
   };
 
   return (
