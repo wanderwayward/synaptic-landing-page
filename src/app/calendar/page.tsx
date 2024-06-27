@@ -106,7 +106,7 @@ const CalendarPage = () => {
   }) => {
     try {
       console.log(
-        "Creating event with start:",
+        "Client-side: Creating event with start:",
         newEvent.start,
         "and end:",
         newEvent.end

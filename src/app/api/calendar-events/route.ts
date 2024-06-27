@@ -58,7 +58,8 @@ export async function POST(req: NextRequest) {
     const startUTC = startDate.toISOString();
     const endUTC = endDate.toISOString();
 
-    console.log("Creating event with start:", startUTC, "and end:", endUTC);
+    console.log("Server-side: Received start:", start, "end:", end);
+    console.log("Server-side: Parsed startUTC:", startUTC, "endUTC:", endUTC);
 
     const response: GaxiosResponse<calendar_v3.Schema$Event> =
       await calendar.events.insert({
