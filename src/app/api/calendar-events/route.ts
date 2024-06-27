@@ -1,4 +1,3 @@
-// src/app/api/calendar-events/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 import { calendar_v3 } from "googleapis";
@@ -22,19 +21,6 @@ interface GoogleApiError {
 
 async function getAuthenticatedClient() {
   const oAuth2Client = authenticate();
-  console.log(
-    "Current env GOOGLE_REFRESH_TOKEN:",
-    process.env.GOOGLE_REFRESH_TOKEN
-  ); // Debug log
-
-  // If no refresh token is set, log an error and throw an exception
-  if (!process.env.GOOGLE_REFRESH_TOKEN) {
-    console.error("No refresh token found in environment variables");
-    throw new Error("No refresh token is set.");
-  }
-
-  console.log("Refreshing access token"); // Debug log
-  await oAuth2Client.refreshAccessToken(); // Refresh the access token if needed
   return oAuth2Client;
 }
 
@@ -43,7 +29,7 @@ export async function GET(req: NextRequest) {
     const auth = await getAuthenticatedClient();
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "primary"; // Use 'primary' for the user's primary calendar
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
 
     const response: GaxiosResponse<calendar_v3.Schema$Events> =
       await calendar.events.list({
@@ -72,7 +58,7 @@ export async function POST(req: NextRequest) {
     const auth = await getAuthenticatedClient();
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "primary"; // Use 'primary' for the user's primary calendar
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
 
     const startDate = parseISO(start);
     const endDate = parseISO(end);

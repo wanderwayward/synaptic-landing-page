@@ -1,12 +1,14 @@
-// src/app/_lib/googleCalendar.ts
 import { google, Auth } from "googleapis";
 
 const SCOPES = ["https://www.googleapis.com/auth/calendar"];
+
+export const calendar = google.calendar("v3");
 
 const requiredEnvVars = [
   "GOOGLE_CLIENT_ID",
   "GOOGLE_CLIENT_SECRET",
   "GOOGLE_REDIRECT_URI",
+  "GOOGLE_REFRESH_TOKEN",
 ];
 
 requiredEnvVars.forEach((envVar) => {
@@ -22,22 +24,9 @@ export const authenticate = (): Auth.OAuth2Client => {
     process.env.GOOGLE_REDIRECT_URI
   );
 
-  // Set credentials if available
-  if (process.env.GOOGLE_REFRESH_TOKEN) {
-    oAuth2Client.setCredentials({
-      refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-    });
-  }
+  oAuth2Client.setCredentials({
+    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
+  });
 
   return oAuth2Client;
-};
-
-export const storeToken = (refreshToken: string) => {
-  // Store the refresh token in a secure place
-  console.log("Storing refresh token in environment variable"); // Debug log
-  process.env.GOOGLE_REFRESH_TOKEN = refreshToken;
-  console.log(
-    "Current env GOOGLE_REFRESH_TOKEN:",
-    process.env.GOOGLE_REFRESH_TOKEN
-  ); // Debug log
 };
