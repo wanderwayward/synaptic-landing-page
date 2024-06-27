@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { parseISO, format } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
+import { fromZonedTime, toZonedTime } from "date-fns-tz";
+
 import {
   Box,
   Spinner,
@@ -105,13 +106,27 @@ const CalendarPage = () => {
     end: string;
   }) => {
     try {
+      // Convert local times to UTC
+      const startUtc = fromZonedTime(
+        newEvent.start,
+        "America/Mexico_City"
+      ).toISOString();
+      const endUtc = fromZonedTime(
+        newEvent.end,
+        "America/Mexico_City"
+      ).toISOString();
+
       console.log(
         "Client-side: Creating event with start:",
-        newEvent.start,
+        startUtc,
         "and end:",
-        newEvent.end
+        endUtc
       );
-      const response = await axios.post("/api/calendar-events", newEvent);
+      const response = await axios.post("/api/calendar-events", {
+        ...newEvent,
+        start: startUtc,
+        end: endUtc,
+      });
       setEvents((prevEvents) => [...prevEvents, response.data]);
       toast({
         title: "Evento creado.",
