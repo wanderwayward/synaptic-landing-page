@@ -1,6 +1,5 @@
-// src/app/api/auth/callback/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { authenticate, storeToken } from "@/app/_lib/googleCalendar";
+import { authenticate } from "@/app/_lib/googleCalendar";
 
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
@@ -15,8 +14,7 @@ export async function GET(req: NextRequest) {
     oAuth2Client.setCredentials(tokens);
 
     if (tokens.refresh_token) {
-      console.log("Storing refresh token:", tokens.refresh_token); // Debug log
-      storeToken(tokens.refresh_token); // Store the refresh token securely
+      console.log("Storing refresh token:", tokens.refresh_token); // Log the refresh token
     } else {
       console.error("No refresh token received");
       return NextResponse.redirect("/error"); // Handle the error case
