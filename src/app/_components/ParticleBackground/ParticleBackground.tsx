@@ -109,4 +109,6 @@ const ParticleBackground = React.memo(() => {
   return <></>;
 });
 
+ParticleBackground.displayName = "ParticleBackground";
+
 export default ParticleBackground;
