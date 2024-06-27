@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
 
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "your_calendar_id"; // Replace with your calendar ID
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
 
     const response: GaxiosResponse<calendar_v3.Schema$Events> =
       await calendar.events.list({
