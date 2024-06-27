@@ -1,4 +1,3 @@
-// src/app/api/auth/initiate/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { authenticate } from "@/app/_lib/googleCalendar";
 
@@ -8,5 +7,6 @@ export async function GET(req: NextRequest) {
     access_type: "offline",
     scope: ["https://www.googleapis.com/auth/calendar"],
   });
+  console.log("Generated auth URL:", authUrl); // Added logging
   return NextResponse.redirect(authUrl);
 }
