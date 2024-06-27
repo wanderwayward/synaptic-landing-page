@@ -1,9 +1,10 @@
 // src/app/api/calendar-events/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { calendar, authenticate } from "@/app/_lib/googleCalendar";
+import { google } from "googleapis";
 import { calendar_v3 } from "googleapis";
 import { GaxiosResponse } from "gaxios";
 import { parseISO } from "date-fns";
+import { authenticate } from "@/app/_lib/googleCalendar";
 
 interface GoogleApiError {
   error: {
@@ -19,14 +20,26 @@ interface GoogleApiError {
   };
 }
 
+async function getAuthenticatedClient() {
+  const oAuth2Client = authenticate();
+  // Retrieve the stored tokens and set them here
+  const tokens = {
+    /* your stored tokens */
+  };
+  oAuth2Client.setCredentials(tokens);
+  return oAuth2Client;
+}
+
 export async function GET(req: NextRequest) {
   try {
-    const auth = await authenticate().getClient();
-    const calendarId = "rubenaguirrelizcano@gmail.com"; // Replace with your calendar ID
+    const auth = await getAuthenticatedClient();
+
+    const calendar = google.calendar({ version: "v3", auth });
+
+    const calendarId = "your_calendar_id"; // Replace with your calendar ID
 
     const response: GaxiosResponse<calendar_v3.Schema$Events> =
       await calendar.events.list({
-        auth: auth as any,
         calendarId,
         timeMin: new Date().toISOString(), // Fetch events from now onwards
         maxResults: 100,
@@ -48,9 +61,12 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { summary, start, end } = await req.json();
-    const auth = await authenticate().getClient();
-    const calendarId = "rubenaguirrelizcano@gmail.com";
+    const { summary, start, end, email } = await req.json();
+    const auth = await getAuthenticatedClient();
+
+    const calendar = google.calendar({ version: "v3", auth });
+
+    const calendarId = "your_calendar_id";
 
     const startDate = parseISO(start);
     const endDate = parseISO(end);
@@ -63,13 +79,20 @@ export async function POST(req: NextRequest) {
 
     const response: GaxiosResponse<calendar_v3.Schema$Event> =
       await calendar.events.insert({
-        auth: auth as any,
         calendarId,
         requestBody: {
           summary,
           start: { dateTime: startUTC, timeZone: "UTC" }, // Store in UTC
           end: { dateTime: endUTC, timeZone: "UTC" }, // Store in UTC
+          attendees: [{ email }],
+          conferenceData: {
+            createRequest: {
+              requestId: "sample123", // A unique ID for the conference
+              conferenceSolutionKey: { type: "hangoutsMeet" },
+            },
+          },
         },
+        conferenceDataVersion: 1,
       });
 
     return NextResponse.json(response.data, { status: 200 });
