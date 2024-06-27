@@ -34,5 +34,6 @@ export const authenticate = (): Auth.OAuth2Client => {
 
 export const storeToken = (refreshToken: string) => {
   // Store the refresh token in a secure place
+  console.log("Storing refresh token in environment variable"); // Debug log
   process.env.GOOGLE_REFRESH_TOKEN = refreshToken;
 };

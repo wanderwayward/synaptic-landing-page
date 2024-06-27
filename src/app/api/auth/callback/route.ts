@@ -15,7 +15,8 @@ export async function GET(req: NextRequest) {
     oAuth2Client.setCredentials(tokens);
 
     if (tokens.refresh_token) {
-      storeToken(tokens.refresh_token); // Store the tokens securely
+      console.log("Storing refresh token:", tokens.refresh_token); // Debug log
+      storeToken(tokens.refresh_token); // Store the refresh token securely
     } else {
       console.error("No refresh token received");
       return NextResponse.redirect("/error"); // Handle the error case

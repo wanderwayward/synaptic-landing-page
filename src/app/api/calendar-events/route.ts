@@ -22,6 +22,7 @@ interface GoogleApiError {
 
 async function getAuthenticatedClient() {
   const oAuth2Client = authenticate();
+  console.log("Refreshing access token"); // Debug log
   await oAuth2Client.refreshAccessToken(); // Refresh the access token if needed
   return oAuth2Client;
 }
