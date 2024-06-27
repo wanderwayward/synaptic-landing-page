@@ -22,21 +22,16 @@ interface GoogleApiError {
 
 async function getAuthenticatedClient() {
   const oAuth2Client = authenticate();
-  // Retrieve the stored tokens and set them here
-  const tokens = {
-    /* your stored tokens */
-  };
-  oAuth2Client.setCredentials(tokens);
+  await oAuth2Client.refreshAccessToken(); // Refresh the access token if needed
   return oAuth2Client;
 }
 
 export async function GET(req: NextRequest) {
   try {
     const auth = await getAuthenticatedClient();
-
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
+    const calendarId = "primary"; // Use 'primary' for the user's primary calendar
 
     const response: GaxiosResponse<calendar_v3.Schema$Events> =
       await calendar.events.list({
@@ -63,10 +58,9 @@ export async function POST(req: NextRequest) {
   try {
     const { summary, start, end, email } = await req.json();
     const auth = await getAuthenticatedClient();
-
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "your_calendar_id";
+    const calendarId = "primary"; // Use 'primary' for the user's primary calendar
 
     const startDate = parseISO(start);
     const endDate = parseISO(end);
