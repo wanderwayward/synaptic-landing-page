@@ -28,6 +28,8 @@ import esLocale from "@fullcalendar/core/locales/es";
 import EventForm from "../_components/EventForm/EventForm";
 import "./fullcalendar.css";
 import { MEDIA_QUERIES } from "../_constants/mediaQueries";
+import { parseISO, format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 const CalendarPage = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -48,19 +50,26 @@ const CalendarPage = () => {
       setIsFetching(true);
       try {
         const response = await axios.get("/api/calendar-events");
-        const events = response.data.map((event: any) => ({
-          title: "Ocupado", // Set title to "Ocupado"
-          start: event.start.dateTime || event.start.date,
-          end: new Date(
-            new Date(event.start.dateTime || event.start.date).getTime() +
-              60 * 60 * 1000
-          ).toISOString(),
-        }));
-        setEvents(events); // Set events once
+        const events = response.data.map((event: any) => {
+          const startUTC = parseISO(event.start.dateTime || event.start.date);
+          const endUTC = parseISO(event.end.dateTime || event.end.date);
+
+          // Convert UTC times to local time zone
+          const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          const startLocal = toZonedTime(startUTC, userTimeZone);
+          const endLocal = toZonedTime(endUTC, userTimeZone);
+
+          return {
+            title: "Ocupado",
+            start: format(startLocal, "yyyy-MM-dd'T'HH:mm:ssxxx"),
+            end: format(endLocal, "yyyy-MM-dd'T'HH:mm:ssxxx"),
+          };
+        });
+        setEvents(events);
       } catch (error) {
         console.error("Error fetching calendar events:", error);
       } finally {
-        setIsFetching(false); // Stop fetching
+        setIsFetching(false);
       }
     };
 

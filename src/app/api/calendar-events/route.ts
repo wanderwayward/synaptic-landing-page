@@ -51,15 +51,13 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { summary, start, end } = await req.json();
+    const { summary, start, end, timeZone } = await req.json();
     const auth = await authenticate().getClient();
     const calendarId = "rubenaguirrelizcano@gmail.com";
 
-    // Parse the start and end times
     const startDate = parseISO(start);
     const endDate = parseISO(end);
 
-    // Convert to UTC strings
     const startUTC = startDate.toISOString();
     const endUTC = endDate.toISOString();
 
@@ -69,8 +67,14 @@ export async function POST(req: NextRequest) {
         calendarId,
         requestBody: {
           summary,
-          start: { dateTime: startUTC },
-          end: { dateTime: endUTC },
+          start: {
+            dateTime: startUTC,
+            timeZone: "UTC", // Store in UTC
+          },
+          end: {
+            dateTime: endUTC,
+            timeZone: "UTC", // Store in UTC
+          },
         },
       });
 
