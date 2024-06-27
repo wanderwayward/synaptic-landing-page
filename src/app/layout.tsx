@@ -26,16 +26,16 @@ export default function RootLayout({
   const [isLg] = useMediaQuery(MEDIA_QUERIES.lg);
 
   let initialGradient =
-    "linear-gradient(73deg, rgba(66, 66, 66) 51%, rgba(255, 182, 39) 51%)";
+    "linear-gradient(73deg, rgba(44, 62, 80) 51%, rgba(108, 117, 125) 51%)";
   if (isSM) {
     initialGradient =
-      "linear-gradient(183deg, rgba(66, 66, 66) 27.2%, rgba(255, 182, 39) 27.2%)";
+      "linear-gradient(183deg, rgba(44, 62, 80) 27.2%, rgba(108, 117, 125) 27.2%)";
   } else if (isMd) {
     initialGradient =
-      "linear-gradient(182deg, rgba(66, 66, 66) 34%, rgba(255, 182, 39) 34%)";
+      "linear-gradient(182deg, rgba(44, 62, 80) 34%, rgba(108, 117, 125) 34%)";
   } else if (isLg) {
     initialGradient =
-      "linear-gradient(183deg, rgba(66, 66, 66) 30%, rgba(255, 182, 39) 30%)";
+      "linear-gradient(183deg, rgba(44, 62, 80) 30%, rgba(108, 117, 125) 30%)";
   }
 
   useEffect(() => {
@@ -108,10 +108,10 @@ export default function RootLayout({
                         as="h1"
                         size="lg"
                         fontFamily="roca"
-                        color="white"
+                        color="#f4e8c1" // Dutch White for the default color
                         sx={{
                           "&:hover": {
-                            textShadow: "0 0 2px #DE3C4B",
+                            color: "#de6b48", // Rich Burgundy on hover
                           },
                         }}
                       >

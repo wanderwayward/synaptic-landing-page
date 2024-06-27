@@ -51,13 +51,13 @@ const ParticleBackground = React.memo(() => {
       },
       particles: {
         color: {
-          value: "#7A7A7A",
+          value: "#f0e6d6",
         },
         links: {
-          color: "#7A7A7A",
+          color: "#f0e6d6",
           distance: 72,
           enable: true,
-          opacity: 0.5,
+          opacity: 0.4,
           width: 2,
         },
         collisions: {
@@ -87,7 +87,7 @@ const ParticleBackground = React.memo(() => {
           type: "triangle",
         },
         size: {
-          value: { min: 3, max: 5 },
+          value: { min: 4, max: 6 },
         },
       },
       detectRetina: true,

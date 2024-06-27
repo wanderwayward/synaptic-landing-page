@@ -1,33 +1,27 @@
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(1.3125em);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.4s ease-in-out;
-}
-
 /* Current day background color */
 .fc .fc-daygrid-day.fc-day-today {
-  background-color: rgba(158, 206, 154, 0.5) !important; /* Celadon */
+  background-color: rgba(
+    216,
+    195,
+    165,
+    0.3
+  ) !important; /* Warm Beige (semi-transparent) */
 }
 
-/* Calendar font */
-.fc {
-  font-family: "roca" !important;
+/* Selection highlight color */
+.fc .fc-highlight {
+  background-color: rgba(
+    216,
+    195,
+    165,
+    0.3
+  ) !important; /* Warm Beige (semi-transparent) */
 }
 
 /* Day numbers */
 .fc .fc-daygrid-day-number {
   font-size: 1.06em !important;
-  color: #f2f2f2 !important; /* Light Text */
+  color: #2c3e50 !important; /* Charcoal */
 }
 
 /* Title */
@@ -35,25 +29,30 @@
   font-family: "roca";
   text-transform: uppercase;
   font-size: 2.65em !important;
-  color: #fff !important;
+  color: #2c3e50 !important; /* Charcoal */
 }
 
 /* Navigation buttons */
 .fc .fc-button {
-  color: #0d00a4 !important; /* Duke Blue */
+  color: #8b4513 !important; /* Saddle Brown */
   border-radius: 1.126em !important;
 }
 
 .fc .fc-button:hover,
 .fc .fc-button:focus {
-  background-color: rgba(187, 173, 255, 0.267) !important; /* Mauve Light */
-  color: #0d00a4 !important; /* Duke Blue */
+  background-color: rgba(
+    159,
+    132,
+    189,
+    0.267
+  ) !important; /* African Violet (semi-transparent) */
+  color: #8b4513 !important; /* Saddle Brown */
 }
 
 .fc .fc-button:active,
 .fc .fc-button.fc-button-active {
-  background-color: rgba(187, 173, 255, 0.795) !important; /* Mauve Light */
-  color: #0d00a4 !important; /* Duke Blue */
+  background-color: rgba(159, 132, 189, 0.795) !important; /* African Violet */
+  color: #8b4513 !important; /* Saddle Brown */
   border: none !important;
   outline: none !important;
 }
@@ -82,8 +81,8 @@
 
 /* Primary buttons */
 .fc .fc-button-primary {
-  background-color: #ff0035 !important; /* Imperial Red */
-  color: white !important;
+  background-color: #de6b48 !important; /* Burnt Sienna */
+  color: #f4e8c1 !important; /* Dutch White */
   font-weight: semi-bold !important;
   font-size: 1.272em !important;
   border: none !important;
@@ -93,20 +92,20 @@
 
 .fc .fc-button-primary:hover,
 .fc .fc-button-primary:focus {
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
+  background-color: #8b4513 !important; /* Saddle Brown */
+  color: #f4e8c1 !important; /* Dutch White */
 }
 
 .fc .fc-button-group .fc-button:hover,
 .fc .fc-button-group .fc-button:focus {
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
+  background-color: #8b4513 !important; /* Saddle Brown */
+  color: #f4e8c1 !important; /* Dutch White */
 }
 
 .fc .fc-button-group .fc-button:active,
 .fc .fc-button-group .fc-button.fc-button-active {
-  background-color: #a83232 !important; /* Darker Red */
-  color: white !important;
+  background-color: #8b4513 !important; /* Saddle Brown */
+  color: #f4e8c1 !important; /* Dutch White */
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -114,8 +113,8 @@
 
 .fc .fc-button-primary:active,
 .fc .fc-button-primary.fc-button-active {
-  background-color: #0d00a4 !important; /* Duke Blue */
-  color: #ffffff !important;
+  background-color: #de6b48 !important; /* Burnt Sienna */
+  color: #f4e8c1 !important; /* Dutch White */
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -123,8 +122,8 @@
 
 /* Day names */
 .fc .fc-col-header-cell {
-  background-color: #eef4ed !important; /* Mint Cream */
-  color: #424242 !important; /* Onyx */
+  background-color: #9f84bd !important; /* African Violet */
+  color: #2c3e50 !important; /* Charcoal */
   border: none !important;
 }
 
@@ -156,7 +155,7 @@
 .fc-timegrid-slot-label {
   font-size: 1.272em !important;
   line-height: 1.59em !important;
-  color: #f2f2f2 !important; /* Light Text */
+  color: #2c3e50 !important; /* Charcoal */
 }
 
 /* Event titles */
@@ -164,12 +163,12 @@
 .fc-event-time {
   font-size: 1.272em !important;
   line-height: 1.59em !important;
-  color: #fff !important; /* White */
+  color: #2c3e50 !important; /* Charcoal */
 }
 
 /* Event appearance */
 .fc-event {
-  background-color: #ff0035 !important; /* Imperial Red */
+  background-color: #39596b !important; /* Deep Teal */
   border-radius: 0.53em !important;
   padding: 0.318em !important;
 }
