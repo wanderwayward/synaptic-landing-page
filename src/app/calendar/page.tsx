@@ -1,13 +1,14 @@
-"use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import axios from "axios";
+import { parseISO, format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 import {
   Box,
-  Flex,
-  Heading,
-  useToast,
   Spinner,
+  Flex,
   Text,
+  useToast,
+  Heading,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -19,28 +20,29 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
-import { EventInput } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import axios from "axios";
 import esLocale from "@fullcalendar/core/locales/es";
 import EventForm from "../_components/EventForm/EventForm";
 import "./fullcalendar.css";
 import { MEDIA_QUERIES } from "../_constants/mediaQueries";
-import { parseISO, format } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
+
+interface EventInput {
+  title: string;
+  start: string;
+  end: string;
+}
 
 const CalendarPage = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [events, setEvents] = useState<EventInput[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<{
-    start: string;
-  } | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<{ start: string } | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const toast = useToast();
-  const router = useRouter();
 
   const [isSmallScreen] = useMediaQuery(MEDIA_QUERIES.sm);
   const [isMediumScreen] = useMediaQuery(MEDIA_QUERIES.md);
@@ -133,7 +135,6 @@ const CalendarPage = () => {
 
   const handleCloseConfirmation = () => {
     setIsConfirmationOpen(false);
-    router.push("/about"); // Use router.push instead of window.location.href
   };
 
   return (
@@ -254,11 +255,8 @@ const CalendarPage = () => {
         <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
           <ModalOverlay />
           <ModalContent top="20%" bg="#FFFFF0">
-            {" "}
-            {/* Ivory Background */}
-            <ModalHeader color="#2c3e50">Crear Evento</ModalHeader>{" "}
-            {/* Deep Indigo */}
-            <ModalCloseButton color="#2c3e50" /> {/* Deep Indigo */}
+            <ModalHeader color="#2c3e50">Crear Evento</ModalHeader>
+            <ModalCloseButton color="#2c3e50" />
             <ModalBody>
               <EventForm
                 start={selectedEvent.start}
@@ -273,31 +271,26 @@ const CalendarPage = () => {
         <Modal isOpen={isConfirmationOpen} onClose={handleCloseConfirmation}>
           <ModalOverlay />
           <ModalContent top="20%" bg="#FFFFF0">
-            {" "}
-            {/* Ivory Background */}
-            <ModalHeader color="#2c3e50">Confirmación</ModalHeader>{" "}
-            {/* Deep Indigo */}
-            <ModalCloseButton color="#2c3e50" /> {/* Deep Indigo */}
+            <ModalHeader color="#2c3e50">Confirmación</ModalHeader>
+            <ModalCloseButton color="#2c3e50" />
             <ModalBody>
               <Text color="#2c3e50" mb={4}>
-                {/* Deep Indigo */}
                 Tu cita se ha programado. Checa tu correo electrónico para más
                 información.
               </Text>
               <Text color="#2c3e50" mb={2}>
-                {/* Deep Indigo */}
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
               </Text>
               <Button
                 width="100%"
                 mb={2}
-                bg="#de6b48" /* Burnt Sienna */
-                color="#ffffff" /* Pure White */
+                bg="#de6b48"
+                color="#ffffff"
                 _hover={{
                   bg: "#2c3e50",
                   color: "white",
-                }} /* Deep Indigo on hover */
+                }}
                 onClick={handleCloseConfirmation}
               >
                 Aceptar
