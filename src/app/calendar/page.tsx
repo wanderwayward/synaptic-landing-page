@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { parseISO, format } from "date-fns";
@@ -62,6 +61,15 @@ const CalendarPage = () => {
           const startLocal = toZonedTime(startUTC, userTimeZone);
           const endLocal = toZonedTime(endUTC, userTimeZone);
 
+          console.log(
+            "Fetched event start:",
+            startLocal,
+            "end:",
+            endLocal,
+            "in time zone:",
+            userTimeZone
+          );
+
           return {
             title: "Ocupado",
             start: format(startLocal, "yyyy-MM-dd'T'HH:mm:ssxxx"),
@@ -96,6 +104,12 @@ const CalendarPage = () => {
     end: string;
   }) => {
     try {
+      console.log(
+        "Creating event with start:",
+        newEvent.start,
+        "and end:",
+        newEvent.end
+      );
       const response = await axios.post("/api/calendar-events", newEvent);
       setEvents((prevEvents) => [...prevEvents, response.data]);
       toast({

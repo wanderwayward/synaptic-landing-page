@@ -22,8 +22,6 @@ interface GoogleApiError {
 export async function GET(req: NextRequest) {
   try {
     const auth = await authenticate().getClient();
-
-    // Use the calendar ID here, typically the email address of the owner of the calendar
     const calendarId = "rubenaguirrelizcano@gmail.com"; // Replace with your calendar ID
 
     const response: GaxiosResponse<calendar_v3.Schema$Events> =
@@ -37,7 +35,6 @@ export async function GET(req: NextRequest) {
       });
 
     const events = response.data.items || [];
-
     return NextResponse.json(events, { status: 200 });
   } catch (error) {
     console.error("Error fetching events:", error);
@@ -51,7 +48,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { summary, start, end, timeZone } = await req.json();
+    const { summary, start, end } = await req.json();
     const auth = await authenticate().getClient();
     const calendarId = "rubenaguirrelizcano@gmail.com";
 
@@ -61,20 +58,16 @@ export async function POST(req: NextRequest) {
     const startUTC = startDate.toISOString();
     const endUTC = endDate.toISOString();
 
+    console.log("Creating event with start:", startUTC, "and end:", endUTC);
+
     const response: GaxiosResponse<calendar_v3.Schema$Event> =
       await calendar.events.insert({
         auth: auth as any,
         calendarId,
         requestBody: {
           summary,
-          start: {
-            dateTime: startUTC,
-            timeZone: "UTC", // Store in UTC
-          },
-          end: {
-            dateTime: endUTC,
-            timeZone: "UTC", // Store in UTC
-          },
+          start: { dateTime: startUTC, timeZone: "UTC" }, // Store in UTC
+          end: { dateTime: endUTC, timeZone: "UTC" }, // Store in UTC
         },
       });
 
