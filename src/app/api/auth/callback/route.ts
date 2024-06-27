@@ -13,7 +13,14 @@ export async function GET(req: NextRequest) {
   try {
     const { tokens } = await oAuth2Client.getToken(code);
     oAuth2Client.setCredentials(tokens);
-    storeToken(tokens); // Store the tokens securely
+
+    if (tokens.refresh_token) {
+      storeToken(tokens.refresh_token); // Store the tokens securely
+    } else {
+      console.error("No refresh token received");
+      return NextResponse.redirect("/error"); // Handle the error case
+    }
+
     return NextResponse.redirect("/success"); // Redirect to a success page or handle tokens
   } catch (error) {
     console.error("Error retrieving access token", error);

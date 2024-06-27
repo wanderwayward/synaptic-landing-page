@@ -7,7 +7,6 @@ const requiredEnvVars = [
   "GOOGLE_CLIENT_ID",
   "GOOGLE_CLIENT_SECRET",
   "GOOGLE_REDIRECT_URI",
-  "GOOGLE_REFRESH_TOKEN", // Add your refresh token here
 ];
 
 requiredEnvVars.forEach((envVar) => {
@@ -33,9 +32,7 @@ export const authenticate = (): Auth.OAuth2Client => {
   return oAuth2Client;
 };
 
-export const storeToken = (tokens: Auth.Credentials) => {
+export const storeToken = (refreshToken: string) => {
   // Store the refresh token in a secure place
-  if (tokens.refresh_token) {
-    process.env.GOOGLE_REFRESH_TOKEN = tokens.refresh_token;
-  }
+  process.env.GOOGLE_REFRESH_TOKEN = refreshToken;
 };
