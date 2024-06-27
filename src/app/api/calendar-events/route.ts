@@ -22,6 +22,17 @@ interface GoogleApiError {
 
 async function getAuthenticatedClient() {
   const oAuth2Client = authenticate();
+  console.log(
+    "Current env GOOGLE_REFRESH_TOKEN:",
+    process.env.GOOGLE_REFRESH_TOKEN
+  ); // Debug log
+
+  // If no refresh token is set, log an error and throw an exception
+  if (!process.env.GOOGLE_REFRESH_TOKEN) {
+    console.error("No refresh token found in environment variables");
+    throw new Error("No refresh token is set.");
+  }
+
   console.log("Refreshing access token"); // Debug log
   await oAuth2Client.refreshAccessToken(); // Refresh the access token if needed
   return oAuth2Client;
