@@ -315,6 +315,11 @@ const CalendarPage = () => {
                 Si tienes una cuenta de Gmail, también recibirás una invitación
                 al evento.
               </Text>
+              <Text color="#2c3e50" mb={2}>
+                Revisa tu bandeja de entrada y la carpeta de spam. Si no recibes
+                el correo, te enviaremos otro correo con los detalles y el
+                enlace de Google Meet.
+              </Text>
               <Button
                 width="100%"
                 mb={2}

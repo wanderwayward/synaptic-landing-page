@@ -51,7 +51,6 @@ export async function GET(req: NextRequest) {
     );
   }
 }
-
 export async function POST(req: NextRequest) {
   try {
     const { summary, start, end, email } = await req.json();
@@ -87,7 +86,22 @@ export async function POST(req: NextRequest) {
         conferenceDataVersion: 1,
       });
 
-    return NextResponse.json(response.data, { status: 200 });
+    const googleMeetLink = response.data.conferenceData?.entryPoints?.find(
+      (entryPoint) => entryPoint.entryPointType === "video"
+    )?.uri;
+
+    console.log("Google Meet link:", googleMeetLink);
+
+    return NextResponse.json(
+      {
+        summary,
+        start: startUTC,
+        end: endUTC,
+        email,
+        googleMeetLink,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error creating event:", error);
     const err = error as GoogleApiError;
