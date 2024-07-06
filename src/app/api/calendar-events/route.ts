@@ -6,7 +6,10 @@ import { parseISO } from "date-fns";
 import { authenticate } from "@/app/_lib/googleCalendar";
 import sgMail from "@sendgrid/mail";
 import { v4 as uuidv4 } from "uuid";
-import { formatReadableDate } from "../../_utils/DateParser";
+import {
+  formatReadableDate,
+  formatReadableTime,
+} from "../../_utils/DateParser"; // Adjust the path to where you save this utility function
 
 interface GoogleApiError {
   error: {
@@ -29,6 +32,7 @@ async function getAuthenticatedClient() {
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const SENDGRID_TEMPLATE_ID = process.env.SENDGRID_TEMPLATE_ID;
+const SENDGRID_INTERNAL_TEMPLATE_ID = process.env.SENDGRID_INTERNAL_TEMPLATE_ID; // New internal template ID
 
 if (!SENDGRID_API_KEY) {
   throw new Error("SendGrid API key is missing");
@@ -38,12 +42,17 @@ if (!SENDGRID_TEMPLATE_ID) {
   throw new Error("SendGrid template ID is missing");
 }
 
+if (!SENDGRID_INTERNAL_TEMPLATE_ID) {
+  throw new Error("SendGrid internal template ID is missing");
+}
+
 sgMail.setApiKey(SENDGRID_API_KEY);
 
 async function sendConfirmationEmail(
   email: string,
   name: string,
   date: string,
+  time: string,
   googleMeetLink: string
 ) {
   const msg = {
@@ -52,8 +61,35 @@ async function sendConfirmationEmail(
     templateId: SENDGRID_TEMPLATE_ID!,
     dynamic_template_data: {
       name,
-      date: formatReadableDate(date), // Format the date to a readable format
+      date, // Already formatted date
+      time, // Already formatted time
       link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
+    },
+  };
+
+  await sgMail.send(msg);
+}
+
+async function sendInternalNotification(
+  email: string,
+  name: string,
+  date: string,
+  time: string,
+  googleMeetLink: string,
+  phone: string,
+  reason: string
+) {
+  const msg = {
+    to: "marco@synaptic.clinic", // Internal email
+    from: "marco@synaptic.clinic", // Use the email address or domain you verified with SendGrid
+    templateId: SENDGRID_INTERNAL_TEMPLATE_ID!,
+    dynamic_template_data: {
+      name,
+      date, // Already formatted date
+      time, // Already formatted time
+      link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
+      phone,
+      reason,
     },
   };
 
@@ -62,7 +98,7 @@ async function sendConfirmationEmail(
 
 export async function POST(req: NextRequest) {
   try {
-    const { summary, start, end, email } = await req.json();
+    const { summary, start, end, email, phone, reason } = await req.json();
     const auth = await getAuthenticatedClient();
     const calendar = google.calendar({ version: "v3", auth });
 
@@ -101,12 +137,28 @@ export async function POST(req: NextRequest) {
 
     console.log("Google Meet link:", googleMeetLink);
 
-    // Send confirmation email
+    // Format date and time
+    const formattedDate = formatReadableDate(start);
+    const formattedTime = formatReadableTime(start);
+
+    // Send confirmation email to the user
     await sendConfirmationEmail(
       email,
       summary,
-      start,
+      formattedDate,
+      formattedTime,
       googleMeetLink || "No Google Meet link available"
+    );
+
+    // Send internal notification email
+    await sendInternalNotification(
+      email,
+      summary,
+      formattedDate,
+      formattedTime,
+      googleMeetLink || "No Google Meet link available",
+      phone,
+      reason
     );
 
     return NextResponse.json(
