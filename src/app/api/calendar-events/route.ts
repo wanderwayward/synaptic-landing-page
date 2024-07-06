@@ -48,7 +48,7 @@ async function sendConfirmationEmail(
 ) {
   const msg = {
     to: email,
-    from: "your-email@example.com", // Use the email address or domain you verified with SendGrid
+    from: "marco@synaptic.clinic", // Use the email address or domain you verified with SendGrid
     templateId: SENDGRID_TEMPLATE_ID!,
     dynamic_template_data: {
       name,

@@ -1,136 +1,169 @@
-import {
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  Button,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-import React from "react";
-import { useForm } from "react-hook-form";
+import { NextRequest, NextResponse } from "next/server";
+import { google } from "googleapis";
+import { calendar_v3 } from "googleapis";
+import { GaxiosResponse } from "gaxios";
+import { parseISO } from "date-fns";
+import { authenticate } from "@/app/_lib/googleCalendar";
+import sgMail from "@sendgrid/mail";
+import { v4 as uuidv4 } from "uuid";
+import { formatReadableDate } from "../../_utils/DateParser"; // Adjust the path to where you save this utility function
 
-interface EventFormProps {
-  start: string;
-  onCreateEvent: (newEvent: {
-    summary: string;
-    email: string;
-    phone: string;
-    reason?: string;
-    start: string;
-    end: string;
-  }) => Promise<void>;
-  onClose: () => void;
+interface GoogleApiError {
+  error: {
+    errors: Array<{
+      domain: string;
+      reason: string;
+      message: string;
+      locationType?: string;
+      location?: string;
+    }>;
+    code: number;
+    message: string;
+  };
 }
 
-const EventForm: React.FC<EventFormProps> = ({
-  start,
-  onCreateEvent,
-  onClose,
-}) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+async function getAuthenticatedClient() {
+  const oAuth2Client = authenticate();
+  return oAuth2Client;
+}
 
-  // Initialize startTime with the selected date and time in local time zone
-  const [startTime, setStartTime] = React.useState(() => {
-    const date = new Date(start);
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const SENDGRID_TEMPLATE_ID = process.env.SENDGRID_TEMPLATE_ID;
+const SENDGRID_INTERNAL_TEMPLATE_ID = process.env.SENDGRID_INTERNAL_TEMPLATE_ID; // New internal template ID
 
-    // Format to 'YYYY-MM-DDTHH:MM' in local time zone
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
+if (!SENDGRID_API_KEY) {
+  throw new Error("SendGrid API key is missing");
+}
 
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  });
+if (!SENDGRID_TEMPLATE_ID) {
+  throw new Error("SendGrid template ID is missing");
+}
 
-  const onSubmit = async (data: any) => {
-    // Calculate event end time as 1 hour after the start time
-    const eventEnd = new Date(
-      new Date(startTime).getTime() + 60 * 60 * 1000
-    ).toISOString();
-    await onCreateEvent({
-      summary: data.name,
-      email: data.email,
-      phone: data.phone,
-      reason: data.reason,
-      start: startTime,
-      end: eventEnd,
-    });
-    onClose();
+if (!SENDGRID_INTERNAL_TEMPLATE_ID) {
+  throw new Error("SendGrid internal template ID is missing");
+}
+
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+async function sendConfirmationEmail(
+  email: string,
+  name: string,
+  date: string,
+  googleMeetLink: string
+) {
+  const msg = {
+    to: email,
+    from: "your-email@example.com", // Use the email address or domain you verified with SendGrid
+    templateId: SENDGRID_TEMPLATE_ID!,
+    dynamic_template_data: {
+      name,
+      date: formatReadableDate(date), // Format the date to a readable format
+      link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
+    },
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Flex direction="column" gap={4}>
-        <FormControl isInvalid={!!errors.name}>
-          <FormLabel color="#2c3e50">Nombre</FormLabel> {/* Deep Indigo */}
-          <Input
-            placeholder="¿Cuál es tu nombre?"
-            {...register("name", { required: "El nombre es requerido" })}
-            bg="#FFFFF0" /* Ivory */
-          />
-          <FormErrorMessage>
-            {errors.name && (errors.name.message as string)}
-          </FormErrorMessage>
-        </FormControl>
-        <FormControl isInvalid={!!errors.email}>
-          <FormLabel color="#2c3e50">Email</FormLabel> {/* Deep Indigo */}
-          <Input
-            placeholder="¿Cuál es tu email?"
-            {...register("email", { required: "El email es requerido" })}
-            bg="#FFFFF0" /* Ivory */
-          />
-          <FormErrorMessage>
-            {errors.email && (errors.email.message as string)}
-          </FormErrorMessage>
-        </FormControl>
-        <FormControl>
-          <FormLabel color="#2c3e50">Teléfono</FormLabel> {/* Deep Indigo */}
-          <Input
-            type="number"
-            placeholder="¿Cuál es tu número de telefono?"
-            {...register("phone")}
-            bg="#FFFFF0" /* Ivory */
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel color="#2c3e50">Fecha y hora de inicio</FormLabel>{" "}
-          {/* Deep Indigo */}
-          <Input
-            type="datetime-local"
-            value={startTime} // Prepopulated value
-            onChange={(e) => setStartTime(e.target.value)}
-            bg="#FFFFF0" /* Ivory */
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel color="#2c3e50">Razón por la que busca terapia</FormLabel>{" "}
-          {/* Deep Indigo */}
-          <Textarea
-            resize={"vertical"}
-            placeholder="Razón por la que buscas terapia"
-            {...register("reason")}
-            bg="#FFFFF0" /* Ivory */
-          />
-        </FormControl>
+  await sgMail.send(msg);
+}
 
-        <Button
-          type="submit"
-          bg="#de6b48" /* Burnt Sienna */
-          color="#ffffff" /* Pure White */
-          mb={2}
-          _hover={{ bg: "#2c3e50", color: "white" }} /* Deep Indigo on hover */
-        >
-          Crear Evento
-        </Button>
-      </Flex>
-    </form>
-  );
-};
+async function sendInternalNotification(
+  email: string,
+  name: string,
+  date: string,
+  googleMeetLink: string,
+  phone: string,
+  reason: string
+) {
+  const msg = {
+    to: "marco@synaptic.clinic", // Internal email
+    from: "marco@synaptic.clinic", // Use the email address or domain you verified with SendGrid
+    templateId: SENDGRID_INTERNAL_TEMPLATE_ID!,
+    dynamic_template_data: {
+      name,
+      date: formatReadableDate(date), // Format the date to a readable format
+      link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
+      phone,
+      reason,
+    },
+  };
 
-export default EventForm;
+  await sgMail.send(msg);
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const { summary, start, end, email, phone, reason } = await req.json();
+    const auth = await getAuthenticatedClient();
+    const calendar = google.calendar({ version: "v3", auth });
+
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
+
+    const startDate = parseISO(start);
+    const endDate = parseISO(end);
+
+    const startUTC = startDate.toISOString();
+    const endUTC = endDate.toISOString();
+
+    console.log("Server-side: Received start:", start, "end:", end);
+    console.log("Server-side: Parsed startUTC:", startUTC, "endUTC:", endUTC);
+
+    const response: GaxiosResponse<calendar_v3.Schema$Event> =
+      await calendar.events.insert({
+        calendarId,
+        requestBody: {
+          summary,
+          start: { dateTime: startUTC, timeZone: "UTC" }, // Store in UTC
+          end: { dateTime: endUTC, timeZone: "UTC" }, // Store in UTC
+          attendees: [{ email }],
+          conferenceData: {
+            createRequest: {
+              requestId: uuidv4(), // Generate a unique request ID
+              conferenceSolutionKey: { type: "hangoutsMeet" },
+            },
+          },
+        },
+        conferenceDataVersion: 1,
+      });
+
+    const googleMeetLink = response.data.conferenceData?.entryPoints?.find(
+      (entryPoint) => entryPoint.entryPointType === "video"
+    )?.uri;
+
+    console.log("Google Meet link:", googleMeetLink);
+
+    // Send confirmation email to the user
+    await sendConfirmationEmail(
+      email,
+      summary,
+      start,
+      googleMeetLink || "No Google Meet link available"
+    );
+
+    // Send internal notification email
+    await sendInternalNotification(
+      email,
+      summary,
+      start,
+      googleMeetLink || "No Google Meet link available",
+      phone,
+      reason
+    );
+
+    return NextResponse.json(
+      {
+        summary,
+        start: startUTC,
+        end: endUTC,
+        email,
+        googleMeetLink,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error creating event:", error);
+    const err = error as GoogleApiError;
+    return NextResponse.json(
+      { error: err.error.message },
+      { status: err.error.code || 500 }
+    );
+  }
+}
