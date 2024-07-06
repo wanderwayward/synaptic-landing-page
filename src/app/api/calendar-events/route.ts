@@ -4,6 +4,8 @@ import { calendar_v3 } from "googleapis";
 import { GaxiosResponse } from "gaxios";
 import { parseISO } from "date-fns";
 import { authenticate } from "@/app/_lib/googleCalendar";
+import sgMail from "@sendgrid/mail";
+import { v4 as uuidv4 } from "uuid";
 
 interface GoogleApiError {
   error: {
@@ -24,40 +26,46 @@ async function getAuthenticatedClient() {
   return oAuth2Client;
 }
 
-export async function GET(req: NextRequest) {
-  try {
-    const auth = await getAuthenticatedClient();
-    const calendar = google.calendar({ version: "v3", auth });
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const SENDGRID_TEMPLATE_ID = process.env.SENDGRID_TEMPLATE_ID;
 
-    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
-
-    const response: GaxiosResponse<calendar_v3.Schema$Events> =
-      await calendar.events.list({
-        calendarId,
-        timeMin: new Date().toISOString(), // Fetch events from now onwards
-        maxResults: 100,
-        singleEvents: true,
-        orderBy: "startTime",
-      });
-
-    const events = response.data.items || [];
-    return NextResponse.json(events, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching events:", error);
-    const err = error as GoogleApiError;
-    return NextResponse.json(
-      { error: err.error.message },
-      { status: err.error.code || 500 }
-    );
-  }
+if (!SENDGRID_API_KEY) {
+  throw new Error("SendGrid API key is missing");
 }
+
+if (!SENDGRID_TEMPLATE_ID) {
+  throw new Error("SendGrid template ID is missing");
+}
+
+sgMail.setApiKey(SENDGRID_API_KEY);
+
+async function sendConfirmationEmail(
+  email: string,
+  name: string,
+  date: string,
+  googleMeetLink: string
+) {
+  const msg = {
+    to: email,
+    from: "marco@synaptic.clinic", // Use the email address or domain you verified with SendGrid
+    templateId: SENDGRID_TEMPLATE_ID!,
+    dynamic_template_data: {
+      name,
+      date,
+      link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
+    },
+  };
+
+  await sgMail.send(msg);
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { summary, start, end, email } = await req.json();
     const auth = await getAuthenticatedClient();
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
+    const calendarId = "marco@synaptic.clinic";
 
     const startDate = parseISO(start);
     const endDate = parseISO(end);
@@ -73,12 +81,12 @@ export async function POST(req: NextRequest) {
         calendarId,
         requestBody: {
           summary,
-          start: { dateTime: startUTC, timeZone: "UTC" }, // Store in UTC
-          end: { dateTime: endUTC, timeZone: "UTC" }, // Store in UTC
+          start: { dateTime: startUTC, timeZone: "UTC" },
+          end: { dateTime: endUTC, timeZone: "UTC" },
           attendees: [{ email }],
           conferenceData: {
             createRequest: {
-              requestId: "sample123", // A unique ID for the conference
+              requestId: uuidv4(),
               conferenceSolutionKey: { type: "hangoutsMeet" },
             },
           },
@@ -91,6 +99,13 @@ export async function POST(req: NextRequest) {
     )?.uri;
 
     console.log("Google Meet link:", googleMeetLink);
+
+    await sendConfirmationEmail(
+      email,
+      summary,
+      start,
+      googleMeetLink || "No Google Meet link available"
+    );
 
     return NextResponse.json(
       {
