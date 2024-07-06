@@ -6,6 +6,7 @@ import { parseISO } from "date-fns";
 import { authenticate } from "@/app/_lib/googleCalendar";
 import sgMail from "@sendgrid/mail";
 import { v4 as uuidv4 } from "uuid";
+import { formatReadableDate } from "../../_utils/DateParser";
 
 interface GoogleApiError {
   error: {
@@ -47,11 +48,11 @@ async function sendConfirmationEmail(
 ) {
   const msg = {
     to: email,
-    from: "marco@synaptic.clinic", // Use the email address or domain you verified with SendGrid
+    from: "your-email@example.com", // Use the email address or domain you verified with SendGrid
     templateId: SENDGRID_TEMPLATE_ID!,
     dynamic_template_data: {
       name,
-      date,
+      date: formatReadableDate(date), // Format the date to a readable format
       link: googleMeetLink || "No Google Meet link available", // Provide a fallback value
     },
   };
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
     const auth = await getAuthenticatedClient();
     const calendar = google.calendar({ version: "v3", auth });
 
-    const calendarId = "marco@synaptic.clinic";
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
 
     const startDate = parseISO(start);
     const endDate = parseISO(end);
@@ -81,12 +82,12 @@ export async function POST(req: NextRequest) {
         calendarId,
         requestBody: {
           summary,
-          start: { dateTime: startUTC, timeZone: "UTC" },
-          end: { dateTime: endUTC, timeZone: "UTC" },
+          start: { dateTime: startUTC, timeZone: "UTC" }, // Store in UTC
+          end: { dateTime: endUTC, timeZone: "UTC" }, // Store in UTC
           attendees: [{ email }],
           conferenceData: {
             createRequest: {
-              requestId: uuidv4(),
+              requestId: uuidv4(), // Generate a unique request ID
               conferenceSolutionKey: { type: "hangoutsMeet" },
             },
           },
@@ -100,6 +101,7 @@ export async function POST(req: NextRequest) {
 
     console.log("Google Meet link:", googleMeetLink);
 
+    // Send confirmation email
     await sendConfirmationEmail(
       email,
       summary,
