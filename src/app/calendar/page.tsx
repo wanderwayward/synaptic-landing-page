@@ -189,6 +189,7 @@ const CalendarPage = () => {
         color="#f4e8c1"
         fontFamily="roca"
         fontSize={{ base: "3em", xl: "6em" }}
+        textAlign={{ base: "center", md: "center" }}
       >
         Selecciona un horario a tu conveniencia
       </Heading>

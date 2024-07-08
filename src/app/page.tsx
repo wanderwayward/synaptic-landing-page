@@ -61,11 +61,12 @@ const HomePage = () => {
         justifyContent="center"
         alignItems="center"
         mt={{ base: 14, lg: 0 }}
+        width="100%" // Ensuring the GridItem itself takes full width
       >
         <Link href="/calendar" _hover={{ textDecoration: "none" }}>
           <CustomButton
             size="xl"
-            width={{ base: "90%" }}
+            width={{ base: "90%", md: "80%", lg: "50%", xl: "40%" }} // Adjusting width for various screen sizes
             maxWidth="120vw"
             bg="#de6b48" // Burnt Sienna for button background
             borderRadius={14}
