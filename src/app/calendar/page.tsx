@@ -281,8 +281,8 @@ const CalendarPage = () => {
             selectAllow={(selectInfo) => {
               return true;
             }}
-            longPressDelay={300} // Reducing long press delay for better responsiveness
-            selectLongPressDelay={300} // Reducing long press delay for selection
+            longPressDelay={100} // Reducing long press delay for better responsiveness
+            selectLongPressDelay={100} // Reducing long press delay for selection
           />
         </Box>
       )}
