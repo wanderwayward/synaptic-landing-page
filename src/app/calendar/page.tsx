@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { parseISO, format } from "date-fns";
 import { fromZonedTime, toZonedTime } from "date-fns-tz";
@@ -22,6 +22,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
+import { DateSelectArg } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -46,6 +47,7 @@ const CalendarPage = () => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const toast = useToast();
   const router = useRouter();
+  const calendarRef = useRef<HTMLDivElement | null>(null);
 
   const [isSmallScreen] = useMediaQuery(MEDIA_QUERIES.sm);
   const [isMediumScreen] = useMediaQuery(MEDIA_QUERIES.md);
@@ -90,12 +92,12 @@ const CalendarPage = () => {
     fetchEvents();
   }, []);
 
-  const handleDateSelect = (selectInfo: any) => {
+  const handleDateSelect = (selectInfo: DateSelectArg) => {
     console.log("Date selected:", selectInfo.startStr);
     setSelectedEvent({
       start: selectInfo.startStr,
     });
-    setIsModalOpen(true); // Show the modal
+    setIsModalOpen(true);
   };
 
   const handleCreateEvent = async (newEvent: {
@@ -215,6 +217,7 @@ const CalendarPage = () => {
           borderRadius="md"
           p={4}
           overflowX="auto" // Enable horizontal scrolling on mobile
+          ref={calendarRef}
         >
           <FullCalendar
             timeZone="local"
@@ -291,11 +294,13 @@ const CalendarPage = () => {
             <ModalHeader color="#2c3e50">Crear Evento</ModalHeader>
             <ModalCloseButton color="#2c3e50" />
             <ModalBody>
-              <EventForm
-                start={selectedEvent.start}
-                onCreateEvent={handleCreateEvent}
-                onClose={handleCloseModal}
-              />
+              {selectedEvent.start && (
+                <EventForm
+                  start={selectedEvent.start}
+                  onCreateEvent={handleCreateEvent}
+                  onClose={handleCloseModal}
+                />
+              )}
             </ModalBody>
           </ModalContent>
         </Modal>
