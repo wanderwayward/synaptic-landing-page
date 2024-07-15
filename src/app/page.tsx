@@ -49,7 +49,7 @@ const HomePage = () => {
           fontFamily="roca"
           padding={{ base: "0 10vh", lg: 0 }}
         >
-          terapia para la vida real
+          terapia para la vida real.
         </Box>
       </GridItem>
 
