@@ -66,7 +66,7 @@ const HomePage = () => {
         <Link href="/calendar" _hover={{ textDecoration: "none" }}>
           <CustomButton
             size="xl"
-            width={{ base: "100%", md: "100%", lg: "50%", xl: "40%" }} // Adjusting width for various screen sizes
+            width={{ base: "100%" }} // Adjusting width for various screen sizes
             maxWidth="120vw"
             bg="#de6b48" // Burnt Sienna for button background
             borderRadius={14}
