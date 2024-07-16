@@ -4,7 +4,8 @@ import HexagonClippedBox from "../_components/Hexagon/HexagonClippedBox";
 import { text, textTwo } from "../_constants/text";
 
 export default function AboutUsPage() {
-  const imageUrl = "/Sigmund_Freud_1926_(cropped).jpg";
+  const imageUrl =
+    "https://res.cloudinary.com/recipeb00k/image/upload/v1721092650/Synaptic%20Landing%20Page/Sigmund_Freud_1926__cropped_ygmia6.jpg";
 
   return (
     <Flex
