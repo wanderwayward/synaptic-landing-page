@@ -72,7 +72,7 @@ const HomePage = () => {
             borderRadius={14}
             color="#f4e8c1" // Dutch White for button text
             fontFamily="roca thin"
-            fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "3.5em" }}
+            fontSize={{ base: "1.5em", md: "2em", lg: "2.5em", xl: "3.5em" }}
             _hover={{
               bg: "#C4A582", // Deep Olive Green on hover
               color: "#ffffff", // White text on hover
