@@ -180,3 +180,32 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    const auth = await getAuthenticatedClient();
+    const calendar = google.calendar({ version: "v3", auth });
+
+    const calendarId = "marco@synaptic.clinic"; // Replace with your calendar ID
+    const now = new Date().toISOString();
+    const response = await calendar.events.list({
+      calendarId,
+      timeMin: now,
+      singleEvents: true,
+      orderBy: "startTime",
+    });
+
+    const events = response.data.items || [];
+
+    return NextResponse.json(events, { status: 200 });
+  } catch (error: unknown) {
+    console.error("Error fetching events:", error);
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json(
+      { error: "Unknown error occurred" },
+      { status: 500 }
+    );
+  }
+}
