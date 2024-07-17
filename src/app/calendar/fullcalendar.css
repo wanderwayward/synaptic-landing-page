@@ -183,6 +183,11 @@
   line-height: 1.59em !important;
 }
 
+/* Adjusting the height of the time slots */
+.fc-timegrid-slot {
+  height: 3em !important; /* Adjust the height as needed */
+}
+
 /* Responsive adjustments for mobile screens */
 @media (max-width: 600px) {
   .fc .fc-toolbar-title {
@@ -190,30 +195,33 @@
   }
   .fc .fc-timegrid-slot-label,
   .fc .fc-timegrid-slot-lane {
-    font-size: 0.8em !important; /* Smaller time slot labels */
-    padding: 0; /* Reduce padding for time slots */
+    font-size: 1em !important; /* Increase time slot labels for mobile */
+    padding: 0.5em 0 !important; /* Adjust padding for time slots */
+  }
+  .fc .fc-timegrid-slot {
+    height: 3em !important; /* Increase height for mobile */
   }
   .fc .fc-timegrid-event {
-    font-size: 0.8em !important; /* Smaller font for events */
-    line-height: 1.2em !important; /* Adjust line height for better spacing */
+    font-size: 0.7em !important; /* Adjust font for events on mobile */
+    line-height: 1.5em !important; /* Adjust line height for better spacing */
   }
   .fc .fc-timegrid-col-frame {
-    padding: 0.2em; /* Less padding for time grid cells */
+    padding: 0.5em; /* Adjust padding for time grid cells */
   }
   .fc .fc-timegrid-now-indicator-line {
-    height: 1px; /* Thinner now indicator line */
+    height: 2px; /* Adjust now indicator line */
   }
   .fc .fc-daygrid-day-number {
-    display: none !important; /* Hide day numbers if too cluttered */
+    display: block !important; /* Ensure day numbers are visible */
   }
   .fc .fc-timegrid-slot-label {
-    padding: 0 0.3em !important; /* Adjust padding for smaller screens */
+    padding: 0.5em !important; /* Adjust padding for smaller screens */
   }
   .fc .fc-toolbar-chunk:last-of-type {
     justify-content: center !important; /* Center the toolbar for better alignment */
   }
   .fc .fc-button-primary {
     font-size: 1em !important; /* Smaller primary button font */
-    padding: 0.3em 0.6em !important; /* Adjust padding for smaller screens */
+    padding: 0.5em 1em !important; /* Adjust padding for smaller screens */
   }
 }
