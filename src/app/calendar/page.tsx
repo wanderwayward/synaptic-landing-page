@@ -267,8 +267,8 @@ const CalendarPage = () => {
                 borderRadius="md"
                 height="100%"
                 p={1}
-                fontSize={isSmallScreen ? "2em" : "1.5em"}
-                lineHeight="2em"
+                fontSize={isSmallScreen ? "2.4em" : "1.5em"}
+                lineHeight={isSmallScreen ? "3em" : "2em"}
               >
                 <Text>Ocupado</Text>
               </Flex>
