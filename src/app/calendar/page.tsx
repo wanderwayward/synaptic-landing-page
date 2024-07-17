@@ -117,12 +117,6 @@ const CalendarPage = () => {
         "America/Mexico_City"
       ).toISOString();
 
-      console.log(
-        "Client-side: Creating event with start:",
-        startUtc,
-        "and end:",
-        endUtc
-      );
       const response = await axios.post("/api/calendar-events", {
         ...newEvent,
         start: startUtc,
@@ -196,7 +190,7 @@ const CalendarPage = () => {
       {isFetching ? (
         <Flex
           width="60%"
-          height="56vh"
+          height={isSmallScreen ? "66vh" : "56vh"}
           bg="#D8C3A5"
           boxShadow="lg"
           borderRadius="md"

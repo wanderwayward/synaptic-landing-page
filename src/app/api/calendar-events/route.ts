@@ -127,6 +127,13 @@ export async function POST(req: NextRequest) {
               conferenceSolutionKey: { type: "hangoutsMeet" },
             },
           },
+          reminders: {
+            useDefault: false, // Set to false if you want to use custom reminders
+            overrides: [
+              { method: "email", minutes: 24 * 60 }, // 24 hours before
+              { method: "popup", minutes: 10 }, // 10 minutes before
+            ],
+          },
         },
         conferenceDataVersion: 1,
       });
@@ -134,8 +141,6 @@ export async function POST(req: NextRequest) {
     const googleMeetLink = response.data.conferenceData?.entryPoints?.find(
       (entryPoint) => entryPoint.entryPointType === "video"
     )?.uri;
-
-    console.log("Google Meet link:", googleMeetLink);
 
     // Format date and time
     const formattedDate = formatReadableDate(start);
