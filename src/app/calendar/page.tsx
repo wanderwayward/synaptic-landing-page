@@ -204,7 +204,7 @@ const CalendarPage = () => {
       ) : (
         <Box
           width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
-          height={isSmallScreen ? "50vh" : "49vh"}
+          height={isSmallScreen ? "66vh" : "56vh"}
           bg="#D8C3A5"
           boxShadow="lg"
           borderRadius="md"
@@ -267,7 +267,7 @@ const CalendarPage = () => {
                 borderRadius="md"
                 height="100%"
                 p={1}
-                fontSize={isSmallScreen ? "1em" : "1.5em"}
+                fontSize={isSmallScreen ? "2em" : "1.5em"}
                 lineHeight="2em"
               >
                 <Text>Ocupado</Text>
