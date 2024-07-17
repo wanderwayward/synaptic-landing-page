@@ -203,7 +203,7 @@ const CalendarPage = () => {
         </Flex>
       ) : (
         <Box
-          width={{ base: "100vw", md: "100%", lg: "80%", xl: "60%" }}
+          width={{ base: "98vw", md: "100%", lg: "80%", xl: "60%" }}
           height={isSmallScreen ? "66vh" : "56vh"}
           bg="#D8C3A5"
           boxShadow="lg"
