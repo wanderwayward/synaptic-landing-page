@@ -42,7 +42,7 @@ export default function RootLayout({
     const timer = setTimeout(() => {
       setLoading(false);
       setInitialLoadComplete(true);
-    }, 120);
+    }, 122);
 
     return () => clearTimeout(timer);
   }, []);
